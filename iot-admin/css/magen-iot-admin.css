@@ -12101,7 +12101,7 @@ textarea.parsley-success:focus {
   /* border-right: 1px solid #f3f3f3; */
   /* box-shadow: inset -1px 0 1px 0 #ced4da; */
   background-color: #fff;
-  padding-top: 170px;
+  padding-top: 59px;
   transition: all 0.2s ease-in-out;
 }
 @media (min-width: 992px) {
@@ -12145,10 +12145,11 @@ textarea.parsley-success:focus {
   position: relative;
 }
 .kt-sideleft-menu > .nav-item > .nav-link.with-sub::after {
-  content: '\f35f';
-  font-family: 'Ionicons';
+  /*content: '\f35f';*/
+  content: '\f0d7';
+  font-family: FontAwesome;
   position: absolute;
-  font-size: 18px;
+  font-size: 16px;
   top: 7px;
   right: 15px;
   color: #adb5bd;

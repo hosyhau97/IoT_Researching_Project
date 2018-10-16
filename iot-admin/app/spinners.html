@@ -42,6 +42,8 @@
 
     <!-- magen-iot-admin CSS -->
     <link rel="stylesheet" href="../css/magen-iot-admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -49,13 +51,6 @@
     <!-- ##### SIDEBAR LOGO ##### -->
     <div class="kt-sideleft-header">
       <div class="kt-logo"><a href="index.html">Magen IOT <small>Administrator</small></a></div>
-      <div id="ktDate" class="kt-date-today"></div>
-      <div class="input-group kt-input-search">
-        <input type="text" class="form-control" placeholder="Search...">
-        <span class="input-group-btn mg-0">
-          <button class="btn"><i class="fa fa-search"></i></button>
-        </span>
-      </div><!-- input-group -->
     </div><!-- kt-sideleft-header -->
 
     <!-- ##### SIDEBAR MENU ##### -->
@@ -64,96 +59,53 @@
       <ul class="nav kt-sideleft-menu">
         <li class="nav-item">
           <a href="index.html" class="nav-link">
-            <i class="icon ion-ios-home-outline"></i>
+            <i class="icon ion-ios-home"></i>
             <span>Dashboard</span>
           </a>
         </li><!-- nav-item -->
         <li class="nav-item">
-          <a href="#" class="nav-link with-sub">
-            <i class="icon ion-ios-gear-outline"></i>
-            <span>Forms</span>
-          </a>
-          <ul class="nav-sub">
-            <li class="nav-item"><a href="form-elements.html" class="nav-link">Form Elements</a></li>
-            <li class="nav-item"><a href="form-layouts.html" class="nav-link">Form Layouts</a></li>
-            <li class="nav-item"><a href="form-validation.html" class="nav-link">Form Validation</a></li>
-            <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
-            <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li>
-          </ul>
-        </li><!-- nav-item -->
-        <li class="nav-item">
           <a href="#" class="nav-link with-sub active">
-            <i class="icon ion-ios-filing-outline"></i>
+            <i class="icon ion-ios-filing"></i>
             <span>UI Elements</span>
           </a>
           <ul class="nav-sub">
-            <li class="nav-item"><a href="accordion.html" class="nav-link">Accordion</a></li>
-            <li class="nav-item"><a href="alerts.html" class="nav-link">Alerts</a></li>
             <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
-            <li class="nav-item"><a href="cards.html" class="nav-link">Cards</a></li>
-            <li class="nav-item"><a href="icons.html" class="nav-link">Icons</a></li>
-            <li class="nav-item"><a href="modal.html" class="nav-link">Modal</a></li>
-            <li class="nav-item"><a href="navigation.html" class="nav-link">Navigation</a></li>
-            <li class="nav-item"><a href="pagination.html" class="nav-link">Pagination</a></li>
-            <li class="nav-item"><a href="popups.html" class="nav-link">Tooltip &amp; Popover</a></li>
             <li class="nav-item"><a href="progress.html" class="nav-link">Progress</a></li>
             <li class="nav-item"><a href="spinners.html" class="nav-link active">Spinners</a></li>
-            <li class="nav-item"><a href="typography.html" class="nav-link">Typography</a></li>
           </ul>
         </li><!-- nav-item -->
         <li class="nav-item">
           <a href="#" class="nav-link with-sub">
-            <i class="icon ion-ios-analytics-outline"></i>
+            <i class="icon ion-ios-analytics"></i>
             <span>Charts</span>
           </a>
           <ul class="nav-sub">
             <li class="nav-item"><a href="chart-morris.html" class="nav-link">Morris Charts</a></li>
-            <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
-            <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
-            <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
-            <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
           </ul>
         </li><!-- nav-item -->
         <li class="nav-item">
           <a href="#" class="nav-link with-sub">
-            <i class="icon ion-ios-navigate-outline"></i>
-            <span>Maps</span>
-          </a>
-          <ul class="nav-sub">
-            <li class="nav-item"><a href="map-google.html" class="nav-link">Google Maps</a></li>
-            <li class="nav-item"><a href="map-vector.html" class="nav-link">Vector Maps</a></li>
-          </ul>
-        </li><!-- nav-item -->
-        <li class="nav-item">
-          <a href="#" class="nav-link with-sub">
-            <i class="icon ion-ios-list-outline"></i>
+            <i class="icon ion-ios-list"></i>
             <span>Tables</span>
           </a>
           <ul class="nav-sub">
-            <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
             <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
           </ul>
         </li><!-- nav-item -->
         <li class="nav-item">
           <a href="#" class="nav-link with-sub">
-            <i class="icon ion-ios-bookmarks-outline"></i>
+            <i class="icon ion-ios-bookmarks"></i>
             <span>Pages</span>
           </a>
           <ul class="nav-sub">
-            <li class="nav-item"><a href="blank.html" class="nav-link">Blank Page</a></li>
-            <li class="nav-item"><a href="mailbox.html" class="nav-link">Mailbox</a></li>
-            <li class="nav-item"><a href="chat.html" class="nav-link">Chat Page</a></li>
             <li class="nav-item"><a href="calendar.html" class="nav-link">Calendar</a></li>
-            <li class="nav-item"><a href="edit-profile.html" class="nav-link">Edit Profile</a></li>
-            <li class="nav-item"><a href="file-manager.html" class="nav-link">File Manager</a></li>
             <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
-            <li class="nav-item"><a href="page-signup.html" class="nav-link">Signup Page</a></li>
             <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>
           </ul>
         </li><!-- nav-item -->
         <li class="nav-item">
           <a href="widgets.html" class="nav-link">
-            <i class="icon ion-ios-briefcase-outline"></i>
+            <i class="icon ion-ios-briefcase"></i>
             <span>Widgets</span>
           </a>
         </li><!-- nav-item -->
@@ -233,11 +185,11 @@
           </a>
           <div class="dropdown-menu wd-200">
             <ul class="list-unstyled user-profile-nav">
-              <li><a href="#"><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
-              <li><a href="#"><i class="icon ion-ios-gear-outline"></i> Settings</a></li>
-              <li><a href="#"><i class="icon ion-ios-download-outline"></i> Downloads</a></li>
-              <li><a href="#"><i class="icon ion-ios-star-outline"></i> Favorites</a></li>
-              <li><a href="#"><i class="icon ion-ios-folder-outline"></i> Collections</a></li>
+              <li><a href="#"><i class="icon ion-ios-person"></i> Edit Profile</a></li>
+              <li><a href="#"><i class="icon ion-ios-gear"></i> Settings</a></li>
+              <li><a href="#"><i class="icon ion-ios-download"></i> Downloads</a></li>
+              <li><a href="#"><i class="icon ion-ios-star"></i> Favorites</a></li>
+              <li><a href="#"><i class="icon ion-ios-folder"></i> Collections</a></li>
               <li><a href="#"><i class="icon ion-power"></i> Sign Out</a></li>
             </ul>
           </div><!-- dropdown-menu -->
@@ -257,23 +209,8 @@
       <div class="kt-pagetitle">
         <h5>Spinners</h5>
       </div><!-- kt-pagetitle -->
-
       <div class="kt-pagebody">
-
         <div class="row">
-          <div class="col-md-6 col-xl-4">
-            <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
-              <div class="sk-rotating-plane bg-gray-800"></div>
-            </div><!-- d-flex -->
-          </div><!-- col-4 -->
-          <div class="col-md-6 col-xl-4 mg-t-30 mg-sm-t-0">
-            <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
-              <div class="sk-double-bounce">
-                <div class="sk-child sk-double-bounce1 bg-gray-800"></div>
-                <div class="sk-child sk-double-bounce2 bg-gray-800"></div>
-              </div>
-            </div><!-- d-flex -->
-          </div><!-- col-4 -->
           <div class="col-md-6 col-xl-4 mg-t-30 mg-xl-t-0">
             <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
               <div class="sk-wave">
@@ -285,78 +222,9 @@
               </div>
             </div><!-- d-flex -->
           </div><!-- col-4 -->
-          <div class="col-md-6 col-xl-4 mg-t-30">
-            <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
-              <div class="sk-spinner sk-spinner-pulse bg-gray-800"></div>
-            </div><!-- d-flex -->
-          </div><!-- col-4 -->
-          <div class="col-md-6 col-xl-4 mg-t-30">
-            <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
-              <div class="sk-chasing-dots">
-                <div class="sk-child sk-dot1 bg-gray-800"></div>
-                <div class="sk-child sk-dot2 bg-gray-800"></div>
-              </div>
-            </div><!-- d-flex -->
-          </div><!-- col-4 -->
-          <div class="col-md-6 col-xl-4 mg-t-30">
-            <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
-              <div class="sk-circle">
-                <div class="sk-circle1 sk-child"></div>
-                <div class="sk-circle2 sk-child"></div>
-                <div class="sk-circle3 sk-child"></div>
-                <div class="sk-circle4 sk-child"></div>
-                <div class="sk-circle5 sk-child"></div>
-                <div class="sk-circle6 sk-child"></div>
-                <div class="sk-circle7 sk-child"></div>
-                <div class="sk-circle8 sk-child"></div>
-                <div class="sk-circle9 sk-child"></div>
-                <div class="sk-circle10 sk-child"></div>
-                <div class="sk-circle11 sk-child"></div>
-                <div class="sk-circle12 sk-child"></div>
-              </div>
-            </div><!-- d-flex -->
-          </div><!-- col-4 -->
-          <div class="col-md-6 col-xl-4 mg-t-30">
-            <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
-              <div class="sk-three-bounce">
-                <div class="sk-child sk-bounce1 bg-gray-800"></div>
-                <div class="sk-child sk-bounce2 bg-gray-800"></div>
-                <div class="sk-child sk-bounce3 bg-gray-800"></div>
-              </div>
-            </div><!-- d-flex -->
-          </div><!-- col-4 -->
-          <div class="col-md-6 col-xl-4 mg-t-30">
-            <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
-              <div class="sk-cube-grid">
-                <div class="sk-cube sk-cube1"></div>
-                <div class="sk-cube sk-cube2"></div>
-                <div class="sk-cube sk-cube3"></div>
-                <div class="sk-cube sk-cube4"></div>
-                <div class="sk-cube sk-cube5"></div>
-                <div class="sk-cube sk-cube6"></div>
-                <div class="sk-cube sk-cube7"></div>
-                <div class="sk-cube sk-cube8"></div>
-                <div class="sk-cube sk-cube9"></div>
-              </div>
-            </div><!-- d-flex -->
-          </div><!-- col-4 -->
-          <div class="col-md-6 col-xl-4 mg-t-30">
-            <div class="d-flex bg-gray-200 ht-300 pos-relative align-items-center">
-              <div class="sk-folding-cube">
-                <div class="sk-cube1 sk-cube"></div>
-                <div class="sk-cube2 sk-cube"></div>
-                <div class="sk-cube4 sk-cube"></div>
-                <div class="sk-cube3 sk-cube"></div>
-              </div>
-            </div><!-- d-flex -->
-          </div><!-- col-4 -->
         </div><!-- row -->
 
       </div><!-- kt-pagebody -->
-      <div class="kt-footer">
-        <span>Copyright &copy;. All Rights Reserved. Magen IOT admin Dashboard.</span>
-        <span>Created by: vueghost.</span>
-      </div><!-- kt-footer -->
     </div><!-- kt-mainpanel -->
 
     <script src="../lib/jquery/jquery.js"></script>
