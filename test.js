@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mqtt = require('mqtt');
 var config = require('./mqtt/config');
-var io = require('socket.io');
+var io = require('socket.io').listen(8080);
 
 var mqtt_url = config.mqtt.CLOUDMQTT_URL;
 var topic_subcribe = config.mqtt.TOPIC_SUBCRIBE;
@@ -28,7 +28,9 @@ client.on('message', function (topic, message) {
 
   router.get('/covaodaykhong', function(req, res){
       res.status(200).json({message:"message"});
-  })
+  });
+
+
 
   module.exports ={
       client,
