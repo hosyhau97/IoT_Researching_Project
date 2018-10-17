@@ -19,8 +19,10 @@ app.get('/api', function (req, res) {
 // var AuthController = require(__root + 'auth/AuthController');
 // app.use('/api/auth', AuthController);
 console.log("OK");
-var MqttNode = require(__root + 'mqtt/MqttNode');
-app.use('/api/mqtt', MqttNode);
+// var MqttNode = require(__root + 'mqtt/MqttNode');
+// app.use('/api/mqtt', MqttNode);
 
-
+var test = require('./test');
+var t = test.router;
+app.use('/', t);
 module.exports = app;
