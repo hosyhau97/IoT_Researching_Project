@@ -51,23 +51,23 @@
 
   <!-- ##### SIDEBAR LOGO ##### -->
   <div class="kt-sideleft-header">
-    <div class="kt-logo"><a href="index.html">Magen IOT <small>Administrator</small></a></div>
+    <div class="kt-logo"><a href="index.html">Green House <small>Administrator</small></a></div>
   </div><!-- kt-sideleft-header -->
 
   <!-- ##### SIDEBAR MENU ##### -->
   <div class="kt-sideleft">
-    <label class="kt-sidebar-label">Navigation</label>
+    <label class="kt-sidebar-label">Điều hướng</label>
     <ul class="nav kt-sideleft-menu">
       <li class="nav-item">
         <a href="index.html" class="nav-link">
           <i class="icon ion-ios-home"></i>
-          <span>Dashboard</span>
+          <span>Trang chủ</span>
         </a>
       </li><!-- nav-item -->
       <li class="nav-item">
         <a href="#" class="nav-link with-sub">
           <i class="icon ion-ios-filing"></i>
-          <span>UI Elements</span>
+          <span>Quá trình sinh trưởng</span>
         </a>
         <ul class="nav-sub">
           <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
@@ -78,16 +78,16 @@
       <li class="nav-item">
         <a href="#" class="nav-link with-sub active">
           <i class="icon ion-ios-analytics"></i>
-          <span>Charts</span>
+          <span>Thông tin biểu đồ</span>
         </a>
         <ul class="nav-sub">
-          <li class="nav-item"><a href="chart-morris.html" class="nav-link active">Morris Charts</a></li>
+          <li class="nav-item"><a href="chart-morris.html" class="nav-link active">Biều đồ chi tiết</a></li>
         </ul>
       </li><!-- nav-item -->
       <li class="nav-item">
         <a href="#" class="nav-link with-sub">
           <i class="icon ion-ios-list"></i>
-          <span>Tables</span>
+          <span>Dữ liệu nhà kính</span>
         </a>
         <ul class="nav-sub">
           <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
@@ -96,7 +96,7 @@
       <li class="nav-item">
         <a href="#" class="nav-link with-sub">
           <i class="icon ion-ios-bookmarks"></i>
-          <span>Pages</span>
+          <span>Thông tin cây trồng</span>
         </a>
         <ul class="nav-sub">
           <li class="nav-item"><a href="mailbox.html" class="nav-link">Mailbox</a></li>
@@ -108,7 +108,7 @@
       <li class="nav-item">
         <a href="widgets.html" class="nav-link">
           <i class="icon ion-ios-briefcase"></i>
-          <span>Widgets</span>
+          <span>Thông tin người dùng</span>
         </a>
       </li><!-- nav-item -->
     </ul>
@@ -204,16 +204,16 @@
   </div><!-- kt-headpanel -->
   <div class="kt-breadcrumb">
     <nav class="breadcrumb">
-      <a class="breadcrumb-item" href="index.html">magen-iot-admin</a>
-      <a class="breadcrumb-item" href="index.html">Charts</a>
-      <span class="breadcrumb-item active">Morris Charts</span>
+      <a class="breadcrumb-item" href="index.html">Green housse</a>
+      <a class="breadcrumb-item" href="index.html">Thông tin biểu đồ</a>
+      <span class="breadcrumb-item active">Biều đồ chi tiết</span>
     </nav>
   </div><!-- kt-breadcrumb -->
 
   <!-- ##### MAIN PANEL ##### -->
   <div class="kt-mainpanel">
     <div class="kt-pagetitle">
-      <h5>Morris Charts</h5>
+      <h5>Biểu đồ chi tiết</h5>
     </div><!-- kt-pagetitle -->
 
     <div class="kt-pagebody">
@@ -221,23 +221,23 @@
       <div class="row row-sm">
         <div class="col-xl-6">
           <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Bar Chart</h6>
-            <p>A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that
-              they represent.</p>
-            <div id="morrisBar1" class="ht-200 ht-sm-300"></div>
+            <h6 class="card-body-title">Nhiệt độ</h6>
+            <!-- <p>A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that
+              they represent.</p> -->
+            <div id="chartContainer" class="ht-200 ht-sm-300"></div>
           </div><!-- card -->
         </div><!-- col-6 -->
         <div class="col-xl-6 mg-t-25 mg-xl-t-0">
           <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Stacked Bar Chart</h6>
-            <p>The stacked charts are used when data sets have to be broken down into their constituents.</p>
-            <div id="morrisBar2" class="ht-200 ht-sm-300"></div>
+            <h6 class="card-body-title">Độ ẩm không khí</h6>
+            <!-- <p>The stacked charts are used when data sets have to be broken down into their constituents.</p> -->
+            <div id="chartContainer1" class="ht-200 ht-sm-300"></div>
           </div><!-- card -->
         </div><!-- col-6 -->
       </div><!-- row -->
 
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Javascript Code</p>
-      <pre><code class="javascript pd-20">new Morris.Bar({
+      <!-- <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Javascript Code</p> -->
+      <!-- <pre><code class="javascript pd-20">new Morris.Bar({
 element: 'morrisBar1',
 data: [
   { y: '2006', a: 100, b: 90 },
@@ -253,30 +253,30 @@ barColors: ['#5058AB', '#14A0C1'],
 gridTextSize: 11,
 hideHover: 'auto',
 resize: true
-});</code></pre>
+});</code></pre> -->
 
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">For stacked bar, just add</p>
-      <pre><code class="javascript pd-20">stacked: true</code></pre>
+      <!-- <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">For stacked bar, just add</p>
+      <pre><code class="javascript pd-20">stacked: true</code></pre> -->
 
       <div class="row row-sm mg-t-50">
         <div class="col-xl-6">
           <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Bar Chart</h6>
-            <p>A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that
-              they represent.</p>
-            <div id="morrisBar3" class="ht-200 ht-sm-300"></div>
+            <h6 class="card-body-title">Ánh sáng</h6>
+            <!-- <p>A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that
+              they represent.</p> -->
+            <div id="chartContainer2" class="ht-200 ht-sm-300"></div>
           </div><!-- card -->
         </div><!-- col-6 -->
         <div class="col-xl-6 mg-t-25 mg-xl-t-0">
           <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Stacked Bar Chart</h6>
-            <p>The stacked charts are used when data sets have to be broken down into their constituents.</p>
-            <div id="morrisBar4" class="ht-200 ht-sm-300"></div>
+            <h6 class="card-body-title">Độ ẩm đất</h6>
+            <!-- <p>The stacked charts are used when data sets have to be broken down into their constituents.</p> -->
+            <div id="chartContainer3" class="ht-200 ht-sm-300"></div>
           </div><!-- card -->
         </div><!-- col-6 -->
       </div><!-- row -->
 
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">For additional data</p>
+      <!-- <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">For additional data</p>
       <pre><code class="javascript pd-20">data: [
 { y: '2006', a: 100, b: 90, c: 80 },
 { y: '2007', a: 75,  b: 65, c: 75 },
@@ -285,84 +285,27 @@ resize: true
 ],
 ykeys: ['a', 'b', 'c'],
 labels: ['Series A', 'Series B', 'Series C'],
-barColors: ['#5058AB', '#14A0C1','#01CB99']</code></pre>
+barColors: ['#5058AB', '#14A0C1','#01CB99']</code></pre> -->
 
 
       <div class="row row-sm mg-t-50">
         <div class="col-xl-6">
           <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Line Chart</h6>
-            <p>A line graph is a type of chart which displays information as a series of data points connected by
-              straight line segments.</p>
-            <div id="morrisLine1" class="ht-200 ht-sm-300"></div>
+            <h6 class="card-body-title">CO2</h6>
+            <!-- <p>A line graph is a type of chart which displays information as a series of data points connected by
+              straight line segments.</p> -->
+            <div id="chartContainer4" class="ht-200 ht-sm-300"></div>
           </div><!-- card -->
         </div><!-- col-6 -->
         <div class="col-xl-6 mg-t-25 mg-xl-t-0">
           <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Line Chart</h6>
-            <p>A line graph is a type of chart which displays information as a series of data points connected by
-              straight line segments.</p>
-            <div id="morrisLine2" class="ht-200 ht-sm-300"></div>
+            <h6 class="card-body-title">O2</h6>
+            <!-- <p>A line graph is a type of chart which displays information as a series of data points connected by
+              straight line segments.</p> -->
+            <div id="chartContainer5" class="ht-200 ht-sm-300"></div>
           </div><!-- card -->
         </div><!-- col-6 -->
       </div><!-- row -->
-
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Javascript Code</p>
-      <pre><code class="javascript pd-20">new Morris.Line({ ... );</code></pre>
-
-      <div class="row row-sm mg-t-50">
-        <div class="col-xl-6">
-          <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Area Chart</h6>
-            <p>A line graph is a type of chart which displays information as a series of data points connected by
-              straight line segments.</p>
-            <div id="morrisArea1" class="ht-200 ht-sm-300"></div>
-          </div><!-- card -->
-        </div><!-- col-6 -->
-        <div class="col-xl-6 mg-t-25 mg-xl-t-0">
-          <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Area Chart</h6>
-            <p>Area charts are used to represent cumulated totals using numbers or percentages (stacked area charts in
-              this case) over time.</p>
-            <div id="morrisArea2" class="ht-200 ht-sm-300"></div>
-          </div><!-- card -->
-        </div><!-- col-6 -->
-      </div><!-- row -->
-
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Javascript Code</p>
-      <pre><code class="javascript pd-20">new Morris.Area({ ... );</code></pre>
-
-      <div class="row row-sm mg-t-50">
-        <div class="col-xl-6">
-          <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Donut Chart</h6>
-            <p>A donut chart, or doughnut chart, functions precisely like a pie chart. The only difference is that the
-              center is blank.</p>
-            <div id="morrisDonut1" class="ht-200 ht-sm-250"></div>
-          </div><!-- card -->
-        </div><!-- col-6 -->
-        <div class="col-xl-6 mg-t-25 mg-sm-t-0">
-          <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Donut Chart</h6>
-            <p>A donut chart, or doughnut chart, functions precisely like a pie chart. The only difference is that the
-              center is blank.</p>
-            <div id="morrisDonut2" class="ht-200 ht-sm-250"></div>
-          </div><!-- card -->
-        </div><!-- col-6 -->
-      </div><!-- row -->
-
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Javascript Code</p>
-      <pre class="mg-b-0"><code class="javascript pd-20">new Morris.Donut({
-element: 'morrisDonut1',
-data: [
-  {label: "Men", value: 12},
-  {label: "Women", value: 30},
-  {label: "Kids", value: 20}
-],
-colors: ['#3D449C','#268FB2','#74DE00'],
-resize: true
-});</code></pre>
-
     </div><!-- kt-pagebody -->
   </div><!-- kt-mainpanel -->
 
@@ -377,6 +320,264 @@ resize: true
 
   <script src="../js/magen-iot-admin.js"></script>
   <script src="../js/chart.morris.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- Biểu đồ 1 -->
+  <script>
+    window.onload = function () {
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ nhiệt độ",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Nhiệt độ",
+          valueFormatString: "#0,,.",
+          suffix: "C",
+          stripLines: [{
+            value: 3366500,
+            label: "Nhiệt độ trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 2*/
+      var chart = new CanvasJS.Chart("chartContainer1", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ độ ẩm không khí",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Độ ẩm",
+          valueFormatString: "#0,,.",
+          suffix: "%",
+          stripLines: [{
+            value: 3366500,
+            label: "Độ ẩm không khí trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 3*/
+      var chart = new CanvasJS.Chart("chartContainer2", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ cường độ ánh sáng",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Cường độ",
+          valueFormatString: "#0,,.",
+          suffix: "mn",
+          stripLines: [{
+            value: 3366500,
+            label: "Cường độ sáng trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 4*/
+      var chart = new CanvasJS.Chart("chartContainer3", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ độ ẩm đất",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Độ ẩm",
+          valueFormatString: "#0,,.",
+          suffix: "%",
+          stripLines: [{
+            value: 3366500,
+            label: "Độ ấm đất trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 5*/
+      var chart = new CanvasJS.Chart("chartContainer4", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ nồng độ CO2",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Nồng độ",
+          valueFormatString: "#0,,.",
+          suffix: "ppm",
+          stripLines: [{
+            value: 3366500,
+            label: "Nồng độ CO2 trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 6*/
+      var chart = new CanvasJS.Chart("chartContainer5", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ nồng độ O2",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Nồng độ",
+          valueFormatString: "#0,,.",
+          suffix: "ppm",
+          stripLines: [{
+            value: 3366500,
+            label: "Nồng độ O2 trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+    }
+  </script>
 </body>
 
 <!-- Mirrored from qbgrow.com/magen/iot-admin/app/chart-morris.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:29:46 GMT -->
