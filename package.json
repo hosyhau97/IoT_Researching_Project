@@ -12,6 +12,7 @@
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.4",
     "mqtt": "^2.18.8",
+    "nodemailer": "^4.6.8",
     "pug": "^2.0.3",
     "socket.io": "^1.7.3",
     "url": "^0.11.0"

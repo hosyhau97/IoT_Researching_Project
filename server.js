@@ -3,8 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
-// var db = require('./db');
-
+var db = require('./db');
 global.__root   = __dirname + '/'; 
 
 app.get('/', function(req, res){
@@ -17,11 +16,7 @@ app.use('/api/users', UserController);
 var AuthController = require(__root + 'auth/AuthController');
 app.use('/api/auth', AuthController);
 
-var MqttNode = require(__root + 'mqtt/MqttNode');
-app.use('/api/mqtt', MqttNode);
-
 var sensor = require('./sensor/SensorController');
-
 sensor.subscribeSensor(io);
 
 http.listen(port, function(){

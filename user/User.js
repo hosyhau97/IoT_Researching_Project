@@ -7,8 +7,9 @@ name:String,
 email:String,
 password:String,
 phone:Number,
-active : false,
-activeCode:Number
+active : {type:Boolean, default:false},
+activeCode:Number,
+created:{type:Date, default:new Date()}
 });
 var users= mongoose.model('User',UserSchema);
 module.exports= users;
