@@ -12,16 +12,10 @@ module.exports.subscribeSensor = function (io){
             console.log(`Publishing data to ${data.topic}`);
             client.publish(data.topic, data.payload);
         });
-
-        setInterval(function(){
-            socket.on('sensor', function(data){
-                console.log(data);
-            });
-        }, 3000);
     });
     
-    client.on('connect', function () {
-        //console.log('connected');
+    client.on('connect', function (){
+        console.log('MQTT sensor connected');
         client.subscribe(topic_subcribe, function (err) {
             if (err) {
                 console.log(err);
