@@ -1,6 +1,7 @@
 var mqtt = require('mqtt');
 var config = require('../mqtt/config');
 var Engine = require('./Engine');
+var AppError = require('../handling_error/AppError').AppError;
 
 var mqtt_url = config.mqtt.CLOUDMQTT_URL;
 var topic_engine = config.mqtt.TOPIC_ENGINE;
@@ -30,7 +31,7 @@ module.exports.subscribeEngine = function (io) {
         client.subscribe(topic_engine, function (err) {
             if (err) {
                 console.log(err);
-                throw err;
+                throw new AppError('Cannot subcribe topic', 500);
             }
             console.log('subcribed engine.');
         });
@@ -122,7 +123,9 @@ module.exports.subscribeEngine = function (io) {
                 process_time: new Date()
             },
             function (err, sensor) {
-                if (err) throw err;
+                if (err){
+                    throw new AppError('Cannot create engine documents', 400);
+                }     
             }
         )
     }

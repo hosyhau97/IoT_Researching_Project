@@ -9,12 +9,10 @@ function verifyToken(req, res, next) {
   if (!token) 
     return res.status(403).send({ auth: false, message:  no_token_found});
 
-  // verifies secret and checks exp
-  jwt.verify(token, config.secret, function(err, decoded) {      
+    jwt.verify(token, config.secret, function(err, decoded) {      
     if (err) 
       return res.status(500).send({ auth: false, message: failed_authenticate });    
 
-    // if everything is good, save to request for use in other routes
     req._id = decoded.id;
     next();
   });

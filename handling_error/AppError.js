@@ -1,12 +1,13 @@
-module.exports = class AppError extends Error {
-    constructor (message, status) {
-    
-      super(message);
-    
-      this.name = this.constructor.name;
-
-      Error.captureStackTrace(this, this.constructor);
-      this.status = status || 500;
-      
-    }
+class AppError extends Error {
+  constructor(message, httpStatus) {
+    super(message, httpStatus);
+    Error.captureStackTrace(this, this.constructor);
+    this.name = this.constructor.name;
+    this.message = message;
+    this.status = httpStatus;
   };
+}
+
+module.exports = {
+  AppError
+}

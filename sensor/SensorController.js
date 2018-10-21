@@ -1,6 +1,7 @@
 var mqtt = require('mqtt');
 var config = require('../mqtt/config');
 var Sensor = require('./Sensor');
+var AppError = require('../handling_error/AppError').AppError;
 
 var mqtt_url = config.mqtt.CLOUDMQTT_URL;
 var topic_subcribe = config.mqtt.TOPIC_SENSOR;
@@ -19,8 +20,7 @@ module.exports.subscribeSensor = function (io){
         console.log('MQTT sensor connected');
         client.subscribe(topic_subcribe, function (err) {
             if (err) {
-                console.log(err);
-                throw err;
+                throw new AppError(`Cannot subcribe a topic ${topic_subcribe}`, 500);
             }
             console.log('subcribed');
         });
@@ -54,7 +54,9 @@ module.exports.subscribeSensor = function (io){
                     process_time: new Date()
                 },
                 function(err, sensor){
-                    if (err) throw err;
+                    if (err) {
+                        throw new AppError('cannot creat data sensor documents', 500);
+                    }
                 }
             )
     }
