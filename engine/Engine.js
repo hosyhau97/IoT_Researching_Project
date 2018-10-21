@@ -10,9 +10,10 @@ var EngineSchema = new Schema({
         pinmode_value:String
     },
     engine_type:String,
-    staus:Boolean,
+    status:Boolean,
     start_time:Date,
     end_time:Date,
+    time_type:Boolean,
     process_time:Date
 });
 var engines= mongoose.model('Engine',EngineSchema);

@@ -1,8 +1,9 @@
 var mqtt = require('mqtt');
-var config = require('../mqtt/config')
+var config = require('../mqtt/config');
+var Sensor = require('./Sensor');
 
 var mqtt_url = config.mqtt.CLOUDMQTT_URL;
-var topic_subcribe = config.mqtt.TOPIC_SUBCRIBE;
+var topic_subcribe = config.mqtt.TOPIC_SENSOR;
 var client = mqtt.connect(mqtt_url);
 
 module.exports.subscribeSensor = function (io){
@@ -34,7 +35,27 @@ module.exports.subscribeSensor = function (io){
             topic: topic,
             message: message.toString()
         };
+        saveDataSensor(object.message);
         io.emit('sensor', object);
         console.log(`topic = ${topic}, message = ${message.toString()}`);
+    }
+
+    function saveDataSensor(object){
+            Sensor.create(
+                {
+                    name:object.name,
+                    value:{
+                        analog_value:object.value.analog_value,
+                        sensor_value:object.value.sensor_value,
+                        pinmode_value:object.value.pinmode_value
+                    },
+                    sensor_type:object.sensor_type,
+                    status:true,
+                    process_time: new Date()
+                },
+                function(err, sensor){
+                    if (err) throw err;
+                }
+            )
     }
 }

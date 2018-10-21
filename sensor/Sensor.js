@@ -9,9 +9,8 @@ var SensorSchema = new Schema({
         sensor_value:String,
         pinmode_value:String
     },
-    average_value:String,
     sensor_type:String,
-    staus:Boolean,
+    status:Boolean,
     process_time:Date
 });
 var sensors= mongoose.model('Sensor',SensorSchema);
