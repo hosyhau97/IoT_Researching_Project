@@ -69,6 +69,8 @@ module.exports.subscribeEngine = function (io) {
             case 'end_time':
                 io.emit('water/end_time', object);
                 break;
+            default:
+                io.emit('nothing', object);
         }
     }
 
@@ -80,6 +82,8 @@ module.exports.subscribeEngine = function (io) {
             case 'end_time':
                 io.emit('light/end_time', object);
                 break;
+            default:
+                io.emit('nothing', object);
         }
     }
 
@@ -91,7 +95,13 @@ module.exports.subscribeEngine = function (io) {
             case 'end_time':
                 io.emit('fan/end_time', object);
                 break;
+            default:
+                io.emit('nothing', object);
         }
+    }
+
+    function updateEngine(){
+        Engine.updateOne()
     }
 
     function saveDataEngine(object) {
@@ -100,11 +110,15 @@ module.exports.subscribeEngine = function (io) {
                 name: object.name,
                 value: {
                     analog_value: object.value.analog_value,
-                    sensor_value: object.value.sensor_value,
+                    engine_value: object.value.sensor_value,
                     pinmode_value: object.value.pinmode_value
                 },
-                sensor_type: object.sensor_type,
-                status: true,
+                engine_type: object.sensor_type,
+                engine_type:object.engine_type,
+                status:object.status,
+                start_time:object.start_time,
+                end_time:object.end_time,
+                time_type:object.time_type,
                 process_time: new Date()
             },
             function (err, sensor) {

@@ -6,14 +6,14 @@ var EngineSchema = new Schema({
     name:String,
     value:{
         analog_value:Number,
-        light_value:String,
+        engine_value:String,
         pinmode_value:String
     },
     engine_type:String,
     status:Boolean,
     start_time:Date,
     end_time:Date,
-    time_type:Boolean,
+    time_type:String,
     process_time:Date
 });
 var engines= mongoose.model('Engine',EngineSchema);

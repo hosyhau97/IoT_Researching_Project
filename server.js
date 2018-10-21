@@ -7,7 +7,8 @@ var db = require('./db');
 global.__root   = __dirname + '/'; 
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  throw new Error("BROKEN");
+  // res.sendFile(__dirname + '/index.html');
 });
 
 var UserController = require(__root + 'user/UserController');
