@@ -3,6 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var verifyToken = require('./VerifyToken');
+var localStorage = require('localStorage');
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
@@ -49,8 +50,9 @@ router.post('/active-account', function (req, res) {
         var mins =Math.round((date - time) / (1000*60));
         console.log(mins);
         if (mins <= 5) {
+            localStorage.setItem('token', JSON.stringify(token));
             var token = jwt.sign({id:user._id},config.secret,{
-                    expiresIn:840000
+                    expiresIn:84000
                 });
                 return res.status(200).json({auth:true,token:token});
         } else {
@@ -62,17 +64,16 @@ router.post('/active-account', function (req, res) {
 router.post('/login', function (req, res) {
     User.findOne({ email: req.body.email }, function (err, user) {
         if (err) return res.status(500).json({ message: 'internal server' , code:500});
+        
         if (!user) {
-            return res.status(400).json({ message: 'User not found, invalid user.' , code:400});
+            return res.status(400).json({ message: 'Tài khoản không hợp lệ, vui lòng nhập lại.' , code:400});
         }
         var password = bcrypt.compareSync(req.body.password, user.password);
         if (!password) return res.status(401).json({ auth: true, token: null });
         var token = jwt.sign({ id: user._id }, config.secret, {
             expiresIn: 84000
         });
-        console.log("token is valid...");
-        // return res.cookie('access_token', token, { signed: true, maxAge: 84000, httpOnly: true, cookieParser: "secret" })
-        //     .json({ auth: true, token: token });
+        localStorage.setItem('token', JSON.stringify(token));
         return res.status(200).json({auth:true,token:token}); 
     });
 });
@@ -86,6 +87,7 @@ router.get('/me', verifyToken, function (req, res, next) {
 });
 
 router.get('/logout', function (req, res) {
+    localStorage.removeItem('token');
     res.status(200).send({ auth: false, token: null, code:200});
 });
 
