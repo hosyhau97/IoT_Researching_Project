@@ -8,12 +8,12 @@ var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var localStorage = require('localStorage');
 var verifyToken = require('./auth/VerifyToken');
+var jwt = require('jsonwebtoken'); 
+var config = require('./config'); 
 
 var db = require('./db');
 var port = process.env.PORT || 3000;
 var x_access_token = 'x-access-token';
-
-var tokenFilter = require('./auth/TokenFilter');
 
 global.__root = __dirname + '/';
 app.use(morgan("dev"));
@@ -41,24 +41,28 @@ try {
 } catch (error) {
   throw { status: error.status, message: error.message };
 }
-app.get('/index',verifyToken, function(req, res, next){
-  var token = req.headers['x-access-token'];
-  console.log(`token1 = ${token}`);
- return res.redirect('/');
+
+app.get('/home', verifyToken, function(req, res){
+
+   console.log('co dc khong');
+   return res.render('index');
 });
 
 app.get('/', function(req, res){
-  var token = localStorage.getItem('token');
-  if (!token){
-    return res.render('page-signin');
-  } else return res.render('index');
+    var token = req.headers[x_access_token];
+    console.log(` t = ${token}`);
+    jwt.verify(token, 'secretByStephen', function(err, decoded) {
+      if (err) {
+        console.log(err);
+        return res.render('page-signin');
+      }
+      else {
+        console.log('a');
+       return res.redirect('/home');
+      }
+    });
 });
 
 http.listen(port, function () {
   console.log('listening on *:' + port);
-});
-
-
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500).json({ status: err.status, message: err.message })
 });

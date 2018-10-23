@@ -6,9 +6,8 @@ var failed_authenticate = 'Failed to authenticate token.';
 var localStorage = require('localStorage');
 function verifyToken(req, res, next) {
 
-  var token = req.headers[x_access_token] || req.cookies["access_token"] || localStorage.getItem('token');
-  token = JSON.parse(token);
-    console.log(`token request = ${token}`);
+  var token =  req.headers[x_access_token];
+  console.log(` t2 = ${token}`);
   if (!token) 
     return res.status(403).send({ auth: false, message:  no_token_found});
 

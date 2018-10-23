@@ -73,7 +73,7 @@ router.post('/login', function (req, res) {
         var token = jwt.sign({ id: user._id }, config.secret, {
             expiresIn: 84000
         });
-        localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('token', token);
         return res.status(200).json({auth:true,token:token}); 
     });
 });
