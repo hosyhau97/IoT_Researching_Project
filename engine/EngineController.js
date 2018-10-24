@@ -9,6 +9,10 @@ var client = mqtt.connect(mqtt_url);
 
 module.exports.subscribeEngine = function (io) {
 
+    var object_water = {};
+    var object_light = {};
+    var object_fan = {};
+    var object_roof = {};
     io.on('connection', function (socket) {
         console.log("socket connected");
         socket.on('control/light', function (data) {
@@ -25,6 +29,11 @@ module.exports.subscribeEngine = function (io) {
             console.log(`Publishing data to control/water`);
             client.publish('control/water', data.payload);
         });
+
+        socket.on('control/roof', function (data) {
+            console.log(`Publishing data to control/roof`);
+            client.publish('control/roof', data.payload);
+        });
     });
 
     client.on('connect', function () {
@@ -39,11 +48,11 @@ module.exports.subscribeEngine = function (io) {
     });
 
     client.on('message', function (topic, message) {
-       try {
-        handleEngine(message, topic);
-       } catch (error) {
-           throw new  AppError('Can not read message from cloud', 500);
-       } 
+        try {
+            handleEngine(message, topic);
+        } catch (error) {
+            throw new AppError('Can not read message from cloud', 500);
+        }
     });
 
     function handleEngine(message, topic) {
@@ -52,71 +61,99 @@ module.exports.subscribeEngine = function (io) {
             message: message.toString()
         };
 
-        switch (object.topic) {
+        switch (topic) {
             case 'control/water':
-                handleWater(object.message);
+                object_water = object.message;
+                handleWater();
                 break;
             case 'control/light':
-                handleLight(object.message);
+                object_light = object.message;
+                handleLight();
                 break;
             case 'control/fan':
-                handleFans(object.message);
+                object_fan = object.message;
+                handleFans();
+                break;
+            case 'control/roof':
+                object_roof = object.message;
+                handleRoof();
                 break;
         }
         console.log(`topic = ${topic}, message = ${message.toString()}`);
     }
 
-    function handleWater(object) {
-        switch (object.time_type) {
+    function handleWater() {
+        switch (object_water.time_type) {
             case 'start_time':
                 var start_time = new Date();
-                object.start_time = start_time;
+                object_water.start_time = start_time;
                 io.emit('water/start_time', start_time);
                 break;
             case 'end_time':
                 var end_time = new Date();
-                object.end_time = end_time;
-                saveDataEngine(object);
+                object_water.end_time = end_time;
+                saveDataEngine(object_water);
                 io.emit('water/end_time', end_time);
+                object_water =null;
                 break;
             default:
                 io.emit('nothing', new Date());
         }
     }
 
-    function handleLight(object) {
-        switch (object.time_type) {
+    function handleLight() {
+        switch (object_light.time_type) {
             case 'start_time':
                 var start_time = new Date();
-                object.start_time = start_time;
-                io.emit('light/start_time', object);
+                object_light.start_time = start_time;
+                io.emit('light/start_time', object_light);
                 break;
             case 'end_time':
                 var end_time = new Date();
-                object.end_time = end_time;
-                saveDataEngine(object);
-                io.emit('light/end_time', object);
+                object_light.end_time = end_time;
+                saveDataEngine(object_light);
+                io.emit('light/end_time', object_light);
                 break;
             default:
-                io.emit('nothing', object);
+                io.emit('nothing', null);
         }
     }
 
-    function handleFans(object) {
-        switch (object.time_type) {
+    function handleFans() {
+        switch (object_fan.time_type) {
             case 'start_time':
                 var start_time = new Date();
-                object.start_time = start_time;
-                io.emit('fan/start_time', object);
+                object_fan.start_time = start_time;
+                io.emit('fan/start_time', object_fan);
                 break;
             case 'end_time':
                 var end_time = new Date();
-                object.end_time = end_time;
-                saveDataEngine(object);
-                io.emit('fan/end_time', object);
+                object_fan.end_time = end_time;
+                saveDataEngine(object_fan);
+                io.emit('fan/end_time', object_fan);
+                object_fan = null;
                 break;
             default:
-                io.emit('nothing', object);
+                io.emit('nothing', null);
+        }
+    }
+
+    function handleRoof() {
+        switch (object_roof.time_type) {
+            case 'start_time':
+                var start_time = new Date();
+                object_roof.start_time = start_time;
+                io.emit('roof/start_time', start_time);
+                break;
+            case 'end_time':
+                var end_time = new Date();
+                object_roof.end_time = end_time;
+                saveDataEngine(object_fan);
+                io.emit('roof/end_time', end_time);
+                object_roof = null;
+                break;
+            default:
+                io.emit('nothing', null);
         }
     }
 
@@ -129,7 +166,6 @@ module.exports.subscribeEngine = function (io) {
                     engine_value: object.value.sensor_value,
                     pinmode_value: object.value.pinmode_value
                 },
-                engine_type: object.sensor_type,
                 engine_type: object.engine_type,
                 status: object.status,
                 start_time: object.start_time,
