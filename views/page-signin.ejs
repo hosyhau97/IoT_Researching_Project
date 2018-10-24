@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from qbgrow.com/magen/iot-admin/app/page-signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:30:25 GMT -->
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Twitter -->
+  <meta name="twitter:site" content="@vueghost">
+  <meta name="twitter:creator" content="@vueghost">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="magen-iot-admin">
+  <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
+  <meta name="twitter:image" content="http://vueghost.com/XiNTZ/magen-iot-admin/img/magen-iot-admin-social.png">
+
+  <!-- Facebook -->
+  <meta property="og:url" content="http://vueghost.com/magen-iot-admin">
+  <meta property="og:title" content="Bracket">
+  <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
+
+  <meta property="og:image" content="http://vueghost.com/XiNTZ/magen-iot-admin/img/magen-iot-admin-social.png">
+  <meta property="og:image:secure_url" content="http://vueghost.com/XiNTZ/magen-iot-admin/img/magen-iot-admin-social.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+
+  <!-- Meta -->
+  <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+  <meta name="author" content="vueghost">
+
+
+  <title>Login Green House</title>
+
+  <!-- vendor css -->
+  <link href="assets/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="assets/lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="assets/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+
+  <!-- magen-iot-admin CSS -->
+  <link rel="stylesheet" href="assets/css/magen-iot-admin.css">
+</head>
+
+<body>
+
+  <div class="signpanel-wrapper">
+    <div class="signbox border border-success">
+      <div class="signbox-header">
+        <h4>Green House</h4>
+      </div><!-- signbox-header -->
+      <div class="signbox-body">
+        <span id="error-message" style="color:brown"></span>
+        <div class="form-group control-email">
+          <label class="form-control-label">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Nhập Email" class="form-control">
+        </div><!-- form-group -->
+        <div class="form-group active-code">
+          <label class="form-control-label">Nhập mã kích hoạt:</label>
+          <input type="email" id="email" name="email" placeholder="Nhập mã kích hoạt" class="form-control">
+        </div><!-- form-group -->
+        <div class="form-group frg-password">
+          <label class="form-control-label">Mật khẩu:</label>
+          <input type="password" name="password" id="password" placeholder="Nhập mật khẩu" class="form-control">
+        </div><!-- form-group -->
+        <div class="form-group">
+          <a href="#" id="btn-forgot-password">Quên mật khẩu?</a>
+        </div><!-- form-group -->
+        <button id="btn-login" class="btn btn-dark btn-block">Đăng nhập</button>
+        <div class="form-group body-fogot">
+          <a class="btn btn-primary btn-sm float-left btn-prev" href="#" role="button">Quay lại</a>
+          <a class="btn btn-primary btn-sm float-right pull-right btn-next" href="#" role="button">Tiếp theo</a>
+        </div>
+        <button id="btn-accept" class="btn btn-dark btn-block">Xác nhận</button>
+        <div class="tx-center pd-10 mg-t-40"><a></a></div>
+      </div><!-- signbox-body -->
+    </div><!-- signbox -->
+  </div><!-- signpanel-wrapper -->
+
+  <script src="assets/lib/jquery/jquery.js"></script>
+  <script src="assets/lib/popper.js/popper.js"></script>
+  <script src="assets/lib/bootstrap/bootstrap.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <script>
+
+    var token = localStorage.getItem('token');
+    function verify(token) {
+      $.ajax({
+        url: "http://localhost:3000/verify",
+        type: 'POST',
+        async: false,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("x-access-token", token);
+        },
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+          window.location.href = "http://localhost:3000/home";
+        },
+        error: function (request, message, error) {
+          // window.location = "http://localhost:3000/";
+          var err_text = request.responseJSON.message;
+          $("#error-message").text(err_text);
+          console.log(request.responseJSON);
+          console.log(message);
+        }
+      });
+    }
+
+    var token = localStorage.getItem('token');
+    verify(token);
+    console.log(`token = ${token}`);
+    $.ajaxSetup({
+      headers: {
+        'x-access-token': token,
+        'Content-type': 'application/json'
+      }
+    });
+
+    //Sự kiện đăng nhập
+    $("#btn-login").click(function () {
+      var email = $("#email").val();
+      var password = $("#password").val();
+
+      $.ajax({
+        url: "http://localhost:3000/api/auth/login",
+        type: 'POST',
+        async: false,
+        data: JSON.stringify({
+          "email": email,
+          "password": password
+        }),
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+          if (data.auth === true && data.token) {
+            var token = data.token;
+            var url = `http://localhost:3000/home`;
+            localStorage.removeItem('token');
+            localStorage.setItem("token", token);
+            // $.ajax();
+            //callAjax(url, token);
+            window.location.href = url;
+          }
+        },
+        error: function (request, message, error) {
+          console.log(request);
+          console.log('error');
+        }
+      }); 
+
+    })
+    //Sự kiện nhấn nút quên mật khẩu
+    $("#btn-forgot-password").click(function () {
+      $("#btn-login").hide();
+      $(".frg-password").hide();
+      $(".body-fogot").show();
+      $("#btn-prev").show();
+      $(this).hide();
+    })
+
+    $(".btn-prev").click(function () {
+      $("#btn-login").show();
+      $(".frg-password").show();
+      $(".body-fogot").hide();
+      $("#btn-prev").hide();
+      $("#btn-forgot-password").show();
+    })
+    $(".btn-next").click(function () {
+      $(".body-fogot").hide();
+      $(".control-email").hide();
+      $(".active-code").show();
+      $("#btn-accept").show();
+    })
+  </script>
+  <style>
+    .signbox-header {
+      background-color: green;
+    }
+
+    .body-fogot {
+      display: none;
+    }
+
+    .active-code {
+      display: none;
+    }
+
+    #btn-accept {
+      display: none;
+    }
+
+    /* #btn-prev, #btn-next {
+      display: none;
+    } */
+  </style>
+</body>
+
+</html>
