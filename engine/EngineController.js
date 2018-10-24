@@ -8,6 +8,7 @@ var topic_engine = config.mqtt.TOPIC_ENGINE;
 var client = mqtt.connect(mqtt_url);
 
 module.exports.subscribeEngine = function (io) {
+
     io.on('connection', function (socket) {
         console.log("socket connected");
         socket.on('control/light', function (data) {
@@ -38,7 +39,11 @@ module.exports.subscribeEngine = function (io) {
     });
 
     client.on('message', function (topic, message) {
+       try {
         handleEngine(message, topic);
+       } catch (error) {
+           throw new  AppError('Can not read message from cloud', 500);
+       } 
     });
 
     function handleEngine(message, topic) {
@@ -49,38 +54,47 @@ module.exports.subscribeEngine = function (io) {
 
         switch (object.topic) {
             case 'control/water':
-                handleWater(object);
+                handleWater(object.message);
                 break;
             case 'control/light':
-                handleLight(object);
+                handleLight(object.message);
                 break;
             case 'control/fan':
-                handleFans(object);
+                handleFans(object.message);
                 break;
         }
-        saveDataEngine(object.message);
         console.log(`topic = ${topic}, message = ${message.toString()}`);
     }
 
     function handleWater(object) {
-        switch (object.message.time_type) {
+        switch (object.time_type) {
             case 'start_time':
-                io.emit('water/start_time', object);
+                var start_time = new Date();
+                object.start_time = start_time;
+                io.emit('water/start_time', start_time);
                 break;
             case 'end_time':
-                io.emit('water/end_time', object);
+                var end_time = new Date();
+                object.end_time = end_time;
+                saveDataEngine(object);
+                io.emit('water/end_time', end_time);
                 break;
             default:
-                io.emit('nothing', object);
+                io.emit('nothing', new Date());
         }
     }
 
     function handleLight(object) {
-        switch (object.message.time_type) {
+        switch (object.time_type) {
             case 'start_time':
+                var start_time = new Date();
+                object.start_time = start_time;
                 io.emit('light/start_time', object);
                 break;
             case 'end_time':
+                var end_time = new Date();
+                object.end_time = end_time;
+                saveDataEngine(object);
                 io.emit('light/end_time', object);
                 break;
             default:
@@ -89,20 +103,21 @@ module.exports.subscribeEngine = function (io) {
     }
 
     function handleFans(object) {
-        switch (object.message.time_type) {
+        switch (object.time_type) {
             case 'start_time':
+                var start_time = new Date();
+                object.start_time = start_time;
                 io.emit('fan/start_time', object);
                 break;
             case 'end_time':
+                var end_time = new Date();
+                object.end_time = end_time;
+                saveDataEngine(object);
                 io.emit('fan/end_time', object);
                 break;
             default:
                 io.emit('nothing', object);
         }
-    }
-
-    function updateEngine(){
-        Engine.updateOne()
     }
 
     function saveDataEngine(object) {
@@ -115,17 +130,17 @@ module.exports.subscribeEngine = function (io) {
                     pinmode_value: object.value.pinmode_value
                 },
                 engine_type: object.sensor_type,
-                engine_type:object.engine_type,
-                status:object.status,
-                start_time:object.start_time,
-                end_time:object.end_time,
-                time_type:object.time_type,
+                engine_type: object.engine_type,
+                status: object.status,
+                start_time: object.start_time,
+                end_time: object.end_time,
+                time_type: object.time_type,
                 process_time: new Date()
             },
             function (err, sensor) {
-                if (err){
+                if (err) {
                     throw new AppError('Cannot create engine documents', 400);
-                }     
+                }
             }
         )
     }

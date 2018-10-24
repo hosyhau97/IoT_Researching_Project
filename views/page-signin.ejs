@@ -84,74 +84,74 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
   <script>
 
+    var token = localStorage.getItem('token');
+    function verify(token) {
+      $.ajax({
+        url: "http://localhost:3000/verify",
+        type: 'POST',
+        async: false,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.setRequestHeader("Content-Type", "application/json");
+          xhr.setRequestHeader("x-access-token", token);
+        },
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+          window.location.href = "http://localhost:3000/home";
+        },
+        error: function (request, message, error) {
+          // window.location = "http://localhost:3000/";
+          var err_text = request.responseJSON.message;
+          $("#error-message").text(err_text);
+          console.log(request.responseJSON);
+          console.log(message);
+        }
+      });
+    }
 
-    $(document).ready(function () {
-      var token = localStorage.getItem('token');
-      console.log(`token_nghia = ${token}`);
-        $.ajaxSetup({
-          url:'http://localhost:3000/home',
-          beforeSend: function (xhr) {
-            
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("x-access-token", token);
-          }, global: false,
-          contentType:'application/json', error:function(){
-            console.log('errrorr');
-          }, success:function(){
-            console.log('success');
-            // window.location.href = 'http://localhost:3000/home';
+    var token = localStorage.getItem('token');
+    verify(token);
+    console.log(`token = ${token}`);
+    $.ajaxSetup({
+      headers: {
+        'x-access-token': token,
+        'Content-type': 'application/json'
+      }
+    });
+
+    //Sự kiện đăng nhập
+    $("#btn-login").click(function () {
+      var email = $("#email").val();
+      var password = $("#password").val();
+
+      $.ajax({
+        url: "http://localhost:3000/api/auth/login",
+        type: 'POST',
+        async: false,
+        data: JSON.stringify({
+          "email": email,
+          "password": password
+        }),
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+          if (data.auth === true && data.token) {
+            var token = data.token;
+            var url = `http://localhost:3000/home`;
+            localStorage.removeItem('token');
+            localStorage.setItem("token", token);
+            // $.ajax();
+            //callAjax(url, token);
+            window.location.href = url;
           }
-        });
+        },
+        error: function (request, message, error) {
+          console.log(request);
+          console.log('error');
+        }
+      }); 
 
-      //Sự kiện đăng nhập
-      $("#btn-login").click(function () {
-        var email = $("#email").val();
-        var password = $("#password").val();
-
-        $.ajax({
-          url: "http://localhost:3000/api/auth/login",
-          type: 'POST',
-          async: false,
-          data: JSON.stringify({
-            "email": email,
-            "password": password
-          }),
-          contentType: "application/json;charset=utf-8",
-          dataType: "json",
-          success: function (data) {
-            if (data.auth === true && data.token) {
-              var token = data.token;
-              var url = `http://localhost:3000/home`;
-              localStorage.setItem("token", token);
-              // $.ajax();
-              //callAjax(url, token);
-             window.location.href = url;
-            }
-          },
-          error: function (request, message, error) {
-            var err_text = request.responseJSON.message;
-            $("#error-message").text(err_text);
-            console.log(request.responseJSON);
-            console.log(message);
-          }
-        }); // end ajax
-
-        /*function callAjax(url, token) {
-          $.ajax({
-            url: url,
-            type: "GET",
-            contentType: 'application/json; charset=utf-8',
-            beforeSend: function (xhr) {
-              xhr.setRequestHeader('Content-Type', 'application/json');
-              xhr.setRequestHeader('x-access-token', token);
-            },
-            success: function () {
-              console.log('hcascsa');
-            }
-          });
-        } */
-      })
     })
     //Sự kiện nhấn nút quên mật khẩu
     $("#btn-forgot-password").click(function () {

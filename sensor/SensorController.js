@@ -20,7 +20,7 @@ module.exports.subscribeSensor = function (io){
         console.log('MQTT sensor connected');
         client.subscribe(topic_subcribe, function (err) {
             if (err) {
-                throw new AppError(`Cannot subcribe a topic ${topic_subcribe}`, 500);
+                throw new AppError(`Không thể subcribe ${topic_subcribe}`, 500);
             }
             console.log('subcribed');
         });
@@ -55,7 +55,7 @@ module.exports.subscribeSensor = function (io){
                 },
                 function(err, sensor){
                     if (err) {
-                        throw new AppError('cannot creat data sensor documents', 500);
+                        throw new AppError('Không thể insert vào document Sensor.', 500);
                     }
                 }
             )

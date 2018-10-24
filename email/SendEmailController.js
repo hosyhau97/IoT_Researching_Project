@@ -1,6 +1,7 @@
 var nodeMailer = require('nodemailer');
 var config = require('./config');
 var AppError = require('../handling_error/AppError').AppError;
+var constants = require('../constants/config');
 
 module.exports.sendEmail = function (name, code, url) {
 
@@ -24,7 +25,7 @@ module.exports.sendEmail = function (name, code, url) {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            throw new AppError('Email can not send, try again.', 500);
+            throw new AppError(constants.INTERNAL_SERVER, 500);
         }
         console.log('Message %s sent: %s', info.messageId, info.response);
     });
