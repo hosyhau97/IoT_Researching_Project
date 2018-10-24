@@ -27,62 +27,6 @@ $(document).ready(function () {
         });
     }
     //verify();
-/*
-    var canvas = document.getElementById('myCanvas');
-    var context = canvas.getContext('2d');
-    var x = canvas.width / 2;
-    var y = canvas.height / 2;
-    var radius = 25;
-    var offset = 0;
-    context.beginPath();
-    context.arc(x + offset, y, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = '#EF6C00';
-    context.fill();
-
-    var canvas = document.getElementById('myCanvas1');
-    var context = canvas.getContext('2d');
-    var x = canvas.width / 2;
-    var y = canvas.height / 2;
-    var radius = 25;
-    var offset = 0;
-    context.beginPath();
-    context.arc(x + offset, y, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = '#EF6C00';
-    context.fill();
-
-    var canvas = document.getElementById('myCanvas2');
-    var context = canvas.getContext('2d');
-    var x = canvas.width / 2;
-    var y = canvas.height / 2;
-    var radius = 25;
-    var offset = 0;
-    context.beginPath();
-    context.arc(x + offset, y, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = '#EF6C00';
-    context.fill();
-
-    var canvas = document.getElementById('myCanvas3');
-    var context = canvas.getContext('2d');
-    var x = canvas.width / 2;
-    var y = canvas.height / 2;
-    var radius = 25;
-    var offset = 0;
-    context.beginPath();
-    context.arc(x + offset, y, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = '#EF6C00';
-    context.fill();
-
-    var canvas = document.getElementById('myCanvas4');
-    var context = canvas.getContext('2d');
-    var x = canvas.width / 2;
-    var y = canvas.height / 2;
-    var radius = 25;
-    var offset = 0;
-    context.beginPath();
-    context.arc(x + offset, y, radius, 0, 2 * Math.PI, false);
-    context.fillStyle = '#EF6C00';
-    context.fill();
-*/
     function setColorToCanvas(color, id) {
         var canvas = document.getElementById(id);
         var context = canvas.getContext('2d');
