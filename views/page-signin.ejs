@@ -85,14 +85,31 @@
   <script>
 
 
-
     $(document).ready(function () {
-      $.ajaxSetup({
-        headers: {
-          'Content-Type': 'application/json',
-          'x-access-token': localStorage.getItem("token")
-        }
-      });
+      var token = localStorage.getItem('token');
+      console.log(`token_nghia = ${token}`);
+      // $.ajaxSetup({url:"wrongfile.txt",error:function(xhr){
+      //   debugger
+      //       alert("An error occured: " + xhr.status + " " + xhr.statusText);
+      //   }});
+      //   $.ajax();
+        $.ajaxSetup({
+          url:'http://localhost:3000/home',
+          beforeSend: function (xhr) {
+            
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("x-access-token", token);
+          }, global: false,
+          contentType:'application/json', error:function(){
+            console.log('errrorr');
+          }, success:function(){
+            console.log('success');
+            window.location.href = 'http://localhost:3000/home';
+            debugger
+          }
+        });
+
       //Sự kiện đăng nhập
       $("#btn-login").click(function () {
         var email = $("#email").val();
@@ -110,10 +127,12 @@
           dataType: "json",
           success: function (data) {
             if (data.auth === true && data.token) {
-              var url = "http://localhost:3000";
               var token = data.token;
-              callAjax(url, token);
-              window.localStorage.setItem("token", token);
+              var url = `http://localhost:3000/home`;
+              localStorage.setItem("token", token);
+              // $.ajax();
+              //callAjax(url, token);
+             window.location.href = url;
             }
           },
           error: function (request, message, error) {
@@ -131,8 +150,8 @@
             contentType: 'application/json; charset=utf-8',
             beforeSend: function (xhr) {
               xhr.setRequestHeader('Content-Type', 'application/json');
-               xhr.setRequestHeader('x-access-token', token); 
-              },
+              xhr.setRequestHeader('x-access-token', token);
+            },
             success: function () {
               console.log('hcascsa');
             }
