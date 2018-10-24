@@ -42,6 +42,11 @@ try {
   throw { status: error.status, message: error.message };
 }
 
+app.get('/', function(req, res){
+    res.render('index');
+});
+/*
+// nếu muốn test cái token thì mở cái này ra nhé
 app.get('/home', verifyToken, function(req, res){
 
    console.log('co dc khong');
@@ -62,6 +67,7 @@ app.get('/', function(req, res){
       }
     });
 });
+*/
 
 http.listen(port, function () {
   console.log('listening on *:' + port);

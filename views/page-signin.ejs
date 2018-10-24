@@ -88,11 +88,6 @@
     $(document).ready(function () {
       var token = localStorage.getItem('token');
       console.log(`token_nghia = ${token}`);
-      // $.ajaxSetup({url:"wrongfile.txt",error:function(xhr){
-      //   debugger
-      //       alert("An error occured: " + xhr.status + " " + xhr.statusText);
-      //   }});
-      //   $.ajax();
         $.ajaxSetup({
           url:'http://localhost:3000/home',
           beforeSend: function (xhr) {
@@ -105,8 +100,7 @@
             console.log('errrorr');
           }, success:function(){
             console.log('success');
-            window.location.href = 'http://localhost:3000/home';
-            debugger
+            // window.location.href = 'http://localhost:3000/home';
           }
         });
 
@@ -143,7 +137,7 @@
           }
         }); // end ajax
 
-        function callAjax(url, token) {
+        /*function callAjax(url, token) {
           $.ajax({
             url: url,
             type: "GET",
@@ -156,7 +150,7 @@
               console.log('hcascsa');
             }
           });
-        }
+        } */
       })
     })
     //Sự kiện nhấn nút quên mật khẩu
