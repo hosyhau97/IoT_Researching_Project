@@ -1,8 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from qbgrow.com/magen/iot-admin/app/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:26:25 GMT -->
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -32,7 +29,7 @@
   <meta name="author" content="vueghost">
 
 
-  <title>magen-iot-admin Responsive Bootstrap 4 Admin Template</title>
+  <title>Smart Green House</title>
 
   <!-- vendor css -->
   <link href="assets/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -47,6 +44,35 @@
 
   <!-- ================================================================= -->
 
+  <!-- <link rel="stylesheet" media="all" href="https://public-assets.envato-static.com/assets/market/core/index-f3ff4d5e99c814136d4f3c3e37ff0e18e0159d07cffaca1979c3049ef61d99a2.css">
+  <link rel="stylesheet" media="all" href="https://public-assets.envato-static.com/assets/market/pages/preview/index-004d35cdd5d555cdd3e956d1b916825642de06529f0fe91fd9f390813761d2fc.css"> -->
+
+  <!-- <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://public-assets.envato-static.com/icons/themeforest.net/apple-touch-icon-72x72-precomposed.png"
+    sizes="72x72">
+  <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://public-assets.envato-static.com/icons/themeforest.net/apple-touch-icon-114x114-precomposed.png"
+    sizes="114x114">
+  <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://public-assets.envato-static.com/icons/themeforest.net/apple-touch-icon-144x144-precomposed.png"
+    sizes="144x144">
+  <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://public-assets.envato-static.com/icons/themeforest.net/apple-touch-icon-precomposed.png"> -->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <script src="assets/lib/jquery/jquery.js"></script>
+  <script src="assets/lib/popper.js/popper.js"></script>
+  <script src="assets/lib/bootstrap/bootstrap.js"></script>
+  <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+  <script src="assets/lib/moment/moment.js"></script>
+  <script src="assets/lib/d3/d3.js"></script>
+  <script src="assets/lib/rickshaw/rickshaw.min.js"></script>
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyAEt_DBLTknLexNbTVwbXyq2HSf2UbRBU8"></script>
+  <script src="assets/lib/gmaps/gmaps.js"></script>
+  <script src="assets/lib/chart.js/Chart.js"></script>
+
+  <script src="assets/js/magen-iot-admin.js"></script>
+  <script src="assets/js/ResizeSensor.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -57,24 +83,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/ionicons@4.2.2/dist/ionicons.js"></script>
 
-  <link rel="stylesheet" media="all" href="https://public-assets.envato-static.com/assets/market/core/index-f3ff4d5e99c814136d4f3c3e37ff0e18e0159d07cffaca1979c3049ef61d99a2.css">
-  <link rel="stylesheet" media="all" href="https://public-assets.envato-static.com/assets/market/pages/preview/index-004d35cdd5d555cdd3e956d1b916825642de06529f0fe91fd9f390813761d2fc.css">
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-  <!-- <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://public-assets.envato-static.com/icons/themeforest.net/apple-touch-icon-72x72-precomposed.png"
-    sizes="72x72">
-  <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://public-assets.envato-static.com/icons/themeforest.net/apple-touch-icon-114x114-precomposed.png"
-    sizes="114x114">
-  <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://public-assets.envato-static.com/icons/themeforest.net/apple-touch-icon-144x144-precomposed.png"
-    sizes="144x144">
-  <link rel="apple-touch-icon-precomposed" type="image/x-icon" href="https://public-assets.envato-static.com/icons/themeforest.net/apple-touch-icon-precomposed.png"> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-  <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
+  <script src="assets/js/index.js"></script>
 </head>
 
 <body style="background-color:white;">
-
   <!-- ##### SIDEBAR LOGO ##### -->
-
   <div class="kt-sideleft-header">
     <div class="kt-logo"><a href="index.html">Green House<small>Administrator</small></a></div>
   </div><!-- kt-sideleft-header -->
@@ -332,14 +348,46 @@
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-body pd-b-40">
-                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Nhiệt độ</h6>
+                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Hệ thống đèn</h6>
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="row change_light" style="height: 50px;">
+                        <div class=" col-4">
+                          <canvas id="myCanvas" width="50" height="50"></canvas>
+                        </div>
+                        <div class="col-4">
+                          <canvas id="myCanvas1" width="50" height="50"></canvas>
+                        </div>
+                        <div class="col-4">
+                          <canvas id="myCanvas2" width="50" height="50"></canvas>
+                        </div>
+                      </div>
+                      <div class="row" style="height: 30px;">
+
+                      </div>
+                      <div class="row change_light" style="height: 50px;">
+                        <div class="col-4">
+                          <canvas id="myCanvas3" width="50" height="50"></canvas>
+                        </div>
+                        <div class="col-4">
+                          <canvas id="myCanvas4" width="50" height="50"></canvas>
+                        </div>
+                        <div class="col-4">
+                          <canvas id="myCanvas5" width="50" height="50"></canvas>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4" id="toggle_light">
+                      <input type="checkbox" checked data-toggle="toggle" data-size="small" />
+                    </div>
+                  </div>
                 </div><!-- card-body -->
               </div>
             </div><!-- col-6 -->
             <div class="col-lg-6">
               <div class="card">
                 <div class="card-body pd-b-40">
-                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Độ ẩm không khi</h6>
+                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Hệ thống tưới</h6>
                 </div><!-- card-body -->
 
               </div><!-- card -->
@@ -350,35 +398,20 @@
             <div class="col-lg-6">
               <div class="card mg-t-20">
                 <div class="card-body pd-b-40 ">
-                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Ánh sáng</h6>
-                </div><!-- card-body -->
+                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Hệ thống thông gió</h6>
+                  <div class="container-fluid">
 
+                  </div>
+                </div><!-- card-body -->
               </div><!-- card -->
             </div><!-- col-6 -->
             <div class="col-lg-6 mg-t-20">
               <div class="card">
                 <div class="card-body pd-b-40">
-                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Độ ẩm đất</h6>
+                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Hệ thống rèm</h6>
+
                 </div><!-- card-body -->
 
-              </div><!-- card -->
-            </div><!-- col-6 -->
-          </div><!-- row -->
-
-          <div class="row row-sm">
-            <div class="col-lg-6 mg-t-20">
-              <div class="card">
-                <div class="card-body pd-b-40">
-                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">CO2</h6>
-                </div><!-- card-body -->
-
-              </div><!-- card -->
-            </div><!-- col-6 -->
-            <div class="col-lg-6">
-              <div class="card mg-t-20">
-                <div class="card-body pd-b-40 ">
-                  <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">O2</h6>
-                </div><!-- card-body -->
               </div><!-- card -->
             </div><!-- col-6 -->
           </div><!-- row -->
@@ -386,58 +419,7 @@
       </div><!-- row -->
     </div><!-- kt-pagebody -->
   </div><!-- kt-mainpanel -->
-
-
-
-  <script src="assets/lib/jquery/jquery.js"></script>
-  <script src="assets/lib/popper.js/popper.js"></script>
-  <script src="assets/lib/bootstrap/bootstrap.js"></script>
-  <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
-  <script src="assets/lib/moment/moment.js"></script>
-  <script src="assets/lib/d3/d3.js"></script>
-  <script src="assets/lib/rickshaw/rickshaw.min.js"></script>
-  <script src="http://maps.google.com/maps/api/js?key=AIzaSyAEt_DBLTknLexNbTVwbXyq2HSf2UbRBU8"></script>
-  <script src="assets/lib/gmaps/gmaps.js"></script>
-  <script src="assets/lib/chart.js/Chart.js"></script>
-
-  <script src="assets/js/magen-iot-admin.js"></script>
-  <script src="assets/js/ResizeSensor.js"></script>
-  <script src="assets/js/dashboard.js"></script>
-  <script>
-     
-     var token = localStorage.getItem('token');
-      console.log(`token  = ${token}`);
-
-      function verify(){
-      $.ajax({
-          url: "http://localhost:3000/verify",
-          type: 'POST',
-          async: false,
-          beforeSend: function (xhr) {
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.setRequestHeader("x-access-token", token);
-          },
-          contentType: "application/json;charset=utf-8",
-          dataType: "json",
-          success: function (data) {
-            console.log('success');
-          },
-          error: function (request, message, error) {
-            var err_text = request.responseJSON.message;
-            $("#error-message").text(err_text);
-            console.log(request.responseJSON);
-            console.log(message);
-            window.location = "http://localhost:3000/";
-          }
-        });
-      }
-      verify();
-  </script>
-  <script>
   
-  </script>
-  <script> (function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', '../../../../www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-83200266-1', 'auto'); ga('send', 'pageview'); </script>
 </body>
 
 </html>
