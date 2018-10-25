@@ -27,39 +27,57 @@ $(document).ready(function () {
         });
     }
     //verify();
-    function setColorToCanvas(color, id) {
-        var canvas = document.getElementById(id);
-        var context = canvas.getContext('2d');
-        var x = canvas.width / 2;
-        var y = canvas.height / 2;
-        var radius = 25;
-        var offset = 0;
-        context.beginPath();
-        context.arc(x + offset, y, radius, 0, 2 * Math.PI, false);
-        context.fillStyle = color;
-        context.fill();
-    }
-    $('#toggle_light').on('change', function () {
-        setTurnOnOffForLight();
-    })
-    setTurnOnOffForLight();
-    function setTurnOnOffForLight() {
+    $('#toggle_light').on('change', controllerSystem.setTurnOnOffForLight_onClick)
+    $(controllerSystem.setTurnOnOffForLight());
+
+    $('#toggle_wartering').on('change', controllerSystem.setTurnOnOffForWartering_onClick);
+    $(controllerSystem.setTurnOnOffForWartering());
+
+    $('#toggle_ventilation').on('change', controllerSystem.setTurnOnOffForVentilation_onClick);
+    $(controllerSystem.setTurnOnOffForVentilation());
+})
+
+var controllerSystem = Object.create({
+    /**
+     * Hệ thống quạt thông gió
+     */
+    setTurnOnOffForVentilation: function () {
+        value = $('#toggle_ventilation input').is(":checked");
+        if (value === true) {
+            $(".ventilation").attr("src", 'assets/img/ventilation-on.gif')
+        }
+        else {
+            $(".ventilation").attr("src", 'assets/img/ventilation-off.png')
+        }
+    },
+    setTurnOnOffForVentilation_onClick: function () {
+        $(controllerSystem.setTurnOnOffForVentilation());
+    },
+    /**
+     * Hệ thống tưới nước
+     */
+    setTurnOnOffForWartering: function () {
+        value = $('#toggle_wartering input').is(":checked");
+        if (value === true) {
+            $(".wartering").attr("src", 'assets/img/wartering.gif')
+        }
+        else {
+            $(".wartering").attr("src", 'assets/img/wartering-off.png')
+        }
+    },
+    setTurnOnOffForWartering_onClick: function () {
+        $(controllerSystem.setTurnOnOffForWartering());
+    },
+    setTurnOnOffForLight: function () {
         value = $('#toggle_light input').is(":checked");
-        if(value === true){
-            setColorToCanvas('#EF6C00', 'myCanvas');
-            for (let i=1; i<=5;i++){
-                let canvas = `myCanvas${i}`;
-                setColorToCanvas('#EF6C00', canvas);
-            }
+        if (value === true) {
+            $(".light-green").attr("src", 'assets/img/pic_bulbon.gif');
         }
-           
-        else{
-            setColorToCanvas('gray', 'myCanvas');
-            for (let i=1; i<=5;i++){
-                let canvas = `myCanvas${i}`;
-                setColorToCanvas('gray', canvas);
-            }
+        else {
+            $(".light-green").attr("src", 'assets/img/pic_bulboff.gif');
         }
-            
+    },
+    setTurnOnOffForLight_onClick: function () {
+        $(controllerSystem.setTurnOnOffForLight());
     }
 })
