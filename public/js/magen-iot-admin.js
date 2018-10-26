@@ -16,11 +16,15 @@
        .substring(0,3).toUpperCase());
    }, 100);
 
-   $('.kt-sideleft').perfectScrollbar({
-     useBothWheelAxes: false,
-     suppressScrollX: true,
-     wheelPropogation: true
-   });
+   /**
+    * Sửa dropdown menu 
+    * NTQuyen
+    */
+  //  $('.kt-sideleft').perfectScrollbar({
+  //    useBothWheelAxes: false,
+  //    suppressScrollX: true,
+  //    wheelPropogation: true
+  //  });
 
    // hiding all sub nav in left sidebar by default.
    $('.nav-sub').slideUp();
