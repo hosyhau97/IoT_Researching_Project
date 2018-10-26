@@ -40,55 +40,74 @@ router.post('/register', function (req, res) {
 });
 
 router.post('/forgot-password', function (req, res) {
-    var email = req.body.email;
-    var activeCode = getRandomInt(1000000000);
-    User.updateOne({ email: email }, { $set: { "activeCode": { "activeCode": activeCode, "created": new Date() } } },
-        function (err, user) {
-            if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
-            if (!user) return res.status(400).json({ message: constants.EMAIL_NOT_EXIST, code: 400 });
+    try {
+        var email = req.body.email;
+        var activeCode = getRandomInt(1000000000);
+        User.updateOne({ email: email }, { $set: { "activeCode": { "activeCode": activeCode, "created": new Date() } } },
+            function (err, user) {
+                if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
+                if (!user) return res.status(400).json({ message: constants.EMAIL_NOT_EXIST, code: 400 });
 
-            var username = user.name;
-            var url = `http://localhost:3000/active-account`;
-            email.sendEmail(username, activeCode, url);
-            return res.status(200).json({message:constants.SUCCESS, code:200})
-        });
+                var username = user.name;
+                var url = `http://localhost:3000/active-account`;
+                email.sendEmail(username, activeCode, url);
+                return res.status(200).json({ message: constants.SUCCESS, code: 200 })
+            });
+    } catch (error) {
+        console.log('Failed to read json from client.');
+        // next(err);
+    }
+
 });
 
 router.post('/active-account', function (req, res) {
-    var activeCode = req.body.activeCode;
-    User.findOne({ activeCode: activeCode }, function (err, user) {
-        if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
-        if (!user) return res.status(400).json({ message: constants.ERROR_ACTIVE_CODE, code: 400 });
-        var date = new Date();
-        var time = user.created;
-        var mins = Math.round((date - time) / (1000 * 60));
-        console.log(mins);
-        if (mins <= 5) {
+    try {
+        var activeCode = req.body.activeCode;
+        User.findOne({ activeCode: activeCode }, function (err, user) {
+            if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
+            if (!user) return res.status(400).json({ message: constants.ERROR_ACTIVE_CODE, code: 400 });
+            var date = new Date();
+            var time = user.created;
+            var mins = Math.round((date - time) / (1000 * 60));
+            console.log(mins);
+            if (mins <= 5) {
+                var token = jwt.sign({ id: user._id }, config.secret, {
+                    expiresIn: 84000
+                });
+                return res.status(200).json({ auth: true, token: token });
+            } else {
+                res.status(400).json({ message: constants.ERROR_ACTIVE_CODE_EXPIRED, code: 200 });
+            }
+        })
+    } catch (error) {
+        console.log('Failed to read json from client.');
+        // next(err);
+    }
+
+});
+
+router.post('/login', function (req, res) {
+    try {
+        var email = req.body.email;
+        var password = req.body.password;
+        User.findOne({ email: email }, function (err, user) {
+            var pass = bcrypt.compareSync(password, user.password);
+            if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
+
+            if (!user) {
+                return res.status(400).json({ message: constants.USER_NOTFOUND, code: 400 });
+            }
+            if (!pass) return res.status(401).json({ message: constants.USER_NOTFOUND, code: 400 });
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 84000
             });
             return res.status(200).json({ auth: true, token: token });
-        } else {
-            res.status(400).json({ message: constants.ERROR_ACTIVE_CODE_EXPIRED, code: 200 });
-        }
-    })
-});
-
-router.post('/login', function (req, res) {
-    var email = req.body.email;
-    User.findOne({ email: req.body.email }, function (err, user) {
-        if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
-
-        if (!user) {
-            return res.status(400).json({ message: constants.USER_NOTFOUND, code: 400 });
-        }
-        var password = bcrypt.compareSync(req.body.password, user.password);
-        if (!password) return res.status(401).json({ message: constants.USER_NOTFOUND, code: 400 });
-        var token = jwt.sign({ id: user._id }, config.secret, {
-            expiresIn: 84000
         });
-        return res.status(200).json({ auth: true, token: token });
-    });
+    } catch (err) {
+        console.log('Failed to read json login from client.');
+        // next(err);
+    }
+
 });
 
 router.get('/me', verifyToken, function (req, res, next) {

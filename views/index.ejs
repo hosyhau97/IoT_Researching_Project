@@ -88,6 +88,7 @@
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
   <script src="assets/js/index.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 </head>
 
 <body style="background-color:white;">
@@ -412,10 +413,12 @@
                 <div class="card-body pd-b-40">
                   <h6 class="card-body-title tx-12 tx-spacing-2 mg-b-20">Hệ thống rèm</h6>
                   <div class="row">
-                    <div class="col-8" style="background-color: red; height: 130px;">
-
+                    <div class="col-8" style="height: 130px;">
+                      <img src="assets/img/roof-off.png" class="card-icon roof" style="top:0; right: 36%;height: 130px; ">
                     </div>
-                    <div class="col-4" style="background-color: green"></div>
+                    <div class="col-4" id="toggle_roof" >
+                      <input type="checkbox" checked data-toggle="toggle" data-size="small" />
+                    </div>
                   </div>
                 </div><!-- card-body -->
               </div><!-- card -->

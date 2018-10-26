@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from qbgrow.com/magen/iot-admin/app/page-signin.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:30:25 GMT -->
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -81,9 +79,9 @@
   <script src="assets/lib/jquery/jquery.js"></script>
   <script src="assets/lib/popper.js/popper.js"></script>
   <script src="assets/lib/bootstrap/bootstrap.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
   <script>
 
+   // get token from localStorage
     var token = localStorage.getItem('token');
     function verify(token) {
       $.ajax({
@@ -103,15 +101,16 @@
         error: function (request, message, error) {
           // window.location = "http://localhost:3000/";
           var err_text = request.responseJSON.message;
-          $("#error-message").text(err_text);
+          // $("#error-message").text(err_text);
           console.log(request.responseJSON);
           console.log(message);
         }
       });
     }
 
-    var token = localStorage.getItem('token');
-    verify(token);
+    if (token && !(token === undefined) && token!=null){
+      verify(token);
+    }
     console.log(`token = ${token}`);
     $.ajaxSetup({
       headers: {
@@ -141,8 +140,6 @@
             var url = `http://localhost:3000/home`;
             localStorage.removeItem('token');
             localStorage.setItem("token", token);
-            // $.ajax();
-            //callAjax(url, token);
             window.location.href = url;
           }
         },

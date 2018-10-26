@@ -5,8 +5,6 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var morgan = require("morgan");
 var cors = require('cors');
-var cookieParser = require('cookie-parser');
-var localStorage = require('localStorage');
 var verifyToken = require('./auth/VerifyToken');
 var jwt = require('jsonwebtoken'); 
 var config = require('./config'); 
@@ -20,7 +18,6 @@ app.use(morgan("dev"));
 app.use(cors());
 app.use("/assets",express.static(__dirname+"/public"));
 app.set("view engine", "ejs");
-app.use(cookieParser());
 
 var UserController = require(__root + 'user/UserController');
 app.use('/api/users', UserController);
@@ -31,15 +28,19 @@ app.use('/api/auth', AuthController);
 try {
   var sensor = require('./sensor/SensorController');
   sensor.subscribeSensor(io);
-} catch (error) {
-  throw { status: error.status, message: error.message };
+} catch (err) {
+  const error = new Error('Failed to connect to Cloud || Mongo DB.');
+  error.httpStatusCode = 500
+  return next(error)
 }
 
 try {
   var engine = require('./engine/EngineController');
   engine.subscribeEngine(io);
-} catch (error) {
-  throw { status: error.status, message: error.message };
+} catch (err) {
+  const error = new Error('Failed to connect to Cloud || Mongo DB.');
+  error.httpStatusCode = 500;
+  return next(error);
 }
 
 app.get('/home', function(req, res){
@@ -52,7 +53,6 @@ app.post('/verify',verifyToken, function(req, res, next){
 
     res.status(200).json({message:"success", code:200});
 });
-
 
 app.get('/', function(req, res){
     var token = req.headers[x_access_token];
@@ -81,6 +81,21 @@ app.use(function(req, res) {
   res.status(500);
  res.render('page-notfound', {title: '404: File Not Found'});
 });
+/*
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({message:'Having error from server.', err:500});
+  next();
+})
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(400).json({message:'Bad request from user.', err:400});
+  next();
+})
+*/
+
 http.listen(port, function () {
   console.log('listening on *:' + port);
 });
+

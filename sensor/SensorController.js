@@ -1,36 +1,34 @@
 var mqtt = require('mqtt');
 var config = require('../mqtt/config');
 var Sensor = require('./Sensor');
-var AppError = require('../handling_error/AppError').AppError;
-
 var mqtt_url = config.mqtt.CLOUDMQTT_URL;
 var topic_subcribe = config.mqtt.TOPIC_SENSOR;
 var client = mqtt.connect(mqtt_url);
 
-module.exports.subscribeSensor = function (io){
+module.exports.subscribeSensor = function (io) {
     io.on('connection', function (socket) {
         console.log("socket connected");
-        socket.on('publish', function(data){
+        socket.on('publish', function (data) {
             console.log(`Publishing data to ${data.topic}`);
             client.publish(data.topic, data.payload);
         });
     });
-    
-    client.on('connect', function (){
+
+    client.on('connect', function () {
         console.log('MQTT sensor connected');
         client.subscribe(topic_subcribe, function (err) {
             if (err) {
-                throw new AppError(`Không thể subcribe ${topic_subcribe}`, 500);
+                console.log(`Không thể subcribe ${topic_subcribe}`);
             }
             console.log('subcribed');
         });
     });
-    
+
     client.on('message', function (topic, message) {
         handleSensor(message, topic);
-      });
-    
-    function handleSensor(message, topic){
+    });
+
+    function handleSensor(message, topic) {
         var object = {
             topic: topic,
             message: message.toString()
@@ -40,24 +38,29 @@ module.exports.subscribeSensor = function (io){
         console.log(`topic = ${topic}, message = ${message.toString()}`);
     }
 
-    function saveDataSensor(object){
+    function saveDataSensor(object) {
+        try {
             Sensor.create(
                 {
-                    name:object.name,
-                    value:{
-                        analog_value:object.value.analog_value,
-                        sensor_value:object.value.sensor_value,
-                        pinmode_value:object.value.pinmode_value
+                    name: object.name,
+                    value: {
+                        analog_value: object.value.analog_value,
+                        sensor_value: object.value.sensor_value,
+                        pinmode_value: object.value.pinmode_value
                     },
-                    sensor_type:object.sensor_type,
-                    status:true,
+                    sensor_type: object.sensor_type,
+                    status: true,
                     process_time: new Date()
                 },
-                function(err, sensor){
+                function (err, sensor) {
                     if (err) {
-                        throw new AppError('Không thể insert vào document Sensor.', 500);
+                        console.log('Failed to insert document to Engine collection.')
                     }
                 }
             )
+        } catch (error) {
+            console.log('Failed to insert document to Engine collection.')
+        }
+
     }
 }

@@ -14,25 +14,29 @@ module.exports.subscribeEngine = function (io) {
     var object_fan = {};
     var object_roof = {};
     io.on('connection', function (socket) {
-        console.log("socket connected");
-        socket.on('control/light', function (data) {
-            console.log(`Publishing data to control/light`);
-            client.publish('control/light', data.payload);
+        console.log("socket engine connected");
+        socket.on('control/light/receive', function (data) {
+            console.log(`Publishing data to control/light ${data.payload.message}`);
+            var buf = Buffer.from(JSON.stringify(data.payload));
+            client.publish('control/light', buf);
         });
 
-        socket.on('control/fan', function (data) {
-            console.log(`Publishing data to control/fan`);
-            client.publish('control/fan', data.payload);
+        socket.on('control/fan/receive', function (data) {
+            console.log(`Publishing data to control/fan ${data.payload.message}`);
+            var buf = Buffer.from(JSON.stringify(data.payload));
+            client.publish('control/fan', buf);
         });
 
-        socket.on('control/water', function (data) {
-            console.log(`Publishing data to control/water`);
-            client.publish('control/water', data.payload);
+        socket.on('control/water/receive', function (data) {
+            console.log(`Publishing data to control/water ${data.payload.message}`);
+            var buf = Buffer.from(JSON.stringify(data.payload));
+            client.publish('control/water', buf);
         });
 
-        socket.on('control/roof', function (data) {
-            console.log(`Publishing data to control/roof`);
-            client.publish('control/roof', data.payload);
+        socket.on('control/roof/receive', function (data) {
+            console.log(`Publishing data to control/roof ${data.payload.message}`);
+            var buf = Buffer.from(JSON.stringify(data.payload));
+            client.publish('control/roof', buf);
         });
     });
 
@@ -40,8 +44,7 @@ module.exports.subscribeEngine = function (io) {
         console.log('MQTT engine connected');
         client.subscribe(topic_engine, function (err) {
             if (err) {
-                console.log(err);
-                throw new AppError('Cannot subcribe topic', 500);
+                console.log('Failed to subcribe topic.');
             }
             console.log('subcribed engine.');
         });
@@ -49,9 +52,11 @@ module.exports.subscribeEngine = function (io) {
 
     client.on('message', function (topic, message) {
         try {
-            handleEngine(message, topic);
-        } catch (error) {
-            throw new AppError('Can not read message from cloud', 500);
+            var json = JSON.parse(message.toString());
+            io.emit(topic, json);
+            handleEngine();
+        } catch (err) {
+            console.log('Failed to parse data engine to json.')
         }
     });
 
@@ -94,7 +99,7 @@ module.exports.subscribeEngine = function (io) {
                 object_water.end_time = end_time;
                 saveDataEngine(object_water);
                 io.emit('water/end_time', end_time);
-                object_water =null;
+                object_water = null;
                 break;
             default:
                 io.emit('nothing', new Date());
@@ -158,26 +163,30 @@ module.exports.subscribeEngine = function (io) {
     }
 
     function saveDataEngine(object) {
-        Engine.create(
-            {
-                name: object.name,
-                value: {
-                    analog_value: object.value.analog_value,
-                    engine_value: object.value.sensor_value,
-                    pinmode_value: object.value.pinmode_value
+        try {
+            Engine.create(
+                {
+                    name: object.name,
+                    value: {
+                        analog_value: object.value.analog_value,
+                        engine_value: object.value.sensor_value,
+                        pinmode_value: object.value.pinmode_value
+                    },
+                    engine_type: object.engine_type,
+                    status: object.status,
+                    start_time: object.start_time,
+                    end_time: object.end_time,
+                    time_type: object.time_type,
+                    process_time: new Date()
                 },
-                engine_type: object.engine_type,
-                status: object.status,
-                start_time: object.start_time,
-                end_time: object.end_time,
-                time_type: object.time_type,
-                process_time: new Date()
-            },
-            function (err, sensor) {
-                if (err) {
-                    throw new AppError('Cannot create engine documents', 400);
+                function (err, sensor) {
+                    if (err) {
+                        console.log('Failed to connect to mongoDB');
+                    }
                 }
-            }
-        )
+            )
+        } catch (error) {
+            console.log('Failed to connect to mongoDB');
+        }
     }
 }
