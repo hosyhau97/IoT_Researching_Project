@@ -29,18 +29,13 @@ try {
   var sensor = require('./processor/SensorProcessor');
   sensor.subscribeSensor(io);
 } catch (err) {
-  // const error = new Error('Failed to connect to Cloud || Mongo DB.');
-  // error.httpStatusCode = 500
-  // return next(error)
 }
 
 try {
   var engine = require('./processor/EngineProcessor');
   engine.subscribeEngine(io);
 } catch (err) {
-  // const error = new Error('Failed to connect to Cloud || Mongo DB.');
-  // error.httpStatusCode = 500;
-  // return next(error);
+
 }
 
 app.get('/home', function(req, res){
@@ -94,8 +89,6 @@ app.use((err, req, res, next) => {
   next();
 })
 
-
 http.listen(port, function () {
   console.log('listening on *:' + port);
 });
-

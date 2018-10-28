@@ -19,10 +19,6 @@ $(function () {
                 console.log('success');
             },
             error: function (request, message, error) {
-                var err_text = request.responseJSON.message;
-                $("#error-message").text(err_text);
-                console.log(request.responseJSON);
-                console.log(message);
                 window.location = "http://localhost:3000/";
             }
         });

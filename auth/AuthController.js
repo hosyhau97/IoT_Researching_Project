@@ -95,21 +95,21 @@ router.post('/login', function (req, res, next) {
         var email = req.body.email;
         var password = req.body.password;
         User.findOne({ email: email }, function (err, user) {
-            var pass = bcrypt.compareSync(password, user.password);
-            if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
-
             if (!user) {
                 return res.status(400).json({ message: constants.USER_NOTFOUND, code: 400 });
             }
+            var pass = bcrypt.compareSync(password, user.password);
+            if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
+
             if (!pass) return res.status(401).json({ message: constants.USER_NOTFOUND, code: 400 });
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 84000
             });
             return res.status(200).json({ auth: true, token: token, code: 200 });
         });
-    } catch (err) {
+    } catch (error) {
         console.log('Failed to read json login from client.');
-        return next(err);
+        return next(error);
     }
 
 });
