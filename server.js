@@ -26,21 +26,21 @@ var AuthController = require(__root + 'auth/AuthController');
 app.use('/api/auth', AuthController);
 
 try {
-  var sensor = require('./sensor/SensorController');
+  var sensor = require('./processor/SensorProcessor');
   sensor.subscribeSensor(io);
 } catch (err) {
-  const error = new Error('Failed to connect to Cloud || Mongo DB.');
-  error.httpStatusCode = 500
-  return next(error)
+  // const error = new Error('Failed to connect to Cloud || Mongo DB.');
+  // error.httpStatusCode = 500
+  // return next(error)
 }
 
 try {
-  var engine = require('./engine/EngineController');
+  var engine = require('./processor/EngineProcessor');
   engine.subscribeEngine(io);
 } catch (err) {
-  const error = new Error('Failed to connect to Cloud || Mongo DB.');
-  error.httpStatusCode = 500;
-  return next(error);
+  // const error = new Error('Failed to connect to Cloud || Mongo DB.');
+  // error.httpStatusCode = 500;
+  // return next(error);
 }
 
 app.get('/home', function(req, res){
