@@ -81,7 +81,7 @@ app.use(function(req, res) {
   res.status(500);
  res.render('page-notfound', {title: '404: File Not Found'});
 });
-/*
+
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).json({message:'Having error from server.', err:500});
@@ -93,7 +93,7 @@ app.use((err, req, res, next) => {
   res.status(400).json({message:'Bad request from user.', err:400});
   next();
 })
-*/
+
 
 http.listen(port, function () {
   console.log('listening on *:' + port);

@@ -63,6 +63,7 @@ router.post('/forgot-password', function (req, res) {
 
 router.post('/active-account', function (req, res) {
     try {
+        if (!req.body.activeCode) return res.status(400).json({ message: constants.ERROR_ACTIVE_CODE, code: 400 });
         var activeCode = req.body.activeCode;
         User.findOne({ activeCode: activeCode }, function (err, user) {
             if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
@@ -82,13 +83,15 @@ router.post('/active-account', function (req, res) {
         })
     } catch (error) {
         console.log('Failed to read json from client.');
-        // next(err);
+        next(error);
     }
 
 });
 
-router.post('/login', function (req, res) {
+router.post('/login', function (req, res, next) {
     try {
+        if (!req.body.password || !req.body.email)
+            return res.status(400).json({ message: constants.USER_NOTFOUND, code: 400 });
         var email = req.body.email;
         var password = req.body.password;
         User.findOne({ email: email }, function (err, user) {
@@ -102,11 +105,11 @@ router.post('/login', function (req, res) {
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 84000
             });
-            return res.status(200).json({ auth: true, token: token });
+            return res.status(200).json({ auth: true, token: token, code: 200 });
         });
     } catch (err) {
         console.log('Failed to read json login from client.');
-        // next(err);
+        return next(err);
     }
 
 });
