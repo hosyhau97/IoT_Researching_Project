@@ -88,11 +88,10 @@
         }
       });
     }
-
-    if (token && !(token === undefined) && token!=null){
+    if (token!==null){
       verify(token);
     }
-    console.log(`token = ${token}`);
+    console.log(`token1 = ${token}`);
     $.ajaxSetup({
       headers: {
         'x-access-token': token,
@@ -125,8 +124,9 @@
           }
         },
         error: function (request, message, error) {
-          console.log(request);
-          console.log('error');
+          var err_text = request.responseJSON.message;
+          $("#error-message").text(err_text);
+
         }
       }); 
 

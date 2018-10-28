@@ -14,6 +14,7 @@ var config = require("../config");
 var email = require('../email/SendEmailController');
 var mail = require('../email/config').EMAIL;
 var constants = require('../constants/config');
+var timeUtil = require('../util/TimeUtil');
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -66,9 +67,9 @@ router.post('/active-account', function (req, res) {
         User.findOne({ activeCode: activeCode }, function (err, user) {
             if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
             if (!user) return res.status(400).json({ message: constants.ERROR_ACTIVE_CODE, code: 400 });
-            var date = new Date();
-            var time = user.created;
-            var mins = Math.round((date - time) / (1000 * 60));
+            var end_time = new Date();
+            var start_time = user.created;
+            var mins = timeUtil.countTime(start_time, end_time);
             console.log(mins);
             if (mins <= 5) {
                 var token = jwt.sign({ id: user._id }, config.secret, {
