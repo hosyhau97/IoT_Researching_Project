@@ -6,7 +6,7 @@ var RawTempSensor = require('../enity/raw/RawTemperatureSensor');
 
 function saveAirSensor(object) {
     try {
-        Sensor.create(
+        RawAirSensor.create(
             {
                 value: {
                     analog_value: object.value.analog_value || null,
@@ -30,7 +30,7 @@ function saveAirSensor(object) {
 
 function saveSoilSensor(object) {
     try {
-        Sensor.create(
+        RawSoilSensor.create(
             {
                 value: {
                     analog_value: object.value.analog_value || null,
@@ -54,7 +54,7 @@ function saveSoilSensor(object) {
 
 function saveTempSensor(object) {
     try {
-        Sensor.create(
+        RawTempSensor.create(
             {
                 value: {
                     analog_value: object.value.analog_value || null,
@@ -78,7 +78,7 @@ function saveTempSensor(object) {
 
 function saveHumiditySensor(object) {
     try {
-        Sensor.create(
+        RawHumiditySensor.create(
             {
                 value: {
                     analog_value: object.value.analog_value || null,
@@ -102,7 +102,7 @@ function saveHumiditySensor(object) {
 
 function saveLightSensor(object) {
     try {
-        Sensor.create(
+        RawLightSensor.create(
             {
                 value: {
                     analog_value: object.value.analog_value || null,
