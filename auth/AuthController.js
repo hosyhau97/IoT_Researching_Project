@@ -1,12 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
 var verifyToken = require('./VerifyToken');
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
-router.use(cookieParser("secret"));
-
 var User = require('../user/User');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
@@ -15,6 +10,9 @@ var email = require('../email/SendEmailController');
 var mail = require('../email/config').EMAIL;
 var constants = require('../constants/config');
 var timeUtil = require('../util/TimeUtil');
+
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -42,6 +40,9 @@ router.post('/register', function (req, res) {
 
 router.post('/forgot-password', function (req, res) {
     try {
+        if (!req.body.email) {
+            return res.status(400).json({ message: constants.EMAIL_NOT_EXIST, code: 400 });
+        }
         var email = req.body.email;
         var activeCode = getRandomInt(1000000000);
         User.updateOne({ email: email }, { $set: { "activeCode": { "activeCode": activeCode, "created": new Date() } } },
@@ -56,7 +57,7 @@ router.post('/forgot-password', function (req, res) {
             });
     } catch (error) {
         console.log('Failed to read json from client.');
-        // next(err);
+        // next(error);
     }
 
 });
@@ -98,9 +99,9 @@ router.post('/login', function (req, res, next) {
             if (!user) {
                 return res.status(400).json({ message: constants.USER_NOTFOUND, code: 400 });
             }
-            var pass = bcrypt.compareSync(password, user.password);
             if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
-
+            var pass = bcrypt.compareSync(password, user.password);
+            
             if (!pass) return res.status(401).json({ message: constants.USER_NOTFOUND, code: 400 });
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 84000
