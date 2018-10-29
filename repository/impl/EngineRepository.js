@@ -7,11 +7,6 @@ function saveDataFanEngine (object) {
     try {
         FlatternFanEngine.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    engine_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
                 engine_type: object.engine_type || null,
                 status: object.status || null,
                 start_time: object.start_time || null,
@@ -22,6 +17,8 @@ function saveDataFanEngine (object) {
             function (err, sensor) {
                 if (err) {
                     console.log('Failed to insert fan to mongoDB');
+                } else {
+                    console.log('insert fan success!!!');
                 }
             }
         )
@@ -34,11 +31,6 @@ function saveDataWaterEngine (object) {
     try {
         FlatternWaterEngine.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    engine_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
                 engine_type: object.engine_type || null,
                 status: object.status || null,
                 start_time: object.start_time || null,
@@ -49,6 +41,8 @@ function saveDataWaterEngine (object) {
             function (err, sensor) {
                 if (err) {
                     console.log('Failed to insert water engine to mongoDB');
+                } else {
+                    console.log('insert water success!!!');
                 }
             }
         )
@@ -61,11 +55,6 @@ function saveDataRoofEngine (object) {
     try {
         FlatternRoofEngine.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    engine_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
                 engine_type: object.engine_type || null,
                 status: object.status || null,
                 start_time: object.start_time || null,
@@ -76,6 +65,8 @@ function saveDataRoofEngine (object) {
             function (err, sensor) {
                 if (err) {
                     console.log('Failed to insert roof to mongoDB');
+                } else {
+                    console.log('insert roof success!!!');
                 }
             }
         )
@@ -88,21 +79,18 @@ function saveDataLightEngine (object) {
     try {
         FlatternLightEngine.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    engine_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
-                engine_type: object.engine_type || null,
-                status: object.status || null,
-                start_time: object.start_time || null,
-                end_time: object.end_time || null,
-                time_type: object.time_type || null,
+                engine_type: object.engine_type,
+                status: object.status,
+                start_time: object.start_time,
+                end_time: object.end_time,
+                time_type: object.time_type,
                 process_time: new Date()
             },
             function (err, sensor) {
                 if (err) {
                     console.log('Failed to insert light to mongoDB');
+                } else {
+                    console.log('insert light success!!!');
                 }
             }
         )

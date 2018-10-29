@@ -4,11 +4,6 @@ var Schema = mongoose.Schema;
 
 var FlatternRoofEngine = new Schema({
     name: { type: String, default: 'Roof engine control' },
-    value: {
-        analog_value: Number,
-        engine_value: String,
-        pinmode_value: String
-    },
     engine_type: String,
     status: Boolean,
     start_time: Date,
