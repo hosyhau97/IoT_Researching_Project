@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
-    <meta name="author" content="vueghost">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+  <meta name="author" content="vueghost">
 
   <title>Smart Green House</title>
   <!-- vendor css -->
@@ -13,6 +13,7 @@
   <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link href="assets/lib/Ionicons/css/ionicons.css" rel="stylesheet">
   <!-- <script src="assets/lib/jquery/jquery.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -25,6 +26,7 @@
   <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
   <script src="assets/js/index.js"></script>
+  <script src="assets/js/common.js"></script>
 </head>
 
 <body style="background-color:white;">
@@ -48,11 +50,6 @@
           <i class="icon ion-ios-filing"></i>
           <span>Quá trình sinh trưởng</span>
         </a>
-        <ul class="nav-sub">
-          <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
-          <li class="nav-item"><a href="progress.html" class="nav-link">Progress</a></li>
-          <li class="nav-item"><a href="spinners.html" class="nav-link">Spinners</a></li>
-        </ul>
       </li><!-- nav-item -->
       <li class="nav-item">
         <a href="#" class="nav-link with-sub">
@@ -60,7 +57,21 @@
           <span>Thông tin biểu đồ</span>
         </a>
         <ul class="nav-sub">
-          <li class="nav-item"><a href="chart-morris.html" class="nav-link">Morris Charts</a></li>
+          <!-- <li class="nav-item"><a href="/chart-morris/sensor" class="nav-link sensor-parent">Biều đồ cảm biến</a> -->
+          <li class="nav-item">
+            <div class="nav-link sensor-parent">Biều đồ cảm biến</div>
+            <ul class="nav-sub-sensor">
+              <li class="nav-item"><a href="/chart-morris/engine" class="nav-link">Biểu đồ theo ngày</a></li>
+              <li class="nav-item"><a href="/chart-morris/engine" class="nav-link">Biểu đồ theo tháng</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link engine-parent">Biểu đồ điều khiển</div>
+            <ul class="nav-sub-engine">
+              <li class="nav-item"><a href="/chart-morris/engine" class="nav-link">Biểu đồ theo ngày</a></li>
+              <li class="nav-item"><a href="/chart-morris/engine" class="nav-link">Biểu đồ theo tháng</a></li>
+            </ul>
+          </li>
         </ul>
       </li><!-- nav-item -->
       <li class="nav-item">
@@ -69,7 +80,20 @@
           <span>Dữ liệu nhà kính</span>
         </a>
         <ul class="nav-sub">
-          <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
+          <li class="nav-item">
+            <div class="nav-link data-sensor">Dữ liệu cảm biến</div>
+            <ul class="nav-sub-data-sensor">
+              <li class="nav-item"><a href="/table-datatable/sensor" class="nav-link">Dữ liệu theo ngày</a></li>
+              <li class="nav-item"><a href="/table-datatable/sensor" class="nav-link">Dữ liệu theo tháng</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link data-engine">Dữ liệu điều khiển</div>
+            <ul class="nav-sub-data-engine">
+              <li class="nav-item"><a href="/table-datatable/engine" class="nav-link">Dữ liệu theo ngày</a></li>
+              <li class="nav-item"><a href="/table-datatable/engine" class="nav-link">Dữ liệu theo tháng</a></li>
+            </ul>
+          </li>
         </ul>
       </li><!-- nav-item -->
       <li class="nav-item">
@@ -77,11 +101,6 @@
           <i class="icon ion-ios-bookmarks"></i>
           <span>Thông tin cây trồng</span>
         </a>
-        <ul class="nav-sub">
-          <li class="nav-item"><a href="calendar.html" class="nav-link">Calendar</a></li>
-          <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
-          <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>
-        </ul>
       </li><!-- nav-item -->
       <li class="nav-item">
         <a href="widgets.html" class="nav-link">
@@ -159,7 +178,7 @@
               </div><!-- media -->
             </a>
             <div class="media-list-footer">
-              <a href="#" class="tx-12"><i class="fa fa-angle-down mg-r-5"></i> Show All Notifications</a>
+              <a href="#" class="tx-12"><i class="fa fa-angle-down mg-r-5"></i>Xem toàn bộ thông báo</a>
             </div>
           </div><!-- media-list -->
         </div><!-- dropdown-menu -->
@@ -167,7 +186,7 @@
       <div class="dropdown dropdown-profile">
         <a href="#" class="nav-link nav-link-profile" data-toggle="dropdown">
           <img src="assets/img/img3.jpg" class="wd-32 rounded-circle" alt="">
-          <span class="logged-name"><span class="hidden-xs-down">James Mark</span> <i class="fa fa-angle-down mg-l-3"></i></span>
+          <span class="logged-name"><span class="hidden-xs-down">Thế Quyền</span> <i class="fa fa-angle-down mg-l-3"></i></span>
         </a>
         <div class="dropdown-menu wd-200">
           <ul class="list-unstyled user-profile-nav">
@@ -184,7 +203,7 @@
   </div><!-- kt-headpanel -->
   <div class="kt-breadcrumb">
     <nav class="breadcrumb">
-      <a class="breadcrumb-item" href="index.html">Green house</a>
+      <a class="breadcrumb-item" href="/home">Green house</a>
       <span class="breadcrumb-item active">Trang chủ</span>
     </nav>
   </div><!-- kt-breadcrumb -->
@@ -353,7 +372,7 @@
                     <div class="col-8" style="height: 130px;">
                       <img src="assets/img/roof-off.png" class="card-icon roof" style="top:0; right: 36%;height: 130px; ">
                     </div>
-                    <div class="col-4" id="toggle_roof" >
+                    <div class="col-4" id="toggle_roof">
                       <input type="checkbox" checked data-toggle="toggle" data-size="small" />
                     </div>
                   </div>

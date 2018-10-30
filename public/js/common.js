@@ -1,0 +1,14 @@
+$(document).ready(function(){
+    $('.sensor-parent').click(function(){
+        $('.nav-sub-sensor').toggle();
+    });
+    $('.engine-parent').click(function(){
+        $('.nav-sub-engine').toggle();
+    });
+    $('.data-sensor').click(function(){
+        $('.nav-sub-data-sensor').toggle();
+    });
+    $('.data-engine').click(function(){
+        $('.nav-sub-data-engine').toggle();
+    })
+});

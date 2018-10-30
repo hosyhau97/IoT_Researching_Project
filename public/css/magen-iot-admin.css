@@ -12133,7 +12133,7 @@ textarea.parsley-success:focus {
   /* border-top: 1px solid #ced4da; */
 }
 .kt-sideleft-menu > .nav-item:last-child {
-  /* border-bottom: 1px solid #ced4da; */
+  border-bottom: 1px solid #ced4da;
 }
 .kt-sideleft-menu > .nav-item > .nav-link {
   display: flex;
@@ -12203,6 +12203,42 @@ textarea.parsley-success:focus {
   background-color: #f3f3f3;
   /* border-top: 1px solid #ced4da; */
   /* box-shadow: inset -1px 0 1px 0 #ced4da; */
+}
+.sensor-parent{
+  cursor: pointer;
+}
+.nav-sub-sensor{
+  display: none;
+  list-style-type: none;
+  margin-left: -28px;
+  cursor: pointer;
+}
+.engine-parent{
+  cursor: pointer;
+}
+.nav-sub-engine{
+  display: none;
+  list-style-type: none;
+  margin-left: -28px;
+  cursor: pointer;
+}
+.data-sensor{
+  cursor: pointer;
+}
+.data-engine{
+  cursor: pointer;
+}
+.nav-sub-data-engine{
+  display: none;
+  list-style-type: none;
+  margin-left: -28px;
+  cursor: pointer;
+}
+.nav-sub-data-sensor{
+  display: none;
+  list-style-type: none;
+  margin-left: -28px;
+  cursor: pointer;
 }
 .kt-sideleft-menu .nav-sub .nav-item + .nav-item {
   border-top: 1px solid #ced4da;
