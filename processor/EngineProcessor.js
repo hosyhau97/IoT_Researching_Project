@@ -1,6 +1,7 @@
 var mqtt = require('mqtt');
 var config = require('../mqtt/config');
 var EngineRepository = require('../repository/impl/EngineRepository');
+var TimeUtil = require('../util/TimeUtil');
 
 var mqtt_url = config.mqtt.CLOUDMQTT_URL;
 var topic_engine = config.mqtt.TOPIC_ENGINE;
@@ -15,25 +16,30 @@ module.exports.subscribeEngine = function (io) {
     io.on('connection', function (socket) {
         console.log("socket engine connected");
         socket.on('control/light/receive', function (data) {
-            console.log(`Publishing data to control/light ${JSON.stringify(data.payload.light_object)}`);
+            // console.log(`Publishing data to control/light ${JSON.stringify(data.payload.light_object)}`);
+            try {
+                
+            } catch (error) {
+                
+            }
             var buf = Buffer.from(JSON.stringify(data.payload.light_object));
             client.publish('control/light', buf);
         });
 
         socket.on('control/fan/receive', function (data) {
-            console.log(`Publishing data to control/fan ${data.payload.fan_object}`);
+            // console.log(`Publishing data to control/fan ${data.payload.fan_object}`);
             var buf = Buffer.from(JSON.stringify(data.payload.fan_object));
             client.publish('control/fan', buf);
         });
 
         socket.on('control/water/receive', function (data) {
-            console.log(`Publishing data to control/water ${data.payload.water_object}`);
+            // console.log(`Publishing data to control/water ${data.payload.water_object}`);
             var buf = Buffer.from(JSON.stringify(data.payload.water_object));
             client.publish('control/water', buf);
         });
 
         socket.on('control/roof/receive', function (data) {
-            console.log(`Publishing data to control/roof ${data.payload.roof_object}`);
+            // console.log(`Publishing data to control/roof ${data.payload.roof_object}`);
             var buf = Buffer.from(JSON.stringify(data.payload.roof_object));
             client.publish('control/roof', buf);
         });
@@ -69,7 +75,9 @@ module.exports.subscribeEngine = function (io) {
                 } else if (message.time_type === "start-end") {
                     object_water.time_type = "start-end";
                     object_water.status = true;
+                    object_water.duration = TimeUtil.miniusTime(object_water.start_time, message.end_time);                    
                     object_water.end_time = message.end_time;
+                    object_water.process_time = TimeUtil.convertDateToTimestamp();
                 }
                 handleWater();
                 break;
@@ -81,6 +89,8 @@ module.exports.subscribeEngine = function (io) {
                     object_light.time_type = "start-end";
                     object_light.status = true;
                     object_light.end_time = message.end_time;
+                    object_light.duration = TimeUtil.miniusTime(object_light.start_time, object_light.end_time);
+                    object_light.process_time = TimeUtil.convertDateToTimestamp();
                 }
                 handleLight();
                 break;
@@ -92,6 +102,8 @@ module.exports.subscribeEngine = function (io) {
                     object_fan.time_type = "start-end";
                     object_fan.status = true;
                     object_fan.end_time = message.end_time;
+                    object_fan.duration = TimeUtil.miniusTime(object_fan.start_time, message.end_time);
+                    object_fan.process_time = TimeUtil.convertDateToTimestamp();
                 }
                 handleFans();
                 break;
@@ -103,6 +115,8 @@ module.exports.subscribeEngine = function (io) {
                     object_roof.time_type = "start-end";
                     object_roof.status = true;
                     object_roof.end_time = message.end_time;
+                    object_roof.duration = TimeUtil.miniusTime(object_roof.start_time, message.end_time);
+                    object_roof.process_time = TimeUtil.convertDateToTimestamp();
                 }
                 handleRoof();
                 break;
@@ -112,7 +126,7 @@ module.exports.subscribeEngine = function (io) {
     function handleWater() {
         switch (object_water.time_type) {
             case 'start_time':
-                io.emit('water/start_time', object_water);
+                io.emit('water/start_time', null);
                 break;
             case "start-end":
                 EngineRepository.saveDataWaterEngine(object_water);

@@ -61,7 +61,7 @@ $(function () {
             case "on":
                 light_object = {
                     engine_type: "light_engine",
-                    start_time: new Date(),
+                    start_time: convertDateToTimestamp(new Date()),
                     end_time: null,
                     time_type: "start_time"
                 }
@@ -70,7 +70,7 @@ $(function () {
                 light_object = {
                     engine_type: "light_engine",
                     start_time: null,
-                    end_time: new Date(),
+                    end_time: convertDateToTimestamp(new Date()),
                     time_type: "start-end"
                 }
                 break;
@@ -120,7 +120,7 @@ $(function () {
             case "on":
                 water_object = {
                     engine_type: "water_engine",
-                    start_time: new Date(),
+                    start_time: convertDateToTimestamp(new Date()),
                     end_time: null,
                     time_type: "start_time"
                 }
@@ -129,7 +129,7 @@ $(function () {
                 water_object = {
                     engine_type: "water_engine",
                     start_time: null,
-                    end_time: new Date(),
+                    end_time: convertDateToTimestamp(new Date()),
                     time_type: "start-end"
                 }
                 break;
@@ -185,6 +185,10 @@ $(function () {
     * Sự kiện hệ thống quạt thông gió
     */
 
+    function convertDateToTimestamp(date){
+        return Math.round(date.getTime()/1000);
+    }
+
     socket.on('control/fan', function (data) {
         var topic = data.topic;
         var message = data.message;
@@ -198,7 +202,7 @@ $(function () {
             case "on":
                 fan_object = {
                     engine_type: "fan_engine",
-                    start_time: new Date(),
+                    start_time: convertDateToTimestamp(new Date()),
                     end_time: null,
                     time_type: "start_time"
                 }
@@ -207,7 +211,7 @@ $(function () {
                 fan_object = {
                     engine_type: "fan_engine",
                     start_time: null,
-                    end_time: new Date(),
+                    end_time: convertDateToTimestamp(new Date()),
                     time_type: "start-end"
                 }
                 break;
@@ -268,7 +272,7 @@ $(function () {
             case "on":
                 roof_object = {
                     engine_type: "roof_engine",
-                    start_time: new Date(),
+                    start_time: convertDateToTimestamp(new Date()),
                     end_time: null,
                     time_type: "start_time"
                 }
@@ -277,7 +281,7 @@ $(function () {
                 roof_object = {
                     engine_type: "roof_engine",
                     start_time: null,
-                    end_time: new Date(),
+                    end_time: convertDateToTimestamp(new Date()),
                     time_type: "start-end"
                 }
                 break;

@@ -32,7 +32,7 @@ router.post('/register', function (req, res) {
         function (err, user) {
             if (err) res.status(500).json({ message: 'there was a problem to create a new user.', code: 500 });
             var url = `http://localhost:3000/active-account`;
-            email.sendEmail(req.body.name, activeCode, url);
+            // email.sendEmail(req.body.name, activeCode, url);
             return res.status(200).json({ message: `Please active your account, We are sending active code to your email: ${mail}`, code: 200 });
         }
     )

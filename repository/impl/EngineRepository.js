@@ -11,8 +11,9 @@ function saveDataFanEngine (object) {
                 status: object.status || null,
                 start_time: object.start_time || null,
                 end_time: object.end_time || null,
+                duration:object.duration || null,
                 time_type: object.time_type || null,
-                process_time: new Date()
+                process_time: object.process_time
             },
             function (err, sensor) {
                 if (err) {
@@ -35,8 +36,9 @@ function saveDataWaterEngine (object) {
                 status: object.status || null,
                 start_time: object.start_time || null,
                 end_time: object.end_time || null,
+                duration:object.duration || null,
                 time_type: object.time_type || null,
-                process_time: new Date()
+                process_time: object.process_time || null
             },
             function (err, sensor) {
                 if (err) {
@@ -59,8 +61,9 @@ function saveDataRoofEngine (object) {
                 status: object.status || null,
                 start_time: object.start_time || null,
                 end_time: object.end_time || null,
+                duration:object.duration || null,
                 time_type: object.time_type || null,
-                process_time: new Date()
+                process_time: object.process_time
             },
             function (err, sensor) {
                 if (err) {
@@ -83,8 +86,9 @@ function saveDataLightEngine (object) {
                 status: object.status,
                 start_time: object.start_time,
                 end_time: object.end_time,
+                duration:object.duration || null,
                 time_type: object.time_type,
-                process_time: new Date()
+                process_time: object.process_time
             },
             function (err, sensor) {
                 if (err) {

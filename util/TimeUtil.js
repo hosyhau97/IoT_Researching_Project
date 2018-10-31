@@ -10,8 +10,21 @@ function countTime(start, end) {
     var mins = Math.round((end - start) / (1000 * 60));
     return mins;
 }
+function miniusTime(start, end){
+    return (end - start);
+}
+function convertTimestampToDate(timestamp){
+    return new Date(timestamp * 1000).toLocaleString();
+}
+
+function convertDateToTimestamp(){
+    return Math.round(new Date().getTime()/1000);
+}
 module.exports = {
     addTimeMinutes,
     addTimeSeconds,
-    countTime
+    countTime,
+    miniusTime,
+    convertTimestampToDate,
+    convertDateToTimestamp
 }

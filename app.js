@@ -23,14 +23,14 @@ module.exports.expressApp = function(app, io, express){
       var sensor = require('./processor/SensorProcessor');
       sensor.subscribeSensor(io);
     } catch (err) {
-        console.log('Error from Server');
+        console.log('Error sensor from Server');
     }
     
     try {
       var engine = require('./processor/EngineProcessor');
       engine.subscribeEngine(io);
     } catch (err) {
-        console.log('Error from Server');
+        console.log('Error engine from Server');
     }
     
     app.get('/home', function(req, res){
