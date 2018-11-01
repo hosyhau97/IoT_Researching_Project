@@ -5,6 +5,8 @@ var jwt = require('jsonwebtoken');
 var config = require('./config'); 
 var x_access_token = 'x-access-token';
 var db = require('./db');
+var cron = require('node-cron');
+var  FlatternLightEngine = require('./repository/enity/flatterner/engine/FlatternLightEngine');
 
 module.exports.expressApp = function(app, io, express){
     global.__root = __dirname + '/';
@@ -31,6 +33,13 @@ module.exports.expressApp = function(app, io, express){
       engine.subscribeEngine(io);
     } catch (err) {
         console.log('Error engine from Server');
+    }
+
+    try {
+      var cronJobs = require('./processor/ReportingProcessor');
+      cronJobs.cronJobsSensor(cron);
+    } catch (error) {
+      
     }
     
     app.get('/home', function(req, res){
