@@ -29,10 +29,7 @@ function verify() {
         contentType: "application/json;charset=utf-8",
         dataType: "json",
         success: function (data) {
-            //console.log(data);
-            // returnData(data);
             check = true;
-            // return data;
         },
         error: function (request, message, error) {
             window.location = "http://localhost:3000/";
@@ -40,5 +37,4 @@ function verify() {
     });
     return check;
 }
-// verify();
-
+var x = verify();
