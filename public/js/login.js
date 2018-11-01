@@ -56,6 +56,7 @@
             var url = `http://localhost:3000/home`;
             localStorage.removeItem('token');
             localStorage.setItem("token", token);
+            localStorage.setItem('setupTime', new Date());
             window.location.href = url;
           }
         },

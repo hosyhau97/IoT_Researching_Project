@@ -3,6 +3,19 @@ $(function () {
     var token = localStorage.getItem('token');
     var socket = io.connect();
 
+    function verifyTokenLocalstorage() {
+        var hours = 24;
+        var now = new Date().getTime();
+        var setupTime = localStorage.getItem('setupTime');
+        if (setupTime == null) {
+            localStorage.setItem('setupTime', now);
+        } else {
+            if (now - setupTime > hours * 60 * 60 * 1000) {
+                localStorage.removeItem('token');
+            }
+        }
+    }
+
     function verify() {
         $.ajax({
             url: "http://localhost:3000/verify",
@@ -185,8 +198,8 @@ $(function () {
     * Sự kiện hệ thống quạt thông gió
     */
 
-    function convertDateToTimestamp(date){
-        return Math.round(date.getTime()/1000);
+    function convertDateToTimestamp(date) {
+        return Math.round(date.getTime() / 1000);
     }
 
     socket.on('control/fan', function (data) {

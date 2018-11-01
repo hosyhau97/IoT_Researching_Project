@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+<!-- Mirrored from qbgrow.com/magen/iot-admin/app/chart-morris.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:29:31 GMT -->
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Twitter -->
+  <meta name="twitter:site" content="@vueghost">
+  <meta name="twitter:creator" content="@vueghost">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="magen-iot-admin">
+  <meta name="twitter:description" content="Premium Quality and Responsive UI for Dashboard.">
+  <meta name="twitter:image" content="http://vueghost.com/XiNTZ/magen-iot-admin/img/magen-iot-admin-social.png">
+
+  <!-- Facebook -->
+  <meta property="og:url" content="http://vueghost.com/magen-iot-admin">
+  <meta property="og:title" content="Bracket">
+  <meta property="og:description" content="Premium Quality and Responsive UI for Dashboard.">
+
+  <meta property="og:image" content="http://vueghost.com/XiNTZ/magen-iot-admin/img/magen-iot-admin-social.png">
+  <meta property="og:image:secure_url" content="http://vueghost.com/XiNTZ/magen-iot-admin/img/magen-iot-admin-social.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+
+  <!-- Meta -->
+  <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
+  <meta name="author" content="vueghost">
+
+
+  <title>magen-iot-admin Responsive Bootstrap 4 Admin Template</title>
+
+  <!-- vendor css -->
+  <link href="../lib/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="../lib/Ionicons/css/ionicons.css" rel="stylesheet">
+  <link href="../lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
+  <link href="../lib/highlightjs/github.css" rel="stylesheet">
+  <link href="../lib/morris.js/morris.css" rel="stylesheet">
+
+  <!-- magen-iot-admin CSS -->
+  <link rel="stylesheet" href="../css/magen-iot-admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ##### SIDEBAR LOGO ##### -->
+  <div class="kt-sideleft-header">
+    <div class="kt-logo"><a href="index.html">Green House <small>Administrator</small></a></div>
+  </div><!-- kt-sideleft-header -->
+
+  <!-- ##### SIDEBAR MENU ##### -->
+  <div class="kt-sideleft">
+    <label class="kt-sidebar-label">Điều hướng</label>
+    <ul class="nav kt-sideleft-menu">
+      <li class="nav-item">
+        <a href="index.html" class="nav-link">
+          <i class="icon ion-ios-home"></i>
+          <span>Trang chủ</span>
+        </a>
+      </li><!-- nav-item -->
+      <li class="nav-item">
+        <a href="#" class="nav-link with-sub">
+          <i class="icon ion-ios-filing"></i>
+          <span>Quá trình sinh trưởng</span>
+        </a>
+        <ul class="nav-sub">
+          <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
+          <li class="nav-item"><a href="progress.html" class="nav-link">Progress</a></li>
+          <li class="nav-item"><a href="spinners.html" class="nav-link">Spinners</a></li>
+        </ul>
+      </li><!-- nav-item -->
+      <li class="nav-item">
+        <a href="#" class="nav-link with-sub active">
+          <i class="icon ion-ios-analytics"></i>
+          <span>Thông tin biểu đồ</span>
+        </a>
+        <ul class="nav-sub">
+          <li class="nav-item"><a href="chart-morris.html" class="nav-link active">Biều đồ chi tiết</a></li>
+        </ul>
+      </li><!-- nav-item -->
+      <li class="nav-item">
+        <a href="#" class="nav-link with-sub">
+          <i class="icon ion-ios-list"></i>
+          <span>Dữ liệu nhà kính</span>
+        </a>
+        <ul class="nav-sub">
+          <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
+        </ul>
+      </li><!-- nav-item -->
+      <li class="nav-item">
+        <a href="#" class="nav-link with-sub">
+          <i class="icon ion-ios-bookmarks"></i>
+          <span>Thông tin cây trồng</span>
+        </a>
+        <ul class="nav-sub">
+          <li class="nav-item"><a href="mailbox.html" class="nav-link">Mailbox</a></li>
+          <li class="nav-item"><a href="calendar.html" class="nav-link">Calendar</a></li>
+          <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
+          <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>
+        </ul>
+      </li><!-- nav-item -->
+      <li class="nav-item">
+        <a href="widgets.html" class="nav-link">
+          <i class="icon ion-ios-briefcase"></i>
+          <span>Thông tin người dùng</span>
+        </a>
+      </li><!-- nav-item -->
+    </ul>
+  </div><!-- kt-sideleft -->
+
+  <!-- ##### HEAD PANEL ##### -->
+  <div class="kt-headpanel">
+    <div class="kt-headpanel-left">
+      <a id="naviconMenu" href="#" class="kt-navicon d-none d-lg-flex"><img src="http://qbgrow.com/magen/iot-admin/img/menu.svg"
+          width="30" /></a>
+      <a id="naviconMenuMobile" href="#" class="kt-navicon d-lg-none"><i class="icon ion-navicon-round"></i></a>
+    </div><!-- kt-headpanel-left -->
+
+    <div class="kt-headpanel-right">
+      <div class="dropdown dropdown-notification">
+        <a href="#" class="nav-link pd-x-7 pos-relative" data-toggle="dropdown">
+          <img src="http://qbgrow.com/magen/iot-admin/img/notification.svg" height="24" />
+          <!-- start: if statement -->
+          <span class="square-8 bg-danger pos-absolute t-15 r-0 rounded-circle"></span>
+          <!-- end: if statement -->
+        </a>
+        <div class="dropdown-menu wd-300 pd-0-force">
+          <div class="dropdown-menu-header">
+            <label>Notifications</label>
+            <a href="#">Mark All as Read</a>
+          </div><!-- d-flex -->
+
+          <div class="media-list">
+            <!-- loop starts here -->
+            <a href="#" class="media-list-link read">
+              <div class="media pd-x-20 pd-y-15">
+                <img src="assets/img/img8.jpg" class="wd-40 rounded-circle" alt="">
+                <div class="media-body">
+                  <p class="tx-13 mg-b-0"><strong class="tx-medium">Suzzeth Bungaos</strong> tagged you and 18 others
+                    in a post.</p>
+                  <span class="tx-12">October 03, 2017 8:45am</span>
+                </div>
+              </div><!-- media -->
+            </a>
+            <!-- loop ends here -->
+            <a href="#" class="media-list-link read">
+              <div class="media pd-x-20 pd-y-15">
+                <img src="assets/img/img9.jpg" class="wd-40 rounded-circle" alt="">
+                <div class="media-body">
+                  <p class="tx-13 mg-b-0"><strong class="tx-medium">Mellisa Brown</strong> appreciated your work
+                    <strong class="tx-medium">The Social Network</strong></p>
+                  <span class="tx-12">October 02, 2017 12:44am</span>
+                </div>
+              </div><!-- media -->
+            </a>
+            <a href="#" class="media-list-link read">
+              <div class="media pd-x-20 pd-y-15">
+                <img src="assets/img/img10.jpg" class="wd-40 rounded-circle" alt="">
+                <div class="media-body">
+                  <p class="tx-13 mg-b-0">20+ new items added are for sale in your <strong class="tx-medium">Sale Group</strong></p>
+                  <span class="tx-12">October 01, 2017 10:20pm</span>
+                </div>
+              </div><!-- media -->
+            </a>
+            <a href="#" class="media-list-link read">
+              <div class="media pd-x-20 pd-y-15">
+                <img src="assets/img/img5.jpg" class="wd-40 rounded-circle" alt="">
+                <div class="media-body">
+                  <p class="tx-13 mg-b-0"><strong class="tx-medium">Julius Erving</strong> wants to connect with you on
+                    your conversation with <strong class="tx-medium">Ronnie Mara</strong></p>
+                  <span class="tx-12">October 01, 2017 6:08pm</span>
+                </div>
+              </div><!-- media -->
+            </a>
+            <div class="media-list-footer">
+              <a href="#" class="tx-12"><i class="fa fa-angle-down mg-r-5"></i> Show All Notifications</a>
+            </div>
+          </div><!-- media-list -->
+        </div><!-- dropdown-menu -->
+      </div><!-- dropdown -->
+      <div class="dropdown dropdown-profile">
+        <a href="#" class="nav-link nav-link-profile" data-toggle="dropdown">
+          <img src="assets/img/img3.jpg" class="wd-32 rounded-circle" alt="">
+          <span class="logged-name"><span class="hidden-xs-down">Jane Doe</span> <i class="fa fa-angle-down mg-l-3"></i></span>
+        </a>
+        <div class="dropdown-menu wd-200">
+          <ul class="list-unstyled user-profile-nav">
+            <li><a href="#"><i class="icon ion-ios-person"></i> Edit Profile</a></li>
+            <li><a href="#"><i class="icon ion-ios-gear"></i> Settings</a></li>
+            <li><a href="#"><i class="icon ion-ios-download"></i> Downloads</a></li>
+            <li><a href="#"><i class="icon ion-ios-star"></i> Favorites</a></li>
+            <li><a href="#"><i class="icon ion-ios-folder"></i> Collections</a></li>
+            <li><a href="#"><i class="icon ion-power"></i> Sign Out</a></li>
+          </ul>
+        </div><!-- dropdown-menu -->
+      </div><!-- dropdown -->
+    </div><!-- kt-headpanel-right -->
+  </div><!-- kt-headpanel -->
+  <div class="kt-breadcrumb">
+    <nav class="breadcrumb">
+      <a class="breadcrumb-item" href="index.html">Green housse</a>
+      <a class="breadcrumb-item" href="index.html">Thông tin biểu đồ</a>
+      <span class="breadcrumb-item active">Biều đồ chi tiết</span>
+    </nav>
+  </div><!-- kt-breadcrumb -->
+
+  <!-- ##### MAIN PANEL ##### -->
+  <div class="kt-mainpanel">
+    <div class="kt-pagetitle">
+      <h5>Biểu đồ chi tiết</h5>
+    </div><!-- kt-pagetitle -->
+
+    <div class="kt-pagebody">
+
+      <div class="row row-sm">
+        <div class="col-xl-6">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Nhiệt độ</h6>
+            <!-- <p>A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that
+              they represent.</p> -->
+            <div id="chartContainer" class="ht-200 ht-sm-300"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+        <div class="col-xl-6 mg-t-25 mg-xl-t-0">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Độ ẩm không khí</h6>
+            <!-- <p>The stacked charts are used when data sets have to be broken down into their constituents.</p> -->
+            <div id="chartContainer1" class="ht-200 ht-sm-300"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
+
+      <!-- <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Javascript Code</p> -->
+      <!-- <pre><code class="javascript pd-20">new Morris.Bar({
+element: 'morrisBar1',
+data: [
+  { y: '2006', a: 100, b: 90 },
+  { y: '2007', a: 75,  b: 65 },
+  { y: '2008', a: 50,  b: 40 },
+  { y: '2009', a: 75,  b: 65 },
+  { y: '2010', a: 50,  b: 40 },
+],
+xkey: 'y',
+ykeys: ['a', 'b'],
+labels: ['Series A', 'Series B'],
+barColors: ['#5058AB', '#14A0C1'],
+gridTextSize: 11,
+hideHover: 'auto',
+resize: true
+});</code></pre> -->
+
+      <!-- <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">For stacked bar, just add</p>
+      <pre><code class="javascript pd-20">stacked: true</code></pre> -->
+
+      <div class="row row-sm mg-t-50">
+        <div class="col-xl-6">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Ánh sáng</h6>
+            <!-- <p>A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that
+              they represent.</p> -->
+            <div id="chartContainer2" class="ht-200 ht-sm-300"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+        <div class="col-xl-6 mg-t-25 mg-xl-t-0">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Độ ẩm đất</h6>
+            <!-- <p>The stacked charts are used when data sets have to be broken down into their constituents.</p> -->
+            <div id="chartContainer3" class="ht-200 ht-sm-300"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
+
+      <!-- <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">For additional data</p>
+      <pre><code class="javascript pd-20">data: [
+{ y: '2006', a: 100, b: 90, c: 80 },
+{ y: '2007', a: 75,  b: 65, c: 75 },
+{ y: '2008', a: 50,  b: 40, c: 45 },
+{ y: '2009', a: 75,  b: 65, c: 85 },
+],
+ykeys: ['a', 'b', 'c'],
+labels: ['Series A', 'Series B', 'Series C'],
+barColors: ['#5058AB', '#14A0C1','#01CB99']</code></pre> -->
+
+
+      <div class="row row-sm mg-t-50">
+        <div class="col-xl-6">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">CO2</h6>
+            <!-- <p>A line graph is a type of chart which displays information as a series of data points connected by
+              straight line segments.</p> -->
+            <div id="chartContainer4" class="ht-200 ht-sm-300"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+        <div class="col-xl-6 mg-t-25 mg-xl-t-0">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">O2</h6>
+            <!-- <p>A line graph is a type of chart which displays information as a series of data points connected by
+              straight line segments.</p> -->
+            <div id="chartContainer5" class="ht-200 ht-sm-300"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
+    </div><!-- kt-pagebody -->
+  </div><!-- kt-mainpanel -->
+
+  <script src="assets/lib/jquery/jquery.js"></script>
+  <script src="assets/lib/popper.js/popper.js"></script>
+  <script src="assets/lib/bootstrap/bootstrap.js"></script>
+  <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
+  <script src="assets/lib/moment/moment.js"></script>
+  <script src="assets/lib/highlightjs/highlight.pack.js"></script>
+  <script src="assets/lib/raphael/raphael.min.js"></script>
+  <script src="assets/lib/morris.js/morris.js"></script>
+
+  <script src="assets/js/magen-iot-admin.js"></script>
+  <script src="assets/js/chart.morris.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- Biểu đồ 1 -->
+  <script>
+    window.onload = function () {
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ nhiệt độ",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Nhiệt độ",
+          valueFormatString: "#0,,.",
+          suffix: "C",
+          stripLines: [{
+            value: 3366500,
+            label: "Nhiệt độ trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 2*/
+      var chart = new CanvasJS.Chart("chartContainer1", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ độ ẩm không khí",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Độ ẩm",
+          valueFormatString: "#0,,.",
+          suffix: "%",
+          stripLines: [{
+            value: 3366500,
+            label: "Độ ẩm không khí trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 3*/
+      var chart = new CanvasJS.Chart("chartContainer2", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ cường độ ánh sáng",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Cường độ",
+          valueFormatString: "#0,,.",
+          suffix: "mn",
+          stripLines: [{
+            value: 3366500,
+            label: "Cường độ sáng trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 4*/
+      var chart = new CanvasJS.Chart("chartContainer3", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ độ ẩm đất",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Độ ẩm",
+          valueFormatString: "#0,,.",
+          suffix: "%",
+          stripLines: [{
+            value: 3366500,
+            label: "Độ ấm đất trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 5*/
+      var chart = new CanvasJS.Chart("chartContainer4", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ nồng độ CO2",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Nồng độ",
+          valueFormatString: "#0,,.",
+          suffix: "ppm",
+          stripLines: [{
+            value: 3366500,
+            label: "Nồng độ CO2 trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+      /*Biểu đồ 6*/
+      var chart = new CanvasJS.Chart("chartContainer5", {
+        animationEnabled: true,
+        title: {
+          text: "Biểu đồ nồng độ O2",
+          fontFamily: "verdana",
+          fontWeight: "bold",
+        },
+        axisY: {
+          title: "Nồng độ",
+          valueFormatString: "#0,,.",
+          suffix: "ppm",
+          stripLines: [{
+            value: 3366500,
+            label: "Nồng độ O2 trung bình"
+          }]
+        },
+        data: [{
+          yValueFormatString: "#,### Units",
+          xValueFormatString: "YYYY",
+          type: "spline",
+          dataPoints: [
+            { x: new Date(2002, 0), y: 2506000 },
+            { x: new Date(2003, 0), y: 2798000 },
+            { x: new Date(2004, 0), y: 3386000 },
+            { x: new Date(2005, 0), y: 6944000 },
+            { x: new Date(2006, 0), y: 6026000 },
+            { x: new Date(2007, 0), y: 2394000 },
+            { x: new Date(2008, 0), y: 1872000 },
+            { x: new Date(2009, 0), y: 2140000 },
+            { x: new Date(2010, 0), y: 7289000 },
+            { x: new Date(2011, 0), y: 4830000 },
+            { x: new Date(2012, 0), y: 2009000 },
+            { x: new Date(2013, 0), y: 2840000 },
+            { x: new Date(2014, 0), y: 2396000 },
+            { x: new Date(2015, 0), y: 1613000 },
+            { x: new Date(2016, 0), y: 2821000 },
+            { x: new Date(2017, 0), y: 2000000 }
+          ]
+        }]
+      });
+      chart.render();
+    }
+  </script>
+</body>
+
+<!-- Mirrored from qbgrow.com/magen/iot-admin/app/chart-morris.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:29:46 GMT -->
+
+</html>
