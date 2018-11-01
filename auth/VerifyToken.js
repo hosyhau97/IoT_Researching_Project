@@ -3,7 +3,6 @@ var config = require('../config');
 var x_access_token = 'x-access-token';
 var no_token_found = 'No token provided.';
 var failed_authenticate = 'Failed to authenticate token.';
-var localStorage = require('localStorage');
 function verifyToken(req, res, next) {
 
   var token =  req.headers[x_access_token];
