@@ -1,6 +1,7 @@
 
 $(function () {
-    var token = localStorage.getItem('token');
+   
+    var check = verify();
     var socket = io.connect();
 
     function verifyTokenLocalstorage() {
@@ -16,33 +17,15 @@ $(function () {
         }
     }
 
-    function verify() {
-        $.ajax({
-            url: "http://localhost:3000/verify",
-            type: 'POST',
-            async: false,
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Accept", "application/json");
-                xhr.setRequestHeader("Content-Type", "application/json");
-                xhr.setRequestHeader("x-access-token", token);
-            },
-            contentType: "application/json;charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                console.log('success');
-            },
-            error: function (request, message, error) {
-                window.location = "http://localhost:3000/";
-            }
-        });
-    }
-    verify();
+
     // END HỆ THỐNG ĐĂNG NHẬP
 
     /**
      * Sự kiện hệ thống đèn chiếu sáng
      */
-    var on = "on";
+    if (check){
+        
+        var on = "on";
     var off = "off";
     socket.on('control/light', function (data) {
         var topic = data.topic;
@@ -52,6 +35,7 @@ $(function () {
     });
 
     function setServerTurnOnOffForLight(message) {
+       
         if (message === 'on') {
             $(".light-green").attr("src", 'assets/img/pic_bulbon.gif');
             $('#toggle_light div').removeClass('off');
@@ -62,6 +46,7 @@ $(function () {
             $(".light-green").attr("src", 'assets/img/pic_bulboff.gif');
             $('#toggle_light div').removeClass('on');
             $('#toggle_light div').addClass('off');
+            $('#toggle_light input').prop('checked', false);
             localStorage.setItem('light_1', off);
         }
     }
@@ -94,7 +79,10 @@ $(function () {
     }
 
     function setTurnOnOffForLight() {
-
+       var x = verify();
+       if (x === false) return;
+       console.log(x);
+       console.log('haha');
         var check = false;
         value = $('#toggle_light input').is(":checked");
         if (value === true) {
@@ -110,8 +98,10 @@ $(function () {
         }
         if (check) localStorage.setItem('light_1', on);
         else localStorage.setItem('light_1', off);
+    
     }
 
+    // setTurnOnOffForLight();
     $('#toggle_light').on('change', function () {
         setTurnOnOffForLight();
     });
@@ -163,6 +153,7 @@ $(function () {
             $(".wartering").attr("src", 'assets/img/wartering-off.png')
             $('#toggle_wartering div').removeClass('on');
             $('#toggle_wartering div').addClass('off');
+            $('#toggle_wartering input').prop('checked', false);
             localStorage.setItem('water_1', off);
         }
     }
@@ -245,6 +236,7 @@ $(function () {
             $(".ventilation").attr("src", 'assets/img/ventilation-off.png');
             $('#toggle_ventilation div').removeClass('on');
             $('#toggle_ventilation div').addClass('off');
+            $('#toggle_ventilation input').prop('checked', false);
             localStorage.setItem('fan_1', off);
         }
     }
@@ -322,6 +314,7 @@ $(function () {
             $(".roof").attr("src", 'assets/img/roof-off.png');
             $('#toggle_roof div').removeClass('on');
             $('#toggle_roof div').addClass('off');
+            $('#toggle_roof input').prop('checked', false);
             localStorage.setItem('roof_1', off);
         }
     }
@@ -350,4 +343,6 @@ $(function () {
     $('#toggle_roof').on('change', function () {
         setTurnOnOffForRoof();
     });
+    }
+    
 });

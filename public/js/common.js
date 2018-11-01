@@ -10,5 +10,35 @@ $(document).ready(function(){
     });
     $('.data-engine').click(function(){
         $('.nav-sub-data-engine').toggle();
-    })
+    });
+    
 });
+
+function verify() {
+    var token = localStorage.getItem('token');
+    var check = false;
+    $.ajax({
+        url: "http://localhost:3000/verify",
+        type: 'POST',
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.setRequestHeader("x-access-token", token);
+        },
+        contentType: "application/json;charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+            //console.log(data);
+            // returnData(data);
+            check = true;
+            // return data;
+        },
+        error: function (request, message, error) {
+            window.location = "http://localhost:3000/";
+        }
+    });
+    return check;
+}
+// verify();
+

@@ -67,19 +67,19 @@ module.exports.expressApp = function (app, io, express) {
     });
   });
 
-  app.get('/chart-morris/sensor/day', function (req, res) {
-    res.render('chart-morris-sensor-day');
+  app.get('/chart-morris-sensor-day', function (req, res) {
+    return  res.render('chart-morris-sensor-day');
   });
 
-  app.get('/chart-morris/sensor/month', function (req, res) {
+  app.get('/chart-morris-sensor-month', function (req, res) {
     res.render('chart-morris-sensor-month');
   });
 
-  app.get('/chart-morris/engine/day', function (req, res) {
+  app.get('/chart-morris-engine-day', function (req, res) {
     res.render('chart-morris-engine-day');
   });
 
-  app.get('/chart-morris/engine/month', function (req, res) {
+  app.get('/chart-morris-engine-month', function (req, res) {
     res.render('chart-morris-engine-month');
   });
 
