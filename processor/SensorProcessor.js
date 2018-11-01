@@ -33,6 +33,7 @@ module.exports.subscribeSensor = function (io) {
             topic: topic,
             message: message.toString()
         };
+        console.log(`message = ${message}`);
         var listMessages = message;
         listMessages.array.forEach(element => {
 

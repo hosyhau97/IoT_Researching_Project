@@ -1,12 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
 var verifyToken = require('./VerifyToken');
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
-router.use(cookieParser("secret"));
-
 var User = require('../user/User');
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
@@ -15,6 +10,9 @@ var email = require('../email/SendEmailController');
 var mail = require('../email/config').EMAIL;
 var constants = require('../constants/config');
 var timeUtil = require('../util/TimeUtil');
+
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -34,7 +32,7 @@ router.post('/register', function (req, res) {
         function (err, user) {
             if (err) res.status(500).json({ message: 'there was a problem to create a new user.', code: 500 });
             var url = `http://localhost:3000/active-account`;
-            email.sendEmail(req.body.name, activeCode, url);
+            // email.sendEmail(req.body.name, activeCode, url);
             return res.status(200).json({ message: `Please active your account, We are sending active code to your email: ${mail}`, code: 200 });
         }
     )
@@ -42,6 +40,9 @@ router.post('/register', function (req, res) {
 
 router.post('/forgot-password', function (req, res) {
     try {
+        if (!req.body.email) {
+            return res.status(400).json({ message: constants.EMAIL_NOT_EXIST, code: 400 });
+        }
         var email = req.body.email;
         var activeCode = getRandomInt(1000000000);
         User.updateOne({ email: email }, { $set: { "activeCode": { "activeCode": activeCode, "created": new Date() } } },
@@ -56,13 +57,14 @@ router.post('/forgot-password', function (req, res) {
             });
     } catch (error) {
         console.log('Failed to read json from client.');
-        // next(err);
+        // next(error);
     }
 
 });
 
 router.post('/active-account', function (req, res) {
     try {
+        if (!req.body.activeCode) return res.status(400).json({ message: constants.ERROR_ACTIVE_CODE, code: 400 });
         var activeCode = req.body.activeCode;
         User.findOne({ activeCode: activeCode }, function (err, user) {
             if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
@@ -82,31 +84,33 @@ router.post('/active-account', function (req, res) {
         })
     } catch (error) {
         console.log('Failed to read json from client.');
-        // next(err);
+        next(error);
     }
 
 });
 
-router.post('/login', function (req, res) {
+router.post('/login', function (req, res, next) {
     try {
+        if (!req.body.password || !req.body.email)
+            return res.status(400).json({ message: constants.USER_NOTFOUND, code: 400 });
         var email = req.body.email;
         var password = req.body.password;
         User.findOne({ email: email }, function (err, user) {
-            var pass = bcrypt.compareSync(password, user.password);
-            if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
-
             if (!user) {
                 return res.status(400).json({ message: constants.USER_NOTFOUND, code: 400 });
             }
+            if (err) return res.status(500).json({ message: constants.INTERNAL_SERVER, code: 500 });
+            var pass = bcrypt.compareSync(password, user.password);
+            
             if (!pass) return res.status(401).json({ message: constants.USER_NOTFOUND, code: 400 });
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 84000
             });
-            return res.status(200).json({ auth: true, token: token });
+            return res.status(200).json({ auth: true, token: token, code: 200 });
         });
-    } catch (err) {
+    } catch (error) {
         console.log('Failed to read json login from client.');
-        // next(err);
+        return next(error);
     }
 
 });

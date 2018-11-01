@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from qbgrow.com/magen/iot-admin/app/progress.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:29:29 GMT -->
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -20,11 +18,17 @@
   <link href="assets/lib/Ionicons/css/ionicons.css" rel="stylesheet">
   <link href="assets/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
   <link href="assets/lib/highlightjs/github.css" rel="stylesheet">
+  <link href="assets/lib/morris.js/morris.css" rel="stylesheet">
 
   <!-- magen-iot-admin CSS -->
   <link rel="stylesheet" href="assets/css/magen-iot-admin.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet">
+
+  <!-- Thư viện biểu đ-->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="assets/js/common.js"></script>
 </head>
@@ -33,7 +37,7 @@
 
   <!-- ##### SIDEBAR LOGO ##### -->
   <div class="kt-sideleft-header">
-    <div class="kt-logo"><a href="/home">Magen IOT <small>Administrator</small></a></div>
+    <div class="kt-logo"><a href="/home">Green House <small>Administrator</small></a></div>
   </div><!-- kt-sideleft-header -->
 
   <!-- ##### SIDEBAR MENU ##### -->
@@ -202,192 +206,83 @@
   </div><!-- kt-headpanel -->
   <div class="kt-breadcrumb">
     <nav class="breadcrumb">
-      <a class="breadcrumb-item" href="/home">magen-iot-admin</a>
-      <a class="breadcrumb-item" href="/home">UI Elements</a>
-      <span class="breadcrumb-item active">Progress</span>
+      <a class="breadcrumb-item" href="/home">Green housse</a>
+      <a class="breadcrumb-item" href="/home">Thông tin biểu đồ</a>
+      <span class="breadcrumb-item active">Biều đồ chi tiết</span>
     </nav>
   </div><!-- kt-breadcrumb -->
 
   <!-- ##### MAIN PANEL ##### -->
   <div class="kt-mainpanel">
     <div class="kt-pagetitle">
-      <h5>Progress</h5>
+      <h5>Biểu đồ chi tiết</h5>
     </div><!-- kt-pagetitle -->
 
     <div class="kt-pagebody">
 
-      <div class="card pd-20 pd-sm-40">
-        <h6 class="card-body-title">Basic Progress</h6>
-        <p class="mg-b-20 mg-sm-b-30">A basic progress in all different colors.</p>
+      <div class="row row-sm">
+        <div class="col-xl-12">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Nhiệt độ</h6>
+            <!-- <p>A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that
+              they represent.</p> -->
+            <div id="chartContainer" class="ht-200 ht-sm-400"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
 
-        <div class="progress mg-b-20">
-          <div class="progress-bar wd-25p" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+      <div class="row row-sm">
+        <div class="col-xl-12">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Độ ẩm không khí</h6>
+            <!-- <p>The stacked charts are used when data sets have to be broken down into their constituents.</p> -->
+            <div id="chartContainer1" class="ht-200 ht-sm-400"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
 
-        <div class="progress mg-b-20">
-          <div class="progress-bar bg-success wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
+      <div class="row row-sm mg-t-50">
+        <div class="col-xl-12">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Ánh sáng</h6>
+            <!-- <p>A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that
+              they represent.</p> -->
+            <div id="chartContainer2" class="ht-200 ht-sm-400"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
 
-        <div class="progress mg-b-20">
-          <div class="progress-bar bg-warning wd-50p" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
+      <div class="row row-sm mg-t-50">
+        <div class="col-xl-12">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Độ ẩm đất</h6>
+            <!-- <p>The stacked charts are used when data sets have to be broken down into their constituents.</p> -->
+            <div id="chartContainer3" class="ht-200 ht-sm-400"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
 
-        <div class="progress mg-b-20">
-          <div class="progress-bar bg-danger wd-65p" role="progressbar" aria-valuenow="65" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
+      <div class="row row-sm mg-t-50">
+        <div class="col-xl-12">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Nồng độ CO2</h6>
+            <!-- <p>A line graph is a type of chart which displays information as a series of data points connected by
+              straight line segments.</p> -->
+            <div id="chartContainer4" class="ht-200 ht-sm-400"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
 
-        <div class="progress">
-          <div class="progress-bar bg-indigo wd-75p" role="progressbar" aria-valuenow="75" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-      </div><!-- card -->
-
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Source Code</p>
-      <pre><code class="html pd-20">&lt;div class=&quot;progress mg-b-20&quot;&gt;
-  &lt;div class=&quot;progress-bar bg-success wd-35p&quot; role=&quot;progressbar&quot; aria-valuenow=&quot;35&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-      <div class="card pd-20 pd-sm-40 mg-t-50">
-        <h6 class="card-body-title">Striped Progress</h6>
-        <p class="mg-b-20 mg-sm-b-30">A striped progress in all different colors.</p>
-
-        <div class="progress mg-b-20">
-          <div class="progress-bar progress-bar-striped wd-25p" role="progressbar" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-
-        <div class="progress mg-b-20">
-          <div class="progress-bar progress-bar-striped bg-success wd-35p" role="progressbar" aria-valuenow="35"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-        <div class="progress mg-b-20">
-          <div class="progress-bar progress-bar-striped bg-warning wd-50p" role="progressbar" aria-valuenow="50"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-        <div class="progress mg-b-20">
-          <div class="progress-bar progress-bar-striped bg-danger wd-65p" role="progressbar" aria-valuenow="65"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-        <div class="progress">
-          <div class="progress-bar progress-bar-striped bg-info wd-75p" role="progressbar" aria-valuenow="75"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </div><!-- card -->
-
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Source Code</p>
-      <pre><code class="html pd-20">&lt;div class=&quot;progress mg-b-20&quot;&gt;
-  &lt;div class=&quot;progress-bar progress-bar-striped wd-35p&quot;
-  role=&quot;progressbar&quot; aria-valuenow=&quot;35&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-      <div class="card pd-20 pd-sm-40 mg-t-50">
-        <h6 class="card-body-title">Progress Sizes</h6>
-        <p class="mg-b-20 mg-sm-b-30">A basic progress in different sizes.</p>
-
-
-        <span class="tx-uppercase tx-11 d-block mg-b-5">Size Super Extra Small</span>
-        <div class="progress mg-b-10">
-          <div class="progress-bar ht-2 wd-25p" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="progress mg-b-10">
-          <div class="progress-bar bg-success ht-2 wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-danger ht-2 wd-50p" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-
-        <span class="tx-uppercase tx-11 d-block mg-t-20 mg-b-5">Size Extra Small</span>
-        <div class="progress mg-b-10">
-          <div class="progress-bar progress-bar-xs wd-25p" role="progressbar" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-        <div class="progress mg-b-10">
-          <div class="progress-bar bg-success progress-bar-xs wd-35p" role="progressbar" aria-valuenow="35"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-danger progress-bar-xs wd-50p" role="progressbar" aria-valuenow="50"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-        <span class="tx-uppercase tx-11 d-block mg-t-20 mg-b-5">Size Small</span>
-        <div class="progress mg-b-10">
-          <div class="progress-bar progress-bar-sm wd-25p" role="progressbar" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-        <div class="progress mg-b-10">
-          <div class="progress-bar bg-success progress-bar-sm wd-35p" role="progressbar" aria-valuenow="35"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-danger progress-bar-sm wd-50p" role="progressbar" aria-valuenow="50"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-
-        <span class="tx-uppercase tx-11 d-block mg-t-20 mg-b-5">Size Normal</span>
-        <div class="progress mg-b-10">
-          <div class="progress-bar wd-25p" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="progress mg-b-10">
-          <div class="progress-bar bg-success wd-35p" role="progressbar" aria-valuenow="35" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-danger wd-50p" role="progressbar" aria-valuenow="50" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-
-        <span class="tx-uppercase tx-11 d-block mg-t-20 mg-b-5">Size Large</span>
-        <div class="progress mg-b-10">
-          <div class="progress-bar progress-bar-lg wd-25p" role="progressbar" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100"></div>
-        </div>
-        <div class="progress mg-b-10">
-          <div class="progress-bar bg-success progress-bar-lg wd-35p" role="progressbar" aria-valuenow="35"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-danger progress-bar-lg wd-50p" role="progressbar" aria-valuenow="50"
-            aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </div><!-- card -->
-
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Source Code</p>
-      <pre><code class="html pd-20">&lt;div class=&quot;progress mg-b-20&quot;&gt;
-  &lt;div class=&quot;progress-bar progress-bar-lg wd-35p&quot;
-  role=&quot;progressbar&quot; aria-valuenow=&quot;35&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-
-      <div class="card pd-20 pd-sm-40 mg-t-50">
-        <h6 class="card-body-title">Progress Labels</h6>
-        <p class="mg-b-20 mg-sm-b-30">A basic progress with labels centered.</p>
-
-        <div class="progress mg-b-10">
-          <div class="progress-bar wd-50p" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-        </div>
-        <div class="progress mg-b-10">
-          <div class="progress-bar bg-success wd-60p" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-            aria-valuemax="100">60%</div>
-        </div>
-        <div class="progress">
-          <div class="progress-bar bg-danger wd-95p" role="progressbar" aria-valuenow="95" aria-valuemin="0"
-            aria-valuemax="100">95%</div>
-        </div>
-      </div><!-- card -->
-
-      <p class="tx-11 tx-uppercase tx-spacing-2 mg-t-40 mg-b-10 tx-gray-600">Source Code</p>
-      <pre class="mg-b-0"><code class="html pd-20">&lt;div class=&quot;progress mg-b-20&quot;&gt;
-  &lt;div class=&quot;progress-bar progress-bar-lg wd-35p&quot;
-  role=&quot;progressbar&quot; aria-valuenow=&quot;35&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot;&gt;35%&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+      <div class="row row-sm mg-t-50">
+        <div class="col-xl-12">
+          <div class="card pd-20 pd-sm-40">
+            <h6 class="card-body-title">Nồng độ O2</h6>
+            <!-- <p>A line graph is a type of chart which displays information as a series of data points connected by
+              straight line segments.</p> -->
+            <div id="chartContainer5" class="ht-200 ht-sm-400"></div>
+          </div><!-- card -->
+        </div><!-- col-6 -->
+      </div><!-- row -->
 
     </div><!-- kt-pagebody -->
   </div><!-- kt-mainpanel -->
@@ -398,10 +293,15 @@
   <script src="assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
   <script src="assets/lib/moment/moment.js"></script>
   <script src="assets/lib/highlightjs/highlight.pack.js"></script>
+  <script src="assets/lib/raphael/raphael.min.js"></script>
+  <script src="assets/lib/morris.js/morris.js"></script>
 
+  <script src="assets/js/chart-morris-sensor-day.js"></script>
   <script src="assets/js/magen-iot-admin.js"></script>
+  <script src="assets/js/chart.morris.js"></script>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <!-- Biểu đồ 1 -->
 </body>
-
-<!-- Mirrored from qbgrow.com/magen/iot-admin/app/progress.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:29:29 GMT -->
+<!-- Mirrored from qbgrow.com/magen/iot-admin/app/chart-morris.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 16 Oct 2018 12:29:46 GMT -->
 
 </html>
