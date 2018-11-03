@@ -38,6 +38,7 @@ export default class Login extends Component {
                 resolve(LoginToServer(user, password));
             })
             prom.then(function(loginInfo) {
+                console.log(loginInfo.code);
                 if (loginInfo.code === 400)
                     Alert.alert('Login failed');
                 else if (loginInfo.code === 200) {
