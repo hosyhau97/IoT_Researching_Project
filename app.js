@@ -20,12 +20,19 @@ module.exports.expressApp = function (app, io, express) {
 
   var AuthController = require('./auth/AuthController');
   app.use('/api/auth', AuthController);
-
+  
   try {
     var sensor = require('./processor/SensorProcessor');
     sensor.subscribeSensor(io);
   } catch (err) {
     console.log('Error sensor from Server');
+  }
+
+  try {
+    var sensorAPI = require('./api/SensorApiResource');
+    sensorAPI.sensorAPI(app);
+  } catch (err) {
+    console.log('Error sensor from API resoure.');
   }
 
   try {

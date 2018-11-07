@@ -11,7 +11,7 @@ var RawSoilSensor = new Schema({
     },
     sensor_type:String,
     status:Boolean,
-    process_time:Date
+    process_time:Number
 });
 var sensors= mongoose.model('RawSoilSensor',RawSoilSensor);
 module.exports= sensors;
