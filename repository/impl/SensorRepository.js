@@ -2,7 +2,7 @@ var RawAirSensor = require('../enity/raw/RawAirSensor');
 var RawSoilSensor = require('../enity/raw/RawSoilSensor');
 var RawHumiditySensor = require('../enity/raw/RawHumiditySensor');
 var RawLightSensor = require('../enity/raw/RawLightSensor');
-var RawTempSensor = require('../enity/raw/RawTemperatureSensor');
+var RawTempSensor = require('../enity/raw/RawTempSensor');
 
 function saveAirSensor(object) {
     try {

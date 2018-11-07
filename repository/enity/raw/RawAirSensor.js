@@ -11,7 +11,7 @@ var RawAirSensor = new Schema({
     },
     sensor_type:String,
     status:Boolean,
-    process_time:Date
+    process_time:Number
 });
 var sensors= mongoose.model('RawAirSensor',RawAirSensor);
 module.exports= sensors;
