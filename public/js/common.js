@@ -17,8 +17,9 @@ $(document).ready(function(){
 function verify() {
     var token = localStorage.getItem('token');
     var check = false;
+    var url = getUrl();
     $.ajax({
-        url: "http://localhost:3000/verify",
+        url: url+"verify",
         type: 'POST',
         async: false,
         beforeSend: function (xhr) {
@@ -32,9 +33,10 @@ function verify() {
             check = true;
         },
         error: function (request, message, error) {
-            window.location = "http://localhost:3000/";
+            window.location = url;
         }
     });
     return check;
 }
+
 var x = verify();
