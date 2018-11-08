@@ -4,94 +4,92 @@ var RawHumiditySensor = require('../repository/enity/raw/RawHumiditySensor');
 var RawLightSensor = require('../repository/enity/raw/RawLightSensor');
 var RawTempSensor = require('../repository/enity/raw/RawTempSensor');
 var constants = require('../constants/config');
+var verifyToken = require('../auth/VerifyToken');
 
 module.exports.sensorAPI = function (app) {
 
-    app.get('/sensor-data', async function (req, res) {
+    app.get('/sensor-data', verifyToken, async function (req, res) {
         try {
-            var object = [];
-            var airs = await getRawAirSensor();
-            var soils = await getRawSoilSensor();
-            var hums = await getRawHumiditySensor();
-            var lights = await getRawLightSensor();
-            var temps = await getRawTempSensor();
-            var air = { "air": airs[0] };
-            var soil = { "soil": soils[0] };
-            var hum = { "humidity": hums[0] };
-            var light = { "light": lights[0] };
-            var temp = { "temperature": temps[0] };
-            object.push(air);
-            object.push(soil);
-            object.push(hum);
-            object.push(light);
-            object.push(temp);
+            var sensor = [];
+            var air = await getRawAirSensor();
+            var soil = await getRawSoilSensor();
+            var hum = await getRawHumiditySensor();
+            var light = await getRawLightSensor();
+            var temp = await getRawTempSensor();
+            
+            sensor.push(temp);
+            sensor.push(hum);
+            sensor.push(light);
+            sensor.push(soil);
+            sensor.push(air);
+            
         } catch (error) {
             return res.status(500).json({message:constants.INTERNAL_SERVER, code:500});
         }
-        return res.status(200).json({ object });
+        return res.status(200).json({ sensor });
     });
 
     function getRawAirSensor() {
         return new Promise(function (resolve, reject) {
-            var query = RawAirSensor.find({}, { value: 1, status: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
+            var query = RawAirSensor.find({}, {name:1, value: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
 
             query.exec(function (err, data) {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(data);
+                return resolve(data[0]);
             });
         })
     }
 
     function getRawSoilSensor() {
         return new Promise(function (resolve, reject) {
-            var query = RawSoilSensor.find({}, { value: 1, status: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
+            var query = RawSoilSensor.find({}, {name:1, value: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
 
             query.exec(function (err, data) {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(data);
+                return resolve(data[0]);
             });
         })
     }
 
     function getRawHumiditySensor() {
         return new Promise(function (resolve, reject) {
-            var query = RawHumiditySensor.find({}, { value: 1, status: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
+            var query = RawHumiditySensor.find({}, {name:1, value: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
 
             query.exec(function (err, data) {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(data);
+                return resolve(data[0]);
             });
         })
     }
 
     function getRawLightSensor() {
         return new Promise(function (resolve, reject) {
-            var query = RawLightSensor.find({}, { value: 1, status: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
+            var query = RawLightSensor.find({}, {name:1, value: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
 
             query.exec(function (err, data) {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(data);
+                return resolve(data[0]);
             });
         })
     }
 
     function getRawTempSensor() {
         return new Promise(function (resolve, reject) {
-            var query = RawTempSensor.find({}, { value: 1, status: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
+            var query = RawTempSensor.find({}, {name:1, value: 1, process_time: 1 }).sort({ "process_time": -1 }).limit(1);
 
             query.exec(function (err, data) {
                 if (err) {
                     return reject(err);
                 }
-                return resolve(data);
+                return resolve(data[0]);
             });
         })
     }
