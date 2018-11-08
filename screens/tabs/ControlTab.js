@@ -1,8 +1,8 @@
 /*
-Author: Phan Hong Nam
-Email: idlogin97@gmail.com
-University: Ha Noi University Of Industry
-Green House Home Tab
+ * Author: Phan Hong Nam
+ * Email: idlogin97@gmail.com
+ * University: Ha Noi University Of Industry
+ * Green House Control Tab
 */
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar, Image, ScrollView} from 'react-native';
@@ -82,8 +82,12 @@ export default class ControlTab extends Component {
                         <View style={styles.ColumnOne}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.title}>
-                                    Hệ thống đèn: {this.state.lightState ? 'Bật' : 'Tắt'}
-                                </Text>   
+                                    Hệ thống đèn:
+                                </Text>
+                                <Text style={{fontSize: 18, 
+                                color: this.state.lightState ? 'green' : 'red'}}>
+                                    {this.state.lightState ? ' Bật' : ' Tắt'}
+                                </Text>    
                             </View>
                             <View style={styles.imageAndControl}>
                                 <Image source={lightSource}
@@ -97,7 +101,7 @@ export default class ControlTab extends Component {
                                     circleSize={25}
                                     barHeight={30}
                                     circleBorderWidth={0}
-                                    backgroundActive={'green'}
+                                    backgroundActive={'#1b9891'}
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#fff'}
                                     circleInActiveColor={'#fff'}
@@ -115,7 +119,11 @@ export default class ControlTab extends Component {
                         <View style={styles.ColumnOne}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.title}>
-                                    Hệ thống tưới nước: {this.state.wateringState ? 'Bật' : 'Tắt'}
+                                    Hệ thống tưới nước:
+                                </Text>
+                                <Text style={{fontSize: 18, 
+                                color: this.state.wateringState ? 'green' : 'red'}}>
+                                    {this.state.wateringState ? ' Bật' : ' Tắt'}
                                 </Text>   
                             </View>
                             <View style={styles.imageAndControl}>
@@ -130,7 +138,7 @@ export default class ControlTab extends Component {
                                     circleSize={25}
                                     barHeight={30}
                                     circleBorderWidth={0}
-                                    backgroundActive={'green'}
+                                    backgroundActive={'#1b9891'}
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#fff'}
                                     circleInActiveColor={'#fff'}
@@ -148,8 +156,12 @@ export default class ControlTab extends Component {
                         <View style={styles.ColumnOne}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.title}>
-                                    Hệ thống quạt thông gió: {this.state.ventilationState ? 'Bật' : 'Tắt'}
-                                </Text>   
+                                    Hệ thống quạt thông gió:
+                                </Text>
+                                <Text style={{fontSize: 18, 
+                                color: this.state.ventilationState ? 'green' : 'red'}}>
+                                    {this.state.ventilationState ? ' Bật' : ' Tắt'}
+                                </Text>  
                             </View>
                             <View style={styles.imageAndControl}>
                                 <Image source={ventilationSource}
@@ -163,7 +175,7 @@ export default class ControlTab extends Component {
                                     circleSize={25}
                                     barHeight={30}
                                     circleBorderWidth={0}
-                                    backgroundActive={'green'}
+                                    backgroundActive={'#1b9891'}
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#fff'}
                                     circleInActiveColor={'#fff'}
@@ -181,8 +193,12 @@ export default class ControlTab extends Component {
                         <View style={styles.ColumnOne}>
                             <View style={styles.titleContainer}>
                                 <Text style={styles.title}>
-                                    Hệ thống mái che: {this.state.roofState ? 'Bật' : 'Tắt'}
-                                </Text>   
+                                    Hệ thống mái che:
+                                </Text>
+                                <Text style={{fontSize: 18, 
+                                color: this.state.roofState ? 'green' : 'red'}}>
+                                    {this.state.roofState ? ' Bật' : ' Tắt'}
+                                </Text>
                             </View>
                             <View style={styles.imageAndControl}>
                                 <Image source={roofSource}
@@ -196,7 +212,7 @@ export default class ControlTab extends Component {
                                     circleSize={25}
                                     barHeight={30}
                                     circleBorderWidth={0}
-                                    backgroundActive={'green'}
+                                    backgroundActive={'#1b9891'}
                                     backgroundInactive={'gray'}
                                     circleActiveColor={'#fff'}
                                     circleInActiveColor={'#fff'}
@@ -232,6 +248,7 @@ const styles = StyleSheet.create({
     controlContainer: {
         flex: 1,
         flexDirection: 'column', 
+        paddingVertical: 10
     }, 
 
     ColumnOne: {
@@ -240,34 +257,30 @@ const styles = StyleSheet.create({
         flexDirection: 'row', 
         flex: 1, 
         flexDirection: 'column', 
-        borderBottomWidth: 1, 
-        borderBottomColor: '#1b9891'
+        marginHorizontal: 20, 
+        marginVertical: 10, 
+        elevation: 2
     }, 
 
     titleContainer: {
         flex: 1, 
         justifyContent: 'center', 
-        paddingLeft: 30
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'center'
     }, 
 
     imageAndControl: {
         flex: 2, 
         flexDirection: 'row', 
-        alignItems: 'center', 
-        // justifyContent: 'space-around', 
-        // backgroundColor: 'black'
-    },
-
-    ColumnTwo: {
-        height: 200,
-        backgroundColor: 'green'
+        alignItems: 'center'
     }, 
 
     image: {
         width: 100, 
         height: 100, 
         marginLeft: 30, 
-        marginRight: 120
+        marginRight: 100
     }, 
 
     title: {

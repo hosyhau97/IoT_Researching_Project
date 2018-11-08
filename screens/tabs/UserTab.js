@@ -1,8 +1,8 @@
 /*
-Author: Phan Hong Nam
-Email: idlogin97@gmail.com
-University: Ha Noi University Of Industry
-Green House Logout Tab
+ * Author: Phan Hong Nam
+ * Email: idlogin97@gmail.com
+ * University: Ha Noi University Of Industry
+ * Green House User Tab
 */
 import React, { Component } from 'react';
 import { View, Text, StatusBar, StyleSheet } from 'react-native';

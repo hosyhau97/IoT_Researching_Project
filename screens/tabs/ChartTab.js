@@ -1,12 +1,15 @@
 /*
-Author: Phan Hong Nam
-Email: idlogin97@gmail.com
-University: Ha Noi University Of Industry
-Green House Second Tab
+ * Author: Phan Hong Nam
+ * Email: idlogin97@gmail.com
+ * University: Ha Noi University Of Industry
+ * Green House Chart Tab
 */
 import React, { Component } from 'react';
 import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import SensorChartTab from './SensorChartTab';
+import ControlChartTab from './ControlChartTab';
+import { createMaterialTopTabNavigator } from 'react-navigation';
 
 export default class ChartTab extends Component {
     static navigationOptions = {
@@ -18,19 +21,30 @@ export default class ChartTab extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                <StatusBar
-                    backgroundColor="rgba(15, 87, 83, 0.8)"
-                // barStyle="light-content"
-                />
-                <View style={styles.header}>
-                    <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
-                    Biểu đồ</Text>
-                </View>
-            </View>
+            <ChartNavigator />
         );
     }
 }
+
+const ChartNavigator = createMaterialTopTabNavigator({
+    Sensor: { screen: SensorChartTab },
+    Control: { screen: ControlChartTab },
+  }, {
+    initialRouteName: 'Sensor',
+    activeColor: '#fff',
+    inactiveColor: 'rgba(255, 255, 255, 0.8)',
+    tabBarOptions: {
+        labelStyle: {
+          fontSize: 13,
+        },
+        indicatorStyle: {
+            backgroundColor: 'white'
+        },
+        style: {
+          backgroundColor: '#1fada6',
+        },
+      }
+  });
 
 const styles = StyleSheet.create({
     container: {

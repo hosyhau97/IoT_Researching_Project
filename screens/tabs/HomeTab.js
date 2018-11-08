@@ -1,6 +1,11 @@
+/*
+ * Author: Phan Hong Nam
+ * Email: idlogin97@gmail.com
+ * University: Ha Noi University Of Industry
+ * Green House Home Tab
+*/
 import React, { Component } from 'react';
 import { Text, Image, View, StyleSheet, StatusBar } from 'react-native';
-import * as Progress from 'react-native-progress';
 import ProgressCircle from 'react-native-progress-circle'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 

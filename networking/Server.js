@@ -1,8 +1,9 @@
-/**
- * Author: Phan Hong Nam (Demons)
- * Facebook: fb.com/nam.gio.97
+/*
+ * Author: Phan Hong Nam
  * Email: idlogin97@gmail.com
- */
+ * University: Ha Noi University Of Industry
+ * Green House Server API
+*/
 
 import React, { Component } from 'react';
 

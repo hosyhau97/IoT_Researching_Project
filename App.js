@@ -1,8 +1,8 @@
 /*
-Author: Phan Hong Nam
-Email: idlogin97@gmail.com
-University: Ha Noi University Of Industry
-Green House Main Screen
+ * Author: Phan Hong Nam
+ * Email: idlogin97@gmail.com
+ * University: Ha Noi University Of Industry
+ * Green House App Tab
 */
  import React, {Component} from 'react';
 // import {Platform, StyleSheet, Text, View} from 'react-native';
