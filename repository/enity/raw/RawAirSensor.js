@@ -4,11 +4,7 @@ var Schema = mongoose.Schema;
 
 var RawAirSensor = new Schema({
     name:{type : String, default :'Air sensor'},
-    value:{
-        analog_value:Number,
-        sensor_value:String,
-        pinmode_value:String
-    },
+    value:Number,
     sensor_type:String,
     status:Boolean,
     process_time:Number
