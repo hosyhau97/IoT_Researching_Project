@@ -8,11 +8,7 @@ function saveAirSensor(object) {
     try {
         RawAirSensor.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    sensor_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
+                value:object.value || null,
                 sensor_type: object.sensor_type || null,
                 status: object.status,
                 process_time: new Date()
@@ -32,11 +28,7 @@ function saveSoilSensor(object) {
     try {
         RawSoilSensor.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    sensor_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
+                value:object.value || null,
                 sensor_type: object.sensor_type || null,
                 status: object.status,
                 process_time: new Date()
@@ -56,11 +48,7 @@ function saveTempSensor(object) {
     try {
         RawTempSensor.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    sensor_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
+                value:object.value || null,
                 sensor_type: object.sensor_type || null,
                 status: object.status,
                 process_time: new Date()
@@ -80,11 +68,7 @@ function saveHumiditySensor(object) {
     try {
         RawHumiditySensor.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    sensor_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
+                value:object.value || null,
                 sensor_type: object.sensor_type || null,
                 status: object.status,
                 process_time: new Date()
@@ -104,11 +88,7 @@ function saveLightSensor(object) {
     try {
         RawLightSensor.create(
             {
-                value: {
-                    analog_value: object.value.analog_value || null,
-                    sensor_value: object.value.sensor_value || null,
-                    pinmode_value: object.value.pinmode_value || null
-                },
+                value:object.value || null,
                 sensor_type: object.sensor_type || null,
                 status: object.status,
                 process_time: new Date()
