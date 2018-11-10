@@ -16,32 +16,40 @@ module.exports.subscribeEngine = function (io) {
     io.on('connection', function (socket) {
         console.log("socket engine connected");
         socket.on('control/light/receive', function (data) {
-            // console.log(`Publishing data to control/light ${JSON.stringify(data.payload.light_object)}`);
             try {
-                
+                var buf = Buffer.from(JSON.stringify(data.payload.light_object));
+                client.publish('control/light', buf);
             } catch (error) {
-                
+                console.log('socket light convert error');
             }
-            var buf = Buffer.from(JSON.stringify(data.payload.light_object));
-            client.publish('control/light', buf);
+
         });
 
         socket.on('control/fan/receive', function (data) {
-            // console.log(`Publishing data to control/fan ${data.payload.fan_object}`);
-            var buf = Buffer.from(JSON.stringify(data.payload.fan_object));
-            client.publish('control/fan', buf);
+            try{
+                var buf = Buffer.from(JSON.stringify(data.payload.fan_object));
+                client.publish('control/fan', buf);
+            }catch(error){
+                console.log('socket fan convert error');
+            }
         });
 
         socket.on('control/water/receive', function (data) {
-            // console.log(`Publishing data to control/water ${data.payload.water_object}`);
-            var buf = Buffer.from(JSON.stringify(data.payload.water_object));
-            client.publish('control/water', buf);
+            try {
+                var buf = Buffer.from(JSON.stringify(data.payload.water_object));
+                client.publish('control/water', buf);
+            }catch(error){
+                console.log('socket water convert error');
+            }
         });
 
         socket.on('control/roof/receive', function (data) {
-            // console.log(`Publishing data to control/roof ${data.payload.roof_object}`);
-            var buf = Buffer.from(JSON.stringify(data.payload.roof_object));
-            client.publish('control/roof', buf);
+            try {
+                var buf = Buffer.from(JSON.stringify(data.payload.roof_object));
+                client.publish('control/roof', buf);
+            }catch(error){
+                console.log('socket roof convert error');
+            }
         });
     });
 
@@ -75,7 +83,7 @@ module.exports.subscribeEngine = function (io) {
                 } else if (message.time_type === "start-end") {
                     object_water.time_type = "start-end";
                     object_water.status = true;
-                    object_water.duration = TimeUtil.miniusTime(object_water.start_time, message.end_time);                    
+                    object_water.duration = TimeUtil.miniusTime(object_water.start_time, message.end_time);
                     object_water.end_time = message.end_time;
                     object_water.process_time = TimeUtil.convertDateToTimestamp();
                 }

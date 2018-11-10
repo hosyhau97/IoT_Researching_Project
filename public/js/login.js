@@ -17,8 +17,6 @@
           window.location.href = "http://localhost:3000/home";
         },
         error: function (request, message, error) {
-          var err_text = request.responseJSON.message;
-          $("#error-message").text(err_text);
           console.log(request.responseJSON);
           console.log(message);
         }

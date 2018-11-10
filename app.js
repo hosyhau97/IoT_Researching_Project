@@ -43,10 +43,10 @@ module.exports.expressApp = function (app, io, express) {
   }
 
   try {
-    var cronJobs = require('./processor/ReportingProcessor');
-    cronJobs.cronJobsSensor(cron);
+    var cronJobs = require('./reporting/ReportingSensor');
+    cronJobs.dataSensorChartByDay(io);
   } catch (error) {
-
+    console.log('Error sensor chart data from Server');
   }
 
   app.get('/home', function (req, res) {
