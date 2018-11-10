@@ -5,7 +5,6 @@ var jwt = require('jsonwebtoken');
 var config = require('./config');
 var x_access_token = 'x-access-token';
 var db = require('./db');
-var cron = require('node-cron');
 var FlatternLightEngine = require('./repository/enity/flatterner/engine/FlatternLightEngine');
 
 module.exports.expressApp = function (app, io, express) {
@@ -89,6 +88,10 @@ module.exports.expressApp = function (app, io, express) {
   app.get('/chart-morris-engine-month', function (req, res) {
     res.render('chart-morris-engine-month');
   });
+
+  app.get('/log-out', function(req, res){
+    return res.render('page-signin');
+  })
 
   app.use(function (req, res) {
     res.status(400);
