@@ -1,4 +1,3 @@
-
 $(function () {
     var socket = io.connect();
 
@@ -404,5 +403,5 @@ $(function () {
         var currentTime = Math.round(new Date().getTime()/1000);
         var minuteRealtime = Math.round((currentTime - process_time)/60);
         $(".tx-success").html(`${minuteRealtime} phút trước.`);
-    }, 60*1000);
+    }, 5000);
 });
