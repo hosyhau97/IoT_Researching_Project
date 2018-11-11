@@ -14,6 +14,8 @@ $(function () {
         else console.log("HHIII0");
         console.log(data);
     });
+    socket.emit('test-sac', {time:null});
+    
 })
 
 //Biểu đồ nhiệt độ

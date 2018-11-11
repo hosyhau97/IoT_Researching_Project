@@ -4,6 +4,7 @@ var RawHumiditySensor = require('../repository/enity/raw/RawHumiditySensor');
 var RawLightSensor = require('../repository/enity/raw/RawLightSensor');
 var RawTempSensor = require('../repository/enity/raw/RawTempSensor');
 var TimeUtils = require('../util/TimeUtil');
+
 module.exports.dataSensorChartByDay = function (io) {
     io.on('connection', function (socket) {
         console.log('reporting connected');
@@ -23,12 +24,19 @@ module.exports.dataSensorChartByDay = function (io) {
                 io.emit('data-chart', [{ light: lights }, { time: end }]);
             }
         });
+
+        socket.on('test-sac', async function (data) {
+            console.log('tested');
+            testData();
+        });
     });
+
+    
 }
 
 function getAirValue(start, end) {
     return new Promise(function (resolve, reject) {
-        var query = RawAirSensor.find({ process_time: { $gt: start, $lt: end } }, {value:1, process_time:1});
+        var query = RawAirSensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
         query.exec(function (err, data) {
             if (err) {
                 return reject(err);
@@ -40,7 +48,7 @@ function getAirValue(start, end) {
 
 function getSoilValue(start, end) {
     return new Promise(function (resolve, reject) {
-        var query = RawSoilSensor.find({ process_time: { $gt: start, $lt: end } }, {value:1, process_time:1});
+        var query = RawSoilSensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
         query.exec(function (err, data) {
             if (err) {
                 return reject(err);
@@ -52,7 +60,7 @@ function getSoilValue(start, end) {
 
 function getLightValue(start, end) {
     return new Promise(function (resolve, reject) {
-        var query = RawLightSensor.find({ process_time: { $gt: start, $lt: end }}, {value:1, process_time:1});
+        var query = RawLightSensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
         query.exec(function (err, data) {
             if (err) {
                 return reject(err);
@@ -64,7 +72,7 @@ function getLightValue(start, end) {
 
 function getHumidityValue(start, end) {
     return new Promise(function (resolve, reject) {
-        var query = RawHumiditySensor.find({ process_time: { $gt: start, $lt: end } }, {value:1, process_time:1});
+        var query = RawHumiditySensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
         query.exec(function (err, data) {
             if (err) {
                 return reject(err);
@@ -76,7 +84,7 @@ function getHumidityValue(start, end) {
 
 function getTemperatureValue(start, end) {
     return new Promise(function (resolve, reject) {
-        var query = RawTempSensor.find({ process_time: { $gt: start, $lt: end } }, {value:1, process_time:1});
+        var query = RawTempSensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
         query.exec(function (err, data) {
             if (err) {
                 return reject(err);
@@ -93,10 +101,10 @@ async function getData(start, end) {
     var humidities = await getHumidityValue(start, end);
     var soils = await getSoilValue(start, end);
 
-    var light = lights.map(item =>{
-        
+    var light = lights.map(item => {
+
     });
-    var result = [{light:lights},{temperature:temps},{},{},{},{}]
+    var result = [{ light: lights }, { temperature: temps }, {}, {}, {}, {}]
 }
 
 function checkTime(time) {
@@ -121,6 +129,52 @@ function convertTimestampToDate(timestamp) {
     return new Date(timestamp * 1000);
 }
 
+function generateDataBySize(size, data) {
+    var values = [];
+    var process_times = [];
+    var i = 0, j = 0, val = 0, arr_size = data.length, over_all_value =0, overall_process_time = [], count = 0;
+    console.log(`size = ${arr_size}`);
+    if (arr_size > 0) {
+        for (i = 0; i < arr_size;) {
+            count += size;
+            if (count >= arr_size) {
+                overall_process_time.push(data[i].process_time);
+                for (j = i; j < arr_size; j++) {
+                    val += data[j].value;
+                    i = i + 1;
+                }
+                over_all_value = (val / size);
+                values.push(over_all_value);
+                overall_process_time.push(data[i-1].process_time);
+                process_times.push(overall_process_time);
+                break;
+            } else {
+                overall_process_time.push(data[i].process_time);
+                for (j = i; j < count; j++) {
+                    val = val + data[j];
+                    i = i + 1;
+                }
+                over_all_value = (val / size);
+                values.push(over_all_value);
+                overall_process_time.push(data[j].process_time);
+                val = 0; over_all_value = 0;
+            }
+        }
+    }
+    var light = [];
+    light.push(values);
+    light.push(process_times);
+    return light;
+}
+
+async function testData(){
+    var lights = await getLightValue(0, 1541948903);
+    console.log(lights);
+    var light = generateDataBySize(4, lights);
+    console.log(`lights = ${light}`);
+}
+    
+/*
 var x = [1, 2, 3, 4, 4, 4, 4, 4];
 var count = 0;
 var process_time = 0;
@@ -151,10 +205,10 @@ function generateDataBySize(size, data) {
                 result.push(over_all);
                 val = 0; over_all = 0;
             }
-
         }
     }
     return result;
 }
 
 console.log(generateDataBySize(size, x));
+*/
