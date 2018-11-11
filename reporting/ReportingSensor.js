@@ -7,12 +7,10 @@ var TimeUtils = require('../util/TimeUtil');
 module.exports.dataSensorChartByDay = function (io) {
     io.on('connection', function (socket) {
         console.log('reporting connected');
-        socket.on('view-chart', async function (data) {
-
+        socket.on('chart-light', async function (data) {
             var date = new Date();
             var end = Math.round(date.getTime() / 1000);
             if (data.time && checkTime(data.time)) {
-                console.log("HiHI");
                 var start = data.time;
                 var lights = await getLightValue(start, end);
                 if (lights.length > 0)
@@ -27,19 +25,6 @@ module.exports.dataSensorChartByDay = function (io) {
         });
     });
 }
-/*
-function getMetaCronJobs() {
-    return new Promise(function (resolve, reject) {
-        var query = MetaCronJobs.find().sort({ "batch": -1 }).limit(1);
-
-        query.exec(function (err, data) {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(data);
-        });
-    })
-}*/
 
 function getAirValue(start, end) {
     return new Promise(function (resolve, reject) {
@@ -135,3 +120,41 @@ function checkTime(time) {
 function convertTimestampToDate(timestamp) {
     return new Date(timestamp * 1000);
 }
+
+var x = [1, 2, 3, 4, 4, 4, 4, 4];
+var count = 0;
+var process_time = 0;
+var val = 0;
+var size = 5;
+
+function generateDataBySize(size, data) {
+    var result = [];
+    var i = 0, j = 0, val = 0, arr_size = data.length, over_all = 0;
+    var count = 0;
+    if (arr_size > 0) {
+        for (i = 0; i < arr_size;) {
+            count += size;
+            if (count >= arr_size) {
+                for (j = i; j < arr_size; j++) {
+                    val += data[j];
+                    i = i + 1;
+                }
+                over_all = (val / size);
+                result.push(over_all);
+                break;
+            } else {
+                for (j = i; j < count; j++) {
+                    val = val + data[j];
+                    i = i + 1;
+                }
+                over_all = (val / size);
+                result.push(over_all);
+                val = 0; over_all = 0;
+            }
+
+        }
+    }
+    return result;
+}
+
+console.log(generateDataBySize(size, x));
