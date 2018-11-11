@@ -9,40 +9,92 @@ import {
     StyleSheet, View, Image,
     TouchableWithoutFeedback, StatusBar,
     TextInput, SafeAreaView, Keyboard, TouchableOpacity,
-    KeyboardAvoidingView, Alert
+    KeyboardAvoidingView, Text, NetInfo, BackAndroid, 
+    ToastAndroid, BackHandler, ActivityIndicator
 } from 'react-native';
-import { Container, Header, Content, Toast, Button, Text } from 'native-base';
 import { LoginToServer } from '../networking/Server';
+
+class WaitingScreen extends Component {
+    render () {
+        return(
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                <Text>Đang đăng nhập</Text>
+                <ActivityIndicator size="large" color="#00ff00" />
+            </View>
+        )
+    }
+}
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            isWaiting: false,
             user: '', 
             password: ''
         }
     }
 
+    componentDidMount = () => {
+        NetInfo.isConnected.fetch().then(isConnected => {
+            if (isConnected == false) {
+                ToastAndroid.showWithGravity(
+                    'Không có kết nối Internet. Vui lòng kiểm tra lại kết nối Internet',
+                    ToastAndroid.SHORT,
+                    ToastAndroid.CENTER,
+                );
+                setTimeout( () => {
+                    BackHandler.exitApp();
+                }, 1000);
+            }
+        });
+    }
+
+    _onWaiting = (waiting) => {
+        this.setState({isWaiting: waiting});
+    }
+
     _onLoginPressed = () => {
+        let waiting = this._onWaiting;
         if (this.state.user.length === 0 || this.state.password.length === 0)
-        Toast.show({
-            text: "Enter username/email and password",
-            buttonText: "Okay",
-            duration: 3000
-          })
+        ToastAndroid.showWithGravity(
+            'Vui lòng nhập tài khoản/mật khẩu',
+            ToastAndroid.SHORT,
+            ToastAndroid.CENTER,
+        );
         else {
             var user = this.state.user, password = this.state.password;
             var callbackFunc = this.props.saveInfo;
             var prom = new Promise(function(resolve, recject) {
                 resolve(LoginToServer(user, password));
+                waiting(true);
             })
             prom.then(function(loginInfo) {
                 console.log(loginInfo.code);
-                if (loginInfo.code === 400)
-                    Alert.alert('Login failed');
+                if (loginInfo.code === 400) {
+                    ToastAndroid.showWithGravity(
+                        'Đăng nhập không thành công. Vui lòng kiểm tra lại tài khoản/mật khẩu',
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER,
+                    );
+                    waiting(false);
+                }
+                else if (loginInfo.code === 500) {
+                    ToastAndroid.showWithGravity(
+                        loginInfo.message,
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER,
+                    );
+                    waiting(false);
+                }
                 else if (loginInfo.code === 200) {
-                    console.log('Login sucess');
+                    ToastAndroid.showWithGravity(
+                        'Đăng nhập thành công',
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER,
+                    );
+                    waiting(false);
                     callbackFunc(loginInfo);
                 }  
             }).catch(function(reason) {
@@ -65,7 +117,9 @@ export default class Login extends Component {
     }
 
     render() {
+        const waiting = this.state;
         return (
+                waiting.isWaiting == true ? <WaitingScreen /> :
                 <SafeAreaView style={styles.container}>
                 <View style= {styles.container}>
                     <KeyboardAvoidingView keyboardVerticalOffset={-300} behavior='padding' style={styles.container}>
@@ -102,7 +156,7 @@ export default class Login extends Component {
                                     />
                                     <TouchableOpacity onPress={this._onLoginPressed}
                                     style={styles.buttonContainer}>
-                                        <Text style={styles.buttonText}>SIGN IN</Text>
+                                        <Text style={styles.buttonText}>Đăng nhập</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>

@@ -7,13 +7,18 @@
 import React, { Component } from 'react';
 import { View, Text, StatusBar, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Orientation from 'react-native-orientation';
 
 export default class UserTab extends Component {
     static navigationOptions = {
         tabBarIcon: ({ focused, horizontal, tintColor}) => {
             return <Ionicons name='md-contact' size={horizontal ? 20 : 25} style={{ color: tintColor }} />
         }, 
-        tabBarColor: '#22c3bb'
+        tabBarColor: '#22c3bb', 
+        tabBarOnPress: ({navigation, defaultHandler}) => {
+            Orientation.lockToPortrait();
+            defaultHandler();
+        }
     }    
     render() {
         return (

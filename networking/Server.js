@@ -7,11 +7,10 @@
 
 import React, { Component } from 'react';
 
-const apiLogin = 'http://192.168.103.123:3000/api/auth/login';
+const apiLogin = 'http://192.168.103.118:3000/api/auth/login';
 
 async function LoginToServer(user, password) {
     try {
-        console.log(user + password);
         let response = await fetch(apiLogin, {
             method: 'POST', 
             headers: {
@@ -26,7 +25,9 @@ async function LoginToServer(user, password) {
         let responseJson = await response.json();
         return responseJson;
     } catch (error) {
-        console.log(error);
+        let response = {code: 500, message: 'Không thể kết nối đến server'};
+        // console.log(error);
+        return response;
     }
 }
 

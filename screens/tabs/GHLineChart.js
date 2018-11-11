@@ -4,11 +4,11 @@
  * University: Ha Noi University Of Industry
  * Green House Sensor Day Chart
 */
-import React, { Component } from 'react';
+import React from 'react';
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
-import {LineChart} from 'react-native-chart-kit';
+import { LineChart } from 'react-native-chart-kit';
 
-export default class LineChart extends React.Component {
+export default class GHLineChart extends React.Component {
     constructor(props) {
       super(props);
     }

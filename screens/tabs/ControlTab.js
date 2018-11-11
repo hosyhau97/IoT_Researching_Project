@@ -8,14 +8,18 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, StatusBar, Image, ScrollView} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Switch } from 'react-native-switch';
+import Orientation from 'react-native-orientation';
 
 export default class ControlTab extends Component {
     static navigationOptions = {
         tabBarIcon: ({ horizontal, tintColor }) => {
             return <Ionicons name='md-switch' size={horizontal ? 20 : 25} style={{ color: tintColor }} />
         }, 
-
-        tabBarColor: '#1b9891'
+        tabBarColor: '#1b9891', 
+        tabBarOnPress: ({navigation, defaultHandler}) => {
+            Orientation.lockToPortrait();
+            defaultHandler();
+        }
     }    
     constructor(props) {
         super(props);

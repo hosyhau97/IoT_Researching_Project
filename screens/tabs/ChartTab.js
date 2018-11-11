@@ -10,19 +10,27 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import SensorChartTab from './SensorChartTab';
 import ControlChartTab from './ControlChartTab';
 import { createMaterialTopTabNavigator } from 'react-navigation';
+import Orientation from 'react-native-orientation';
 
 export default class ChartTab extends Component {
+    constructor(props) {
+        super(props);
+    }
     static navigationOptions = {
         tabBarIcon: ({ focused, horizontal, tintColor}) => {
             return <Ionicons name='md-analytics' size={horizontal ? 20 : 25} style={{ color: tintColor }} />
         }, 
-
-        tabBarColor: '#1fada6'
+        tabBarColor: '#1fada6', 
+        tabBarOnPress: ({navigation, defaultHandler}) => {
+            defaultHandler();
+            Orientation.lockToLandscape();
+        }
     }
-    render() {
+
+    render () {
         return (
             <ChartNavigator />
-        );
+        )
     }
 }
 

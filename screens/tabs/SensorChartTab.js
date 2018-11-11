@@ -7,7 +7,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { Dropdown }from 'react-native-material-dropdown';
-import LineChart from './LineChart';
+import GHLineChart from './GHLineChart';
+import GHBarChart from './GHBarChart';
 
 class Splash extends Component {
   render() {
@@ -23,33 +24,93 @@ class Splash extends Component {
   }
 }
 
+class DayCharts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: this.props.data, 
+      labels: this.props.label
+    }
+    this.props.onRendered(false);
+  }
+
+  componentDidMount = () => {
+    this.props.onRendered(true);
+  }
+
+  render () {
+    const dataAndLabels = this.state;
+    return (
+      <View>
+        <GHLineChart data={dataAndLabels.data} labels={dataAndLabels.labels} />
+        <GHLineChart data={dataAndLabels.data} labels={dataAndLabels.labels} />
+        <GHLineChart data={dataAndLabels.data} labels={dataAndLabels.labels} />
+        <GHLineChart data={dataAndLabels.data} labels={dataAndLabels.labels} />
+        <GHLineChart data={dataAndLabels.data} labels={dataAndLabels.labels} />
+        <GHLineChart data={dataAndLabels.data} labels={dataAndLabels.labels} />
+      </View>
+    )
+    
+  }
+}
+
+class MonthCharts extends Component {
+  constructor(props) {
+    super(props);
+    this.props.onRendered(false);
+  }
+
+  componentDidMount = () => {
+    this.props.onRendered(true);
+  }
+  render() {
+    return (
+      <View>
+        <GHBarChart />
+        <GHBarChart />
+        <GHBarChart />
+        <GHBarChart />
+        <GHBarChart />
+        <GHBarChart />
+      </View>
+    )
+  }
+}
+
 class ToggleScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chartFinishRender: false
+      chartFinishRender: false, 
+      chartType: 'day'
     }
+
     setTimeout(() => {
       this.setState({chartFinishRender: true});
-    }, 2000);
+    }, 500);
+  }
+
+  componentWillReceiveProps = (props) => {
+    console.log(props.onChangeChartType);
+    this.setState({chartType: props.onChangeChartType});
+  }
+
+  _onChildRendered = (rendered) => {
+    this.setState({chartFinishRender: rendered});
   }
 
   render() {
     const finish = this.state;
+    console.log(finish.chartType);
     const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 
                         'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const data = [23, 45, 97, 14, 34, 80, 34, 45, 43, 33, 21, 50];
-    let screen = finish.chartFinishRender == true ? 
-      <View>
-        <LineChart data={data} labels={labels} />
-        <LineChart data={data} labels={labels} />
-        <LineChart data={data} labels={labels} />
-        <LineChart data={data} labels={labels} />
-        <LineChart data={data} labels={labels} />
-        <LineChart data={data} labels={labels} />
-      </View>
-      : <Splash />
-    return screen
+    let screen = finish.chartFinishRender == false ? 
+                  <Splash /> :
+                  finish.chartType == 'day' ? 
+                  <DayCharts onRendered={this._onChildRendered} data={data} labels={labels}/> : 
+                  <MonthCharts onRendered={this._onChildRendered} />
+    return screen;
   }
 }
 
@@ -66,7 +127,7 @@ export default class SensorChartTab extends Component {
       if (index == 0)
         this.setState({chartType: 'day'});
       else if (index == 1)
-      this.setState({chartType: 'month'});
+        this.setState({chartType: 'month'});
       console.log(this.state.chartType);
     };
 
@@ -77,8 +138,10 @@ export default class SensorChartTab extends Component {
         value: 'Tháng',
       }];
       const finish = this.state;
-      
-      return(
+
+      let selectScreen = finish.chartType;
+
+      return (
         <View style={styles.container}>
           <View style={styles.selectChart}>
             <Dropdown
@@ -90,10 +153,10 @@ export default class SensorChartTab extends Component {
           </View>
           <View style={styles.charts}>
             <ScrollView>
-              <ToggleScreen />
+              <ToggleScreen onChangeChartType={selectScreen} />
             </ScrollView>
           </View> 
-        </View>
+      </View>
       )
     }
 }
@@ -107,7 +170,7 @@ const styles = StyleSheet.create({
 
   selectChart: {
     flex: 1, 
-    paddingBottom: 10
+    marginBottom: 10
   }, 
 
   charts: {

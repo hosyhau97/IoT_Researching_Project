@@ -8,14 +8,24 @@ import React, { Component } from 'react';
 import { Text, Image, View, StyleSheet, StatusBar } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Orientation from 'react-native-orientation';
 
 export default class HomeTab extends Component {
   static navigationOptions = {
     tabBarIcon: ({ focused, horizontal, tintColor}) => {
         return <Ionicons name='md-home' size={horizontal ? 20 : 25} style={{ color: tintColor }} />
     }, 
-    tabBarColor: '#17827d'
+    tabBarColor: '#17827d', 
+    tabBarOnPress: ({navigation, defaultHandler}) => {
+      defaultHandler();
+      Orientation.lockToPortrait();
+    }
   }
+
+  componentDidMount = () => {
+    Orientation.lockToPortrait();
+  }
+
   constructor(props) {
     super(props);
 
@@ -25,12 +35,16 @@ export default class HomeTab extends Component {
       co2: 288, 
       humidity: 60, 
       soil_moiture: 30, 
-      oxygen: 288
+      oxygen: 288, 
+      orientation: 'portrait'
     }
+    
   }
+
+
   render() {
     let infor = this.state;
-    console.log(JSON.stringify(infor));
+
     return (
         <View style={styles.container}>
           <StatusBar

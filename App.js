@@ -17,7 +17,7 @@ class WelcomeScreen extends Component {
   render() {
     return(
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{color: 'green', fontSize: 28}}>Welcome</Text>
+        <Text style={{color: 'green', fontSize: 30}}>Green House</Text>
       </View>
     )
   }
@@ -33,8 +33,6 @@ export default class App extends Component {
     }
     
     this._retrieveData();
-    // this._retrieveData();
-    
   }
 
   saveUserInfo = (info) => {
