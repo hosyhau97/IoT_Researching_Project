@@ -5,15 +5,15 @@ var jwt = require('jsonwebtoken');
 var config = require('./config');
 var x_access_token = 'x-access-token';
 var db = require('./db');
-var cron = require('node-cron');
 var FlatternLightEngine = require('./repository/enity/flatterner/engine/FlatternLightEngine');
-
+var path = require('path');
 module.exports.expressApp = function (app, io, express) {
   global.__root = __dirname + '/';
   app.use(morgan("dev"));
   app.use(cors());
   app.use("/assets", express.static(__dirname + "/public"));
   app.set("view engine", "ejs");
+  app.set('views', path.join(__dirname, 'views'));
 
   var UserController = require('./user/UserController');
   app.use('/api/users', UserController);
@@ -43,10 +43,10 @@ module.exports.expressApp = function (app, io, express) {
   }
 
   try {
-    var cronJobs = require('./processor/ReportingProcessor');
-    cronJobs.cronJobsSensor(cron);
+    var cronJobs = require('./reporting/ReportingSensor');
+    cronJobs.dataSensorChartByDay(io);
   } catch (error) {
-
+    console.log('Error sensor chart data from Server');
   }
 
   app.get('/home', function (req, res) {
@@ -90,6 +90,10 @@ module.exports.expressApp = function (app, io, express) {
     res.render('chart-morris-engine-month');
   });
 
+  app.get('/log-out', function(req, res){
+    return res.render('page-signin');
+  })
+  
   app.use(function (req, res) {
     res.status(400);
     res.render('page-notfound', { title: '404: File Not Found' });

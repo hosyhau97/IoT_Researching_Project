@@ -11,7 +11,9 @@ $(document).ready(function(){
     $('.data-engine').click(function(){
         $('.nav-sub-data-engine').toggle();
     });
-    
+    $("#logout").click(function(){
+        localStorage.removeItem('token');
+    });
 });
 
 function verify() {

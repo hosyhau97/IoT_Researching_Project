@@ -17,8 +17,6 @@
           window.location.href = "http://localhost:3000/home";
         },
         error: function (request, message, error) {
-          var err_text = request.responseJSON.message;
-          $("#error-message").text(err_text);
           console.log(request.responseJSON);
           console.log(message);
         }
@@ -35,11 +33,7 @@
       }
     });
 
-    //Sự kiện đăng nhập
-    $("#btn-login").click(function () {
-      var email = $("#email").val();
-      var password = $("#password").val();
-
+    function callAjaxLogin(email, password){
       $.ajax({
         url: "http://localhost:3000/api/auth/login",
         type: 'POST',
@@ -66,7 +60,13 @@
 
         }
       }); 
+    }
 
+    //Sự kiện đăng nhập
+    $("#btn-login").click(function () {
+      var email = $("#email").val();
+      var password = $("#password").val();
+      callAjaxLogin(email, password);
     })
     //Sự kiện nhấn nút quên mật khẩu
     $("#btn-forgot-password").click(function () {
@@ -89,4 +89,12 @@
       $(".control-email").hide();
       $(".active-code").show();
       $("#btn-accept").show();
-    })
+    });
+    document.body.addEventListener('keypress', function(e) {
+      var key = e.which || e.keyCode;
+      if (key === 13) { 
+        var email = $("#email").val();
+      var password = $("#password").val();
+      callAjaxLogin(email, password);
+      }
+    });

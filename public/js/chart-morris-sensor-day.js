@@ -1,3 +1,21 @@
+$(function () {
+    var socket = io.connect();
+
+    var time = localStorage.getItem('time');
+    if (time === undefined || time === null){
+        socket.emit('view-chart', {time:null});
+    } else {
+        socket.emit('view-chart', {time:time});
+    }
+
+    socket.on('data-chart',function(data){
+        if (data.length > 0)
+            localStorage.setItem('time', data[1].time)
+        else console.log("HHIII0");
+        console.log(data);
+    });
+})
+
 //Biểu đồ nhiệt độ
 Highcharts.chart('chartContainer', {
     chart: {
