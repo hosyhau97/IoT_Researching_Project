@@ -6,8 +6,9 @@ var RawTempSensor = require('../repository/enity/raw/RawTempSensor');
 var TimeUtils = require('../util/TimeUtil');
 var size = 4;
 module.exports.dataSensorChartByDay = function (io) {
-    io.on('connection', function (socket) {
+    io.on('connection',async function (socket) {
         console.log('reporting connected');
+        /*
         socket.on('chart-light', async function (data) {
             var date = new Date();
             var end = Math.round(date.getTime() / 1000);
@@ -23,13 +24,14 @@ module.exports.dataSensorChartByDay = function (io) {
                 console.log(lights);
                 io.emit('data-chart', [{ light: lights }, { time: end }]);
             }
+        });*/
+
+      await socket.on('light-data-by-day',async function (data) {
+            var lights = await getLightDataByDay(4, data, io);
+            // console.log(lights);
         });
 
-        socket.on('light-data-by-day', function (data) {
-            var lights = getLightDataByDay(size, data, io);
-        });
-
-        socket.on('temperature-data-by-day', function (data) {
+      await  socket.on('temperature-data-by-day', function (data) {
             var temperatures = getTemperatureDataByDay(size, data, io);
         });
 
@@ -170,13 +172,15 @@ function generateDataBySize(size, data, result) {
             } else {
                 overall_process_time.push(data[i].process_time);
                 for (j = i; j < count; j++) {
-                    val = val + data[j];
+                    val = val + data[j].value;
                     i = i + 1;
                 }
                 over_all_value = (val / size);
                 values.push(over_all_value);
                 overall_process_time.push(data[j].process_time);
+                process_times.push(overall_process_time);
                 val = 0; over_all_value = 0;
+                overall_process_time = [];
             }
         }
     }
@@ -189,49 +193,61 @@ async function getLightValueByDay(start, end, size) {
     var lights = await getLightValue(start, end);
     var result = [];
     var light = generateDataBySize(size, lights, result);
-    return light;
+    var data = {};
+    data.value = light[0];
+    data.process_time = light[1];
+    return data;
 }
 
 async function getTemperatureValueByDay(start, end, size) {
     var temperatures = await getTemperatureValue(start, end);
     var result = [];
     var temperature = generateDataBySize(size, temperatures, result);
-    return temperature;
+    var data = {};
+    data.value = temperature[0];
+    data.process_time = temperature[1];
+    return data;
 }
 
 async function getHumidityValueByDay(start, end, size) {
     var humidities = await getHumidityValue(start, end);
     var result = [];
     var humidity = generateDataBySize(size, humidities, result);
-    return humidity;
+    data.value = humidity[0];
+    data.process_time = humidity[1];
+    return data;
 }
 
 async function getSoilValueByDay(start, end, size) {
     var soils = await getSoilValue(start, end);
     var result = [];
     var soil = generateDataBySize(size, soils, result);
-    return soil;
+    data.value = soil[0];
+    data.process_time = soil[1];
+    return data;
 }
 
 async function getAirValueByDay(start, end, size) {
     var airs = await getLightValue(start, end);
     var result = [];
     var air = generateDataBySize(size, airs, result);
-    return air;
+    data.value = air[0];
+    data.process_time = air[1];
+    return data;
 }
 
-function getLightDataByDay(size, data, io) {
+async function getLightDataByDay(size, data, io) {
     var date = new Date();
     var end = Math.round(date.getTime() / 1000);
     if (data.time && checkTime(data.time)) {
         var start = data.time;
-        var lights = getLightValueByDay(start, end, size);
-        if (lights.length > 0)
+        var lights = await getLightValueByDay(start, end, size);
+        if (lights)
             io.emit('data-chart-light', lights);
         else io.emit('data-chart-light', []);
     } else {
         var start = Math.round(end - (date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds()));
-        var lights = getLightValueByDay(start, end, size);
+        var lights = await getLightValueByDay(start, end, size);
         console.log(lights);
         io.emit('data-chart-light', lights);
     }
@@ -249,7 +265,6 @@ function getTemperatureDataByDay(size, data, io) {
     } else {
         var start = Math.round(end - (date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds()));
         var temps = getTemperatureValueByDay(start, end, size);
-        console.log(temps);
         io.emit('data-chart-temperature', temps);
     }
 }
