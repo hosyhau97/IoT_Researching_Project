@@ -8,12 +8,11 @@ $(function () {
         socket.emit('view-chart', {time:time});
     }
 
-    socket.on('data-chart',function(data){
-        if (data.length > 0)
-            localStorage.setItem('time', data[1].time)
-        else console.log("HHIII0");
+    socket.on('data-chart-light',function(data){
         console.log(data);
     });
+    socket.emit('light-data-by-day', {time:10});
+    
 })
 
 //Biểu đồ nhiệt độ
