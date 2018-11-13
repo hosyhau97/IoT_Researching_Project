@@ -9,5 +9,5 @@ var RawHumiditySensor = new Schema({
     status:Boolean,
     process_time:Number
 });
-var sensors= mongoose.model('RawHumiditySensor',RawHumiditySensor);
+var sensors= mongoose.model('RawHumiditySensor', RawHumiditySensor);
 module.exports= sensors;

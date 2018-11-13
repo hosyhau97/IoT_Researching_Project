@@ -2,18 +2,47 @@ $(function () {
     var socket = io.connect();
 
     var time = localStorage.getItem('time');
+    console.log(time);
     if (time === undefined || time === null){
         socket.emit('view-chart', {time:null});
     } else {
         socket.emit('view-chart', {time:time});
     }
 
+    socket.emit('light-data-by-day', {time:10});
+
+    socket.emit('temperature-data-by-day', {time:11});
+
+    socket.emit('humidity-data-by-day', {time:11});
+
+    socket.emit('soil-data-by-day', {time:11});
+
+    socket.emit('air-data-by-day', {time:11});
+
+   
+
+    socket.on('data-chart-temperature',function(data){
+        console.log(data);
+    });
+
+    socket.on('data-chart-humidity',function(data){
+        console.log(data);
+    });
+
     socket.on('data-chart-light',function(data){
         console.log(data);
     });
-    socket.emit('light-data-by-day', {time:10});
+
+    socket.on('data-chart-soil',function(data){
+        console.log(data);
+    });
+
+    socket.on('data-chart-air',function(data){
+        console.log(data);
+    });
     
-})
+    
+});
 
 //Biểu đồ nhiệt độ
 Highcharts.chart('chartContainer', {

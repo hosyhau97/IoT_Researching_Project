@@ -43,8 +43,8 @@ module.exports.expressApp = async function (app, io, express) {
   }
 
   try {
-    var cronJobs = require('./reporting/ReportingSensor');
-    await cronJobs.dataSensorChartByDay(io);
+    var sensorData = require('./reporting/ReportingSensor');
+    await sensorData.dataSensorChartByDay(io);
   } catch (error) {
     console.log('Error sensor chart data from Server');
   }

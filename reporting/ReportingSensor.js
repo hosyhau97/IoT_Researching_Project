@@ -5,46 +5,29 @@ var RawLightSensor = require('../repository/enity/raw/RawLightSensor');
 var RawTempSensor = require('../repository/enity/raw/RawTempSensor');
 var TimeUtils = require('../util/TimeUtil');
 var size = 4;
-module.exports.dataSensorChartByDay = function (io) {
-    io.on('connection',async function (socket) {
+var sizeDaySensor = 2;
+module.exports.dataSensorChartByDay =async function (io) {
+    io.on('connection', function (socket) {
         console.log('reporting connected');
-        /*
-        socket.on('chart-light', async function (data) {
-            var date = new Date();
-            var end = Math.round(date.getTime() / 1000);
-            if (data.time && checkTime(data.time)) {
-                var start = data.time;
-                var lights = await getLightValue(start, end);
-                if (lights.length > 0)
-                    io.emit('data-chart', [{ light: lights }, { time: end }]);
-                else io.emit('data-chart', []);
-            } else {
-                var start = Math.round(end - (date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds()));
-                var lights = await getLightValue(start, end);
-                console.log(lights);
-                io.emit('data-chart', [{ light: lights }, { time: end }]);
-            }
-        });*/
 
-      await socket.on('light-data-by-day',async function (data) {
-            var lights = await getLightDataByDay(4, data, io);
-            // console.log(lights);
+        socket.on('light-data-by-day', async function (data) {
+            var lights = await getLightDataByDay(sizeDaySensor, data, io);
         });
 
-      await  socket.on('temperature-data-by-day', function (data) {
-            var temperatures = getTemperatureDataByDay(size, data, io);
+        socket.on('temperature-data-by-day', async function (data) {
+            var temperatures = await getTemperatureDataByDay(sizeDaySensor, data, io);
         });
 
-        socket.on('humidity-data-by-day', function (data) {
-            var humidities = getHumidityDataByDay(size, data, io);
+        socket.on('humidity-data-by-day', async function (data) {
+            var humidities = await getHumidityDataByDay(sizeDaySensor, data, io);
         });
 
-        socket.on('soil-data-by-day', function (data) {
-            var soils = getSoilDataByDay(size, data, io);
+        socket.on('soil-data-by-day', async function (data) {
+            var soils = await getSoilDataByDay(sizeDaySensor, data, io);
         });
 
-        socket.on('air-data-by-day', function (data) {
-            var airs = getAirDataByDay(size, data, io);
+        socket.on('air-data-by-day', async function (data) {
+            var airs = await getAirDataByDay(sizeDaySensor, data, io);
         });
 
     });
@@ -110,22 +93,6 @@ function getTemperatureValue(start, end) {
             return resolve(data);
         });
     })
-}
-
-async function getData(start, end) {
-    var lights = await getLightValue(start, end);
-    var temps = await getTemperatureValue(start, end);
-    var airs = await getAirValue(start, end);
-    var humidities = await getHumidityValue(start, end);
-    var soils = await getSoilValue(start, end);
-
-    var light = lights.map(item => {
-        return item.value;
-    }).filter(item => item > 40)
-        .reduce(function (pre, next) {
-            return pre.concat(next);
-        });
-    var result = [{ light: lights }, { temperature: temps }, {}, {}, {}, {}]
 }
 
 function checkTime(time) {
@@ -201,6 +168,7 @@ async function getLightValueByDay(start, end, size) {
 
 async function getTemperatureValueByDay(start, end, size) {
     var temperatures = await getTemperatureValue(start, end);
+    console.log(`temp = ${temperatures}`);
     var result = [];
     var temperature = generateDataBySize(size, temperatures, result);
     var data = {};
@@ -211,8 +179,10 @@ async function getTemperatureValueByDay(start, end, size) {
 
 async function getHumidityValueByDay(start, end, size) {
     var humidities = await getHumidityValue(start, end);
+    console.log(`humidities = ${humidities}`);
     var result = [];
     var humidity = generateDataBySize(size, humidities, result);
+    var data = {};
     data.value = humidity[0];
     data.process_time = humidity[1];
     return data;
@@ -220,17 +190,21 @@ async function getHumidityValueByDay(start, end, size) {
 
 async function getSoilValueByDay(start, end, size) {
     var soils = await getSoilValue(start, end);
+    console.log(`soil = ${soils}`)
     var result = [];
     var soil = generateDataBySize(size, soils, result);
+    var data = {};
     data.value = soil[0];
     data.process_time = soil[1];
     return data;
 }
 
 async function getAirValueByDay(start, end, size) {
-    var airs = await getLightValue(start, end);
+    var airs = await getAirValue(start, end);
+    console.log(`air = ${airs}`);
     var result = [];
     var air = generateDataBySize(size, airs, result);
+    var data = {};
     data.value = air[0];
     data.process_time = air[1];
     return data;
@@ -259,7 +233,7 @@ function getTemperatureDataByDay(size, data, io) {
     if (data.time && checkTime(data.time)) {
         var start = data.time;
         var temps = getTemperatureValueByDay(start, end, size);
-        if (temps.length > 0)
+        if (temps)
             io.emit('data-chart-temperature', temps);
         else io.emit('data-chart-temperature', []);
     } else {
@@ -275,7 +249,7 @@ function getHumidityDataByDay(size, data, io) {
     if (data.time && checkTime(data.time)) {
         var start = data.time;
         var humidity = getHumidityValueByDay(start, end, size);
-        if (humidity.length > 0)
+        if (humidity)
             io.emit('data-chart-humidity', humidity);
         else io.emit('data-chart-humidity', []);
     } else {
@@ -292,12 +266,12 @@ function getAirDataByDay(size, data, io) {
     if (data.time && checkTime(data.time)) {
         var start = data.time;
         var air = getAirValueByDay(start, end, size);
-        if (air.length > 0)
-            io.emit('data-chart-air', lights);
+        if (air)
+            io.emit('data-chart-air', air);
         else io.emit('data-chart-air', []);
     } else {
         var start = Math.round(end - (date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds()));
-        var air = getLightValueByDay(start, end, size);
+        var air = getAirValueByDay(start, end, size);
         console.log(air);
         io.emit('data-chart-air', air);
     }
@@ -309,7 +283,7 @@ function getSoilDataByDay(size, data, io) {
     if (data.time && checkTime(data.time)) {
         var start = data.time;
         var soils = getSoilValueByDay(start, end, size);
-        if (soils.length > 0)
+        if (soils)
             io.emit('data-chart-light', soils);
         else io.emit('data-chart-light', []);
     } else {
