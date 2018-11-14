@@ -4,6 +4,7 @@ var RawHumiditySensor = require('../repository/enity/raw/RawHumiditySensor');
 var RawLightSensor = require('../repository/enity/raw/RawLightSensor');
 var RawTempSensor = require('../repository/enity/raw/RawTempSensor');
 var TimeUtils = require('../util/TimeUtil');
+var SensorData = require('./SensorData');
 var size = 4;
 var sizeDaySensor = 2;
 module.exports.dataSensorChartByDay =async function (io) {
@@ -33,66 +34,6 @@ module.exports.dataSensorChartByDay =async function (io) {
     });
 
 
-}
-
-function getAirValue(start, end) {
-    return new Promise(function (resolve, reject) {
-        var query = RawAirSensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
-        query.exec(function (err, data) {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(data);
-        });
-    })
-}
-
-function getSoilValue(start, end) {
-    return new Promise(function (resolve, reject) {
-        var query = RawSoilSensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
-        query.exec(function (err, data) {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(data);
-        });
-    })
-}
-
-function getLightValue(start, end) {
-    return new Promise(function (resolve, reject) {
-        var query = RawLightSensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
-        query.exec(function (err, data) {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(data);
-        });
-    })
-}
-
-function getHumidityValue(start, end) {
-    return new Promise(function (resolve, reject) {
-        var query = RawHumiditySensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
-        query.exec(function (err, data) {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(data);
-        });
-    })
-}
-
-function getTemperatureValue(start, end) {
-    return new Promise(function (resolve, reject) {
-        var query = RawTempSensor.find({ process_time: { $gt: start, $lt: end } }, { value: 1, process_time: 1 });
-        query.exec(function (err, data) {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(data);
-        });
-    })
 }
 
 function checkTime(time) {
@@ -157,7 +98,7 @@ function generateDataBySize(size, data, result) {
 }
 
 async function getLightValueByDay(start, end, size) {
-    var lights = await getLightValue(start, end);
+    var lights = await SensorData.getLightAllValue(start, end);
     var result = [];
     var light = generateDataBySize(size, lights, result);
     var data = {};
@@ -167,7 +108,7 @@ async function getLightValueByDay(start, end, size) {
 }
 
 async function getTemperatureValueByDay(start, end, size) {
-    var temperatures = await getTemperatureValue(start, end);
+    var temperatures = await SensorData.getTemperatureAllValue(start, end);
     console.log(`temp = ${temperatures}`);
     var result = [];
     var temperature = generateDataBySize(size, temperatures, result);
@@ -178,7 +119,7 @@ async function getTemperatureValueByDay(start, end, size) {
 }
 
 async function getHumidityValueByDay(start, end, size) {
-    var humidities = await getHumidityValue(start, end);
+    var humidities = await SensorData.getHumidityAllValue(start, end);
     console.log(`humidities = ${humidities}`);
     var result = [];
     var humidity = generateDataBySize(size, humidities, result);
@@ -189,7 +130,7 @@ async function getHumidityValueByDay(start, end, size) {
 }
 
 async function getSoilValueByDay(start, end, size) {
-    var soils = await getSoilValue(start, end);
+    var soils = await SensorData.getSoilAllValue(start, end);
     console.log(`soil = ${soils}`)
     var result = [];
     var soil = generateDataBySize(size, soils, result);
@@ -200,7 +141,7 @@ async function getSoilValueByDay(start, end, size) {
 }
 
 async function getAirValueByDay(start, end, size) {
-    var airs = await getAirValue(start, end);
+    var airs = await SensorData.getAirAllValue(start, end);
     console.log(`air = ${airs}`);
     var result = [];
     var air = generateDataBySize(size, airs, result);
