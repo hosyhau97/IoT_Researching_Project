@@ -10,7 +10,7 @@ function saveAirSensor(object) {
             {
                 value:object.value || null,
                 sensor_type: object.sensor_type || null,
-                status: object.status,
+                status: true,
                 process_time: Math.round(new Date().getTime()/1000)
             },
             function (err, sensor) {
@@ -30,7 +30,7 @@ function saveSoilSensor(object) {
             {
                 value:object.value || null,
                 sensor_type: object.sensor_type || null,
-                status: object.status,
+                status: true,
                 process_time: Math.round(new Date().getTime()/1000)
             },
             function (err, sensor) {
@@ -50,7 +50,7 @@ function saveTempSensor(object) {
             {
                 value:object.value || null,
                 sensor_type: object.sensor_type || null,
-                status: object.status,
+                status: true,
                 process_time: Math.round(new Date().getTime()/1000)
             },
             function (err, sensor) {
@@ -70,7 +70,7 @@ function saveHumiditySensor(object) {
             {
                 value:object.value || null,
                 sensor_type: object.sensor_type || null,
-                status: object.status,
+                status: true,
                 process_time: Math.round(new Date().getTime()/1000)
             },
             function (err, sensor) {
@@ -90,7 +90,7 @@ function saveLightSensor(object) {
             {
                 value:object.value || null,
                 sensor_type: object.sensor_type || null,
-                status: object.status,
+                status: true,
                 process_time: Math.round(new Date().getTime()/1000)
             },
             function (err, sensor) {

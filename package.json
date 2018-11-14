@@ -16,6 +16,7 @@
     "morgan": "^1.9.1",
     "mqtt": "^2.18.8",
     "node-cron": "^2.0.3",
+    "node-persist": "^3.0.1",
     "nodemailer": "^4.6.8",
     "socket.io": "^1.7.3"
   },

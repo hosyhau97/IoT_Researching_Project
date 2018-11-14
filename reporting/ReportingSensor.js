@@ -7,7 +7,8 @@ var TimeUtils = require('../util/TimeUtil');
 var SensorData = require('./SensorData');
 var size = 4;
 var sizeDaySensor = 2;
-module.exports.dataSensorChartByDay =async function (io) {
+var storage = require('node-persist');
+module.exports.dataSensorChartByDay = function (io) {
     io.on('connection', function (socket) {
         console.log('reporting connected');
 
@@ -30,10 +31,7 @@ module.exports.dataSensorChartByDay =async function (io) {
         socket.on('air-data-by-day', async function (data) {
             var airs = await getAirDataByDay(sizeDaySensor, data, io);
         });
-
     });
-
-
 }
 
 function checkTime(time) {

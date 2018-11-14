@@ -7,7 +7,7 @@ var x_access_token = 'x-access-token';
 var db = require('./db');
 var FlatternLightEngine = require('./repository/enity/flatterner/engine/FlatternLightEngine');
 var path = require('path');
-module.exports.expressApp = async function (app, io, express) {
+module.exports.expressApp = function (app, io, express) {
   global.__root = __dirname + '/';
   app.use(morgan("dev"));
   app.use(cors());
@@ -44,7 +44,7 @@ module.exports.expressApp = async function (app, io, express) {
 
   try {
     var sensorData = require('./reporting/ReportingSensor');
-    await sensorData.dataSensorChartByDay(io);
+    sensorData.dataSensorChartByDay(io);
   } catch (error) {
     console.log('Error sensor chart data from Server');
   }
